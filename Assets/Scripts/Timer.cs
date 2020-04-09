@@ -31,6 +31,7 @@ public class Timer : MonoBehaviour
 
     }
 
+    // convert time to string 
     void timeCalculator()
     {
         minutes = (int)timeleft / 60;

@@ -28,6 +28,8 @@ public class ButtonScript : MonoBehaviour
     public bool complete;
     public bool pressing;
 
+    public TextMesh buttonWords;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,49 +37,17 @@ public class ButtonScript : MonoBehaviour
         pressing = false;
 
         //Generate Color & Word on Bomb, and Strip Color for each strike
-        randomRoller = Random.Range(1, 6);
-        if (randomRoller == 1)
-        {
-            currentColor = red;
-        }
-        else if (randomRoller == 2)
-        {
-            currentColor = white;
-        }
-        else if (randomRoller == 3)
-        {
-            currentColor = yellow;
-        }
-        else if (randomRoller == 4)
-        {
-            currentColor = blue;
-        }
-        else
-        {
-            currentColor = black;
-        }
+        currentColor = ButtonColorGen();
 
-        randomRoller = Random.Range(1, 5);
-        if (randomRoller == 1)
-        {
-            currentString = detonate;
-        }
-        else if (randomRoller == 2)
-        {
-            currentString = abort;
-        }
-        else if (randomRoller == 3)
-        {
-            currentString = hold;
-        }
-        else
-        {
-            currentString = press;
-        }
+        currentString = ButtonTextGen();
 
         stripColor0 = StripColorGen();
         stripColor1 = StripColorGen();
         stripColor2 = StripColorGen();
+
+        //Set Button Color and Text
+        GetComponent<MeshRenderer>().material.SetColor("_BaseColor", currentColor);
+        buttonWords.text = currentString;
     }
 
     // Update is called once per frame
@@ -102,6 +72,40 @@ public class ButtonScript : MonoBehaviour
         }
     }
 
+    //Pick a color: Red, White, Yellow, Blue, or Black; Set Text Color to fit
+    Color ButtonColorGen()
+    {
+        Color buttonColor;
+        randomRoller = Random.Range(1, 6);
+        if (randomRoller == 1)
+        {
+            buttonColor = red;
+            buttonWords.color = white;
+        }
+        else if (randomRoller == 2)
+        {
+            buttonColor = white;
+            buttonWords.color = black;
+        }
+        else if (randomRoller == 3)
+        {
+            buttonColor = yellow;
+            buttonWords.color = black;
+        }
+        else if (randomRoller == 4)
+        {
+            buttonColor = blue;
+            buttonWords.color = white;
+        }
+        else
+        {
+            buttonColor = black;
+            buttonWords.color = white;
+        }
+        return buttonColor;
+    }
+
+    //Pick a color: Red, White, Yellow, or Blue
     Color StripColorGen()
     {
         Color genColor;
@@ -123,5 +127,29 @@ public class ButtonScript : MonoBehaviour
             genColor = blue;
         }
         return genColor;
+    }
+
+    //Pick one of the four text options
+    string ButtonTextGen()
+    {
+        string buttonText;
+        randomRoller = Random.Range(1, 5);
+        if (randomRoller == 1)
+        {
+            buttonText = detonate;
+        }
+        else if (randomRoller == 2)
+        {
+            buttonText = abort;
+        }
+        else if (randomRoller == 3)
+        {
+            buttonText = hold;
+        }
+        else
+        {
+            buttonText = press;
+        }
+        return buttonText;
     }
 }

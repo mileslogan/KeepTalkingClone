@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WireBehavior : MonoBehaviour
 {
-
+    public bool cut;
     Color[] possibleColors;
     public Color wireColor;
 

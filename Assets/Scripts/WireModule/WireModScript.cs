@@ -196,6 +196,7 @@ public class WireModScript : MonoBehaviour
         {
             if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0))
             {
+                hit.collider.gameObject.GetComponent<WireBehavior>().cut = true;
                 hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
         }

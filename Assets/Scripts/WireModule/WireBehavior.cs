@@ -9,9 +9,12 @@ public class WireBehavior : MonoBehaviour
     public Color wireColor;
     WireModScript ModuleHead;
 
+    public bool cut = false;
+
     // Start is called before the first frame update
     void Awake()
     {
+        cut = false;
         ModuleHead = GetComponentInParent<WireModScript>();
 
         possibleColors = new Color[5]; 

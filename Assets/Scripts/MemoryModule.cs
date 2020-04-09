@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class MemoryModule : MonoBehaviour
 {
 
@@ -56,6 +54,7 @@ public class MemoryModule : MonoBehaviour
         startStage();
     }
 
+    // start & restart after failed 
     void startStage()
     {
         curstage = 1;
@@ -63,6 +62,7 @@ public class MemoryModule : MonoBehaviour
         refresh();
     }
 
+    //send the index of the button that has been clicked to stage check
     public void bottonClick(int index)
     {
         switch (curstage)
@@ -86,6 +86,7 @@ public class MemoryModule : MonoBehaviour
         }
     }
 
+    // move to next stage after finish
     void nextStage()
     {
         curstage++;
@@ -93,6 +94,7 @@ public class MemoryModule : MonoBehaviour
         refresh();
     }
 
+    //check of the button click for each stage
     void stage1check(int index)
     {
         stage01index = index;
@@ -243,7 +245,7 @@ public class MemoryModule : MonoBehaviour
         startStage();
     }
 
-
+    // refresh the UI for testing 
     void refresh()
     {
         if (curstage == 6)

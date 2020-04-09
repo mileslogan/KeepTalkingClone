@@ -15,7 +15,7 @@ public class WireModScript : MonoBehaviour
     Color[] colorOrder; //gets the colors of the wires in order from top to bottom
     int colorCounter = 0;
 
-    //cases, read the manual to understand the naming.
+    //CASES: read the manual to understand the naming.
     //three
     public bool three_one = false;
     public bool three_two = false;

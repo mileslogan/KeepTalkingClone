@@ -7,16 +7,11 @@ public class WireBehavior : MonoBehaviour
 
     Color[] possibleColors;
     public Color wireColor;
-    WireModScript ModuleHead;
-
-    public bool cut = false;
 
     // Start is called before the first frame update
     void Awake()
     {
-        cut = false;
-        ModuleHead = GetComponentInParent<WireModScript>();
-
+        //assign possible wire colors to array
         possibleColors = new Color[5]; 
         possibleColors[0] = Color.red;
         possibleColors[1] = Color.blue;

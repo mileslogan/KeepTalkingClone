@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class ButtonScript : MonoBehaviour
 {
-    public Color red;
-    public Color white;
-    public Color yellow;
-    public Color blue;
-    public Color black;
-
     public Color currentColor;
 
     public Color stripColor0;
     public Color stripColor1;
     public Color stripColor2;
 
-    public string detonate;
-    public string abort;
-    public string hold;
-    public string press;
+    string detonate = "DETONATE";
+    string abort = "ABORT";
+    string hold = "HOLD";
+    string press = "PRESS";
 
     public string currentString;
 
@@ -28,7 +22,10 @@ public class ButtonScript : MonoBehaviour
     public bool complete;
     public bool pressing;
 
+    public bool needHold;
+
     public TextMesh buttonWords;
+    public GameObject buttonStrip;
 
     // Start is called before the first frame update
     void Start()
@@ -48,27 +45,24 @@ public class ButtonScript : MonoBehaviour
         //Set Button Color and Text
         GetComponent<MeshRenderer>().material.SetColor("_BaseColor", currentColor);
         buttonWords.text = currentString;
+
+        //Check if generated button needs to be pressed or held and released
+        HoldOrPress();
     }
 
     // Update is called once per frame
+    // CURRENTLY A WORK IN PROGRESS
     void Update()
     {
-        //Functionaltiy based on what is on bomb and what color and word there is
-        if (currentString == detonate)
+        RaycastHit hit; 
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
         {
-            //if there is more than one battery, press and immediately release
-            //else, hold
-        }
-        else if (currentColor == red && currentString == hold)
-        {
-            //press and immediately release
-        }
-        //else if (lit indicator FRK)
-        //if there are more than two batteries, press and immediately release
-        //else, hold
-        else
-        {
-            //holding instructions
+            if (hit.collider.tag == "BUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                
+            }
         }
     }
 
@@ -79,28 +73,28 @@ public class ButtonScript : MonoBehaviour
         randomRoller = Random.Range(1, 6);
         if (randomRoller == 1)
         {
-            buttonColor = red;
-            buttonWords.color = white;
+            buttonColor = Color.red;
+            buttonWords.color = Color.white;
         }
         else if (randomRoller == 2)
         {
-            buttonColor = white;
-            buttonWords.color = black;
+            buttonColor = Color.white;
+            buttonWords.color = Color.black;
         }
         else if (randomRoller == 3)
         {
-            buttonColor = yellow;
-            buttonWords.color = black;
+            buttonColor = Color.yellow;
+            buttonWords.color = Color.black;
         }
         else if (randomRoller == 4)
         {
-            buttonColor = blue;
-            buttonWords.color = white;
+            buttonColor = Color.blue;
+            buttonWords.color = Color.white;
         }
         else
         {
-            buttonColor = black;
-            buttonWords.color = white;
+            buttonColor = Color.black;
+            buttonWords.color = Color.white;
         }
         return buttonColor;
     }
@@ -112,19 +106,19 @@ public class ButtonScript : MonoBehaviour
         randomRoller = Random.Range(1, 5);
         if (randomRoller == 1)
         {
-            genColor = red;
+            genColor = Color.red;
         }
         else if (randomRoller == 2)
         {
-            genColor = white;
+            genColor = Color.white;
         }
         else if (randomRoller == 3)
         {
-            genColor = yellow;
+            genColor = Color.yellow;
         }
         else
         {
-            genColor = blue;
+            genColor = Color.blue;
         }
         return genColor;
     }
@@ -151,5 +145,37 @@ public class ButtonScript : MonoBehaviour
             buttonText = press;
         }
         return buttonText;
+    }
+
+    //Figure out whether the bomb needs to be held or pressed; WORK IN PROGESS
+    void HoldOrPress()
+    {
+        //Functionaltiy based on what is on bomb and what color and word there is
+        if (currentColor == Color.blue && currentString == abort)
+        {
+            needHold = true;
+        }
+        else if (currentString == detonate) //ALSO if there is more than one battery
+        {
+            needHold = false;
+        }
+        else if (currentColor == Color.white) //ALSO if lit indicator CAR
+        {
+            needHold = true;
+        }
+        //else if (lit indicator FRK && more than two batteries)
+        //press and immediately release
+        else if (currentColor == Color.yellow)
+        {
+            needHold = true;
+        }
+        else if (currentColor == Color.red && currentString == hold)
+        {
+            needHold = false;
+        }
+        else
+        {
+            needHold = true;
+        }
     }
 }

@@ -15,16 +15,16 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(countDown(countdowntime));
+        StartCoroutine(CountDown(countdowntime));
     }
 
-    private IEnumerator countDown(float timer)
+    private IEnumerator CountDown(float timer)
     {
         timeleft = timer;
         while (timeleft > 0)
         {
-            timeCalculator();
-            text.GetComponent<Text>().text = str_minutes + " : " + str_seconds;
+            TimeCalculator();
+            text.GetComponent<TextMesh>().text = str_minutes + " : " + str_seconds;
             yield return new WaitForSeconds(1.0f);
             timeleft--;
         }
@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour
     }
 
     // convert time to string 
-    void timeCalculator()
+    void TimeCalculator()
     {
         minutes = (int)timeleft / 60;
         seconds = (int)timeleft % 60;

@@ -16,6 +16,7 @@ public class GenerateBomb : MonoBehaviour
     //prefabs
     public GameObject TimerModule;
     public GameObject EmptyModule;
+    public GameObject SpawnedTimer;
     
     //variables to change
     public int ModuleAmount = 1;
@@ -33,7 +34,9 @@ public class GenerateBomb : MonoBehaviour
     
     //Strikes
     public int MaxStrikes = 2;
-    private int CurrentStrikes = 0;
+    
+    //ACCESSED BY CERTAIN MODULES-TIMER
+    public int CurrentStrikes = 0;
     
     
     //EXTERNAL MODULES // EXTRA->means extra elements that go on the sides of the bomb to be used in the puzzle modules
@@ -59,17 +62,19 @@ public class GenerateBomb : MonoBehaviour
     //which objects to spawn, used in the function SpawnAllExtras()
     public List<GameObject> ExtrasToSpawn = new List<GameObject>();
     
+    
+    //VARIABLES USED BY OTHER MODULES//
     //serial number
     List<char> Serial = new List<char>();
-    public string SerialN = "";
+    public string SerialN = ""; //bomb serial number
     
     //To be used by other modules in their puzzling solving
-    public bool IsEven;
-    public bool HasVowel;
+    public bool IsEven; //has an even number in its final slot
+    public bool HasVowel; //has a vowel in the serial number
     
     //Batteries
     public int MaxBatteries = 2;
-    public int BatteryNum;
+    public int BatteryNum; //number of batteries on bomb
 
     //indicators
     public List<string> Indicators = new List<string>();
@@ -78,8 +83,10 @@ public class GenerateBomb : MonoBehaviour
     public int MinIndicators = 1;
     public int MaxIndicators = 5;
     private float LikelihoodToBeOn = .6f;
-    public List<Indicator> AddedIndicators = new List<Indicator>();
+    public List<Indicator> AddedIndicators = new List<Indicator>(); //indicators on bomb: to get see if isOn: AddedIndicators[0].IsOn
     
+    //module selected
+    public static GameObject SelectedModule = null; //currently selected module: which enables interaction[clicking]
     
     // Start is called before the first frame update
     void Awake()
@@ -109,7 +116,7 @@ public class GenerateBomb : MonoBehaviour
         //once done creating bomb, rotate it
         if (IsDone && !HasRotated)
         {
-            transform.Rotate(Vector3.right, 90f);
+            transform.parent.Rotate(Vector3.right, 90f);
             HasRotated = true;
         }
         else
@@ -164,20 +171,22 @@ public class GenerateBomb : MonoBehaviour
             if (module != null)
             {
                 spawned = Instantiate(module, transform.position + location, Quaternion.identity);
-                spawned.transform.parent = transform;
+                spawned.transform.parent = transform.parent;
+                spawned.transform.Rotate(Vector3.right, 270f);
                 SpawnedModules.Add(spawned);
             }
             //if no module, spawn empty module
             else
             {
                 spawned = Instantiate(EmptyModule, transform.position + location, Quaternion.identity);
-                spawned.transform.parent = transform;
+                spawned.transform.parent = transform.parent;
             }
             
         }
         //spawn timer: always spawns at top middle of front: can be adjusted if need be
         GameObject timer = Instantiate(TimerModule, transform.position + ModuleLocations[1], Quaternion.identity);
-        timer.transform.parent = transform;
+        timer.transform.parent = transform.parent;
+        SpawnedTimer = timer;
     }
 
     
@@ -226,7 +235,7 @@ public class GenerateBomb : MonoBehaviour
         
         if (extra != null)
         {
-            extra.transform.parent = transform;
+            extra.transform.parent = transform.parent;
             
         }
 

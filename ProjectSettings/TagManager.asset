@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - WIRE
+<<<<<<< HEAD
   - MemoryModuleButton
+=======
+  - WhoButtons
+>>>>>>> d3c50a7fe122c3edbe238ab63791bce6076e3e73
   layers:
   - Default
   - TransparentFX

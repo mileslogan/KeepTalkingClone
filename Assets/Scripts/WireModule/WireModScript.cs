@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WireModScript : MonoBehaviour
 {
+    public bool COMPLETED;
+    public bool FAILED;
+
+    public Material[] lightMaterials;
+    public MeshRenderer LED;
+
     string serialNum;
     //to be taken from the bomb casing from Mike
 
@@ -11,6 +17,7 @@ public class WireModScript : MonoBehaviour
     int wireCounter; //ensures there are exactly the right amount of wire when initilizing the wire positions
 
     public GameObject[] wireSlots; //all possible activated wires
+    public List<GameObject> activeWires = new List<GameObject>();
 
     Color[] colorOrder; //gets the colors of the wires in order from top to bottom
     int colorCounter = 0;
@@ -44,8 +51,15 @@ public class WireModScript : MonoBehaviour
     int blackcount = 0;
     int whitecount = 0;
 
+    //animation
+    Vector3 originalRot;
+
+    //conditions (tells you what wire to cut. *note: there are two special cases)
+    ConditionWire[] conditions = new ConditionWire[15];
+
     void Awake()
     {
+        originalRot = transform.rotation.eulerAngles;
         //DEBUGGING ONLY UNTIL IMPLEMETED WITH MIKE
         serialNum = Random.Range(111111,999999).ToString();
         //DEBUGGING ONLY UNTIL IMPLEMETED WITH MIKE
@@ -96,12 +110,36 @@ public class WireModScript : MonoBehaviour
             if (wire.activeInHierarchy) // if the wire is active, then add this color to the array, now we have an array in order of the colors that appear on the wires
             {
                 colorOrder[colorCounter] = wire.GetComponent<WireBehavior>().wireColor;
+                activeWires.Add(wire);
                 Debug.Log(wire.GetComponent<WireBehavior>().wireColor);
                 colorCounter++;
             }
         }
 
         DetermineCases();
+        LoadConditions();
+    }
+
+    void LoadConditions()
+    {
+        conditions[0] = new ConditionWire(three_one, 1);
+        conditions[1] = new ConditionWire(three_two, 2);
+        conditions[2] = new ConditionWire(three_four, 2);
+
+        conditions[3] = new ConditionWire(four_two, 0);
+        conditions[4] = new ConditionWire(four_three, 0);
+        conditions[5] = new ConditionWire(four_four, 3);
+        conditions[6] = new ConditionWire(four_five, 1);
+
+        conditions[7] = new ConditionWire(five_one, 3);
+        conditions[8] = new ConditionWire(five_two, 0);
+        conditions[9] = new ConditionWire(five_three, 1);
+        conditions[10] = new ConditionWire(five_four, 0);
+
+        conditions[11] = new ConditionWire(six_one, 2);
+        conditions[12] = new ConditionWire(six_two, 3);
+        conditions[13] = new ConditionWire(six_three, 5);
+        conditions[14] = new ConditionWire(six_four, 3);
     }
 
     void DetermineCases() // sets up the cases in the manual
@@ -194,13 +232,61 @@ public class WireModScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))// if moused over
         {
-            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0))
+            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0) && !COMPLETED && !FAILED)
             {
                 hit.collider.gameObject.GetComponent<WireBehavior>().cut = true;
                 hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                transform.Rotate(-5,0,5);
+                FailedOrCompleted();
+            }
+        }
+<<<<<<< HEAD
+
+
+=======
+        if (COMPLETED)
+        {
+            LED.material = lightMaterials[0];
+        }
+        if (FAILED)
+        {
+            LED.material = lightMaterials[1];
+        }
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(originalRot), Time.deltaTime * 20);
+
+    }
+
+    void FailedOrCompleted()
+    {
+
+        foreach (ConditionWire condition in conditions)
+        {
+            if (condition.condition == true)
+            {
+                if (activeWires[condition.wireToCut].gameObject.GetComponent<WireBehavior>().cut)
+                {
+                    COMPLETED = true;
+                }
             }
         }
 
+        if (!COMPLETED)
+        {
+            FAILED = true;
+        }
+    }
 
+    public struct ConditionWire
+    {
+        public bool condition;
+        public int wireToCut;
+
+        public ConditionWire(bool _condition, int _wireToCut)
+        {
+            condition = _condition;
+            wireToCut = _wireToCut;
+        }
+>>>>>>> d3c50a7fe122c3edbe238ab63791bce6076e3e73
     }
 }

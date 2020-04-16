@@ -95,12 +95,12 @@ public class GenerateBomb : MonoBehaviour
         //shuffle order of where each module is spawned
         RandFuncs.Shuffle(ModuleLocToSpawn);
         
-        //Construct bomb
-        SpawnModules();
+        //Construct bomb variables
         CreateSerial();
         AddIndicators();
         AddBatteries();
-
+        //spawn modules
+        SpawnModules();
         //spawn extras: batteries, indicators, and serial #: potentially do: weird ports
         SpawnAllExtras();
         

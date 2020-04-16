@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ButtonScript : MonoBehaviour
+public class WhoButtonScript : MonoBehaviour
 {
     public int buttonNum;
     public string buttonString;
@@ -27,6 +27,6 @@ public class ButtonScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, startPos, Time.deltaTime*1);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, startPos, Time.deltaTime * 1);
     }
 }

@@ -7,6 +7,12 @@ using UnityEngine.SocialPlatforms;
 
 public class GenerateBomb : MonoBehaviour
 {
+    //done loading
+    private bool IsDone = false;
+
+    private bool HasRotated = false;
+
+    public float DoneTimer = .3f;
     //prefabs
     public GameObject TimerModule;
     public GameObject EmptyModule;
@@ -90,11 +96,37 @@ public class GenerateBomb : MonoBehaviour
 
         //spawn extras: batteries, indicators, and serial #: potentially do: weird ports
         SpawnAllExtras();
+        
     }
 
+    void Start()
+    {
+        
+    }
     // Update is called once per frame
     void Update()
     {
+        //once done creating bomb, rotate it
+        if (IsDone && !HasRotated)
+        {
+            transform.Rotate(Vector3.right, 90f);
+            HasRotated = true;
+        }
+        else
+        {
+            if (DoneTimer <= 0f)
+            {
+                
+                IsDone = true;
+            }
+            else
+            {
+                DoneTimer -= Time.deltaTime;
+            }
+            
+            
+        }
+        
         //restart for debugging
         Restart();
 
@@ -132,7 +164,7 @@ public class GenerateBomb : MonoBehaviour
             if (module != null)
             {
                 spawned = Instantiate(module, transform.position + location, Quaternion.identity);
-                //spawned.transform.parent = transform;
+                spawned.transform.parent = transform;
                 SpawnedModules.Add(spawned);
             }
             //if no module, spawn empty module
@@ -173,6 +205,7 @@ public class GenerateBomb : MonoBehaviour
     //used by SpawnAllExtras as well as RespawnSelf to individual spawn each extra
     public GameObject SpawnExtra(GameObject prefab)
     {
+        
         Area side = BombSides[Random.Range(0, BombSides.Length)];
         Vector3 loc = RandomVector3(side);
 

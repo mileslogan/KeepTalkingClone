@@ -13,8 +13,13 @@ public class RespawnSelf : MonoBehaviour
 
     //make sure does not occur twice
     public bool HasTriggered;
-    
-    
+
+    public Transform Parent;
+
+    public void Start()
+    {
+        Parent = transform.parent;
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -59,6 +64,8 @@ public class RespawnSelf : MonoBehaviour
                 else
                 {
                     bombScript.SpawnExtra(objToSpawn);
+                    bombScript.DoneTimer = .3f;
+                    //obj.transform.parent = Parent;
                 }
             }
             //destroy current because it overlaps

@@ -15,20 +15,34 @@
             <e p="RespawnSelf.cs" t="Include" />
           </e>
         </e>
+        <e p="Modules" t="Include">
+          <e p="Keypad Things" t="Include">
+            <e p="keyScript.cs" t="Include" />
+          </e>
+        </e>
+        <e p="MouseControl.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="ButtonModule" t="Include">
             <e p="ButtonScript.cs" t="Include" />
           </e>
-          <e p="MemoryModule.cs" t="Include" />
+          <e p="MemoryModule" t="Include">
+            <e p="MemoryModule.cs" t="Include" />
+            <e p="MemoryModuleButton.cs" t="Include" />
+          </e>
+          <e p="SerialNumber.cs" t="Include" />
+          <e p="SimonSays" t="Include">
+            <e p="SimonSaysScript.cs" t="Include" />
+          </e>
           <e p="SimpleCameraController.cs" t="Include" />
-          <e p="Timer.cs" t="Include" />
+          <e p="Timer" t="Include">
+            <e p="Timer.cs" t="Include" />
+          </e>
           <e p="WireModule" t="Include">
             <e p="WireBehavior.cs" t="Include" />
             <e p="WireModScript.cs" t="Include" />
             <e p="WireSnip.cs" t="Include" />
           </e>
         </e>
-        <e p="SerialNumber.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />

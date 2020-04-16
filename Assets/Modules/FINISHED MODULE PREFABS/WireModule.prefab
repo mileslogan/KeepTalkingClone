@@ -273,8 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f726f6ea3ec0ba647b8695331b197e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireColor: {r: 0, g: 0, b: 0, a: 0}
   cut: 0
+  wireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &703510623741944370
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -581,8 +581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f726f6ea3ec0ba647b8695331b197e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireColor: {r: 0, g: 0, b: 0, a: 0}
   cut: 0
+  wireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &1318981928102517923
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -652,6 +652,7 @@ MonoBehaviour:
   lightMaterials:
   - {fileID: 2100000, guid: 20abd6c5eb7b14e43be8c9af93ab863b, type: 2}
   - {fileID: 2100000, guid: 0fe01b24b0db3a44b84de2d49b94035c, type: 2}
+  - {fileID: 2100000, guid: 7ee0c452b2a40c14b8ceebe1e9a86f6e, type: 2}
   LED: {fileID: 8138955970192679564}
   wireCount: 0
   wireSlots:
@@ -1925,8 +1926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f726f6ea3ec0ba647b8695331b197e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireColor: {r: 0, g: 0, b: 0, a: 0}
   cut: 0
+  wireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &7111838267281685807
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2128,8 +2129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f726f6ea3ec0ba647b8695331b197e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireColor: {r: 0, g: 0, b: 0, a: 0}
   cut: 0
+  wireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &7225089365863405565
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2238,8 +2239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f726f6ea3ec0ba647b8695331b197e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireColor: {r: 0, g: 0, b: 0, a: 0}
   cut: 0
+  wireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &7388187310884646794
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2598,8 +2599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f726f6ea3ec0ba647b8695331b197e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireColor: {r: 0, g: 0, b: 0, a: 0}
   cut: 0
+  wireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &7840636679078224061
 MeshCollider:
   m_ObjectHideFlags: 0

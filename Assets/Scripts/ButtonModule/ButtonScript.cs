@@ -19,7 +19,7 @@ public class ButtonScript : MonoBehaviour
 
     int randomRoller;
 
-    public bool complete;
+    public bool completed;
     public bool pressing;
 
     public bool needHold;
@@ -30,7 +30,7 @@ public class ButtonScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        complete = false;
+        completed = false;
         pressing = false;
 
         //Generate Color & Word on Bomb, and Strip Color for each strike

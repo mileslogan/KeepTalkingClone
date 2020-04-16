@@ -365,7 +365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100905971, guid: b4bbbb1d9b55d4e0cbda922db4a6745e, type: 3}
       propertyPath: m_TagString
-      value: Key
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1988552265, guid: b4bbbb1d9b55d4e0cbda922db4a6745e, type: 3}
       propertyPath: m_Name
@@ -373,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1988552265, guid: b4bbbb1d9b55d4e0cbda922db4a6745e, type: 3}
       propertyPath: m_TagString
-      value: Key
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1988552267, guid: b4bbbb1d9b55d4e0cbda922db4a6745e, type: 3}
       propertyPath: m_Controller
@@ -447,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 7614097817742904093, guid: b4bbbb1d9b55d4e0cbda922db4a6745e,
         type: 3}
       propertyPath: m_TagString
-      value: Key
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7614097818424920064, guid: b4bbbb1d9b55d4e0cbda922db4a6745e,
         type: 3}
@@ -472,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 7614097818424920065, guid: b4bbbb1d9b55d4e0cbda922db4a6745e,
         type: 3}
       propertyPath: m_TagString
-      value: Key
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4bbbb1d9b55d4e0cbda922db4a6745e, type: 3}

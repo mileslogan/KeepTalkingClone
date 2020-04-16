@@ -6,7 +6,6 @@ TagManager:
   tags:
   - EXTRA
   - WIRE
-  - Key
   layers:
   - Default
   - TransparentFX

@@ -37,6 +37,11 @@
           <e p="Timer" t="Include">
             <e p="Timer.cs" t="Include" />
           </e>
+          <e p="Who's On First" t="Include">
+            <e p="WhoButtonScript.cs" t="Include" />
+            <e p="WhosOnFirst.cs" t="Include" />
+            <e p="WhosOnFirstArrays.cs" t="Include" />
+          </e>
           <e p="WireModule" t="Include">
             <e p="WireBehavior.cs" t="Include" />
             <e p="WireModScript.cs" t="Include" />

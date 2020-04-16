@@ -22,6 +22,7 @@ public class WireBehavior : MonoBehaviour
         wireColor = possibleColors[Random.Range(0,4)]; //determine color of wire
         GetComponent<MeshRenderer>().material.SetColor("_BaseColor", wireColor);
         transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_BaseColor", wireColor);
+        GetComponent<MeshCollider>().enabled = GetComponent<MeshRenderer>().enabled;
     }
  
 }

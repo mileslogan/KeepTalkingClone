@@ -25,6 +25,7 @@ public class MemoryModule : MonoBehaviour
     public GameObject text3; //text on button 2
     public GameObject text4; //text on button 3
     public GameObject bigtext; //big number on the top
+    public Animator memoryAnimator;
 
 
     void Start()
@@ -285,6 +286,8 @@ public class MemoryModule : MonoBehaviour
         text3.GetComponent<TextMesh>().text = "" + stages[curstage - 1][2];
         text4.GetComponent<TextMesh>().text = "" + stages[curstage - 1][3];
 
+        Debug.Log("Test");
+        memoryAnimator.SetTrigger("MemoryRefreshButton");
     }
 
 }

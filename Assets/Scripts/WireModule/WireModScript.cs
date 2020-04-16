@@ -54,6 +54,9 @@ public class WireModScript : MonoBehaviour
     //animation
     Vector3 originalRot;
 
+    AudioSource AS;
+    public AudioClip clip;
+
     //conditions (tells you what wire to cut. *note: there are two special cases)
     ConditionWire[] conditions = new ConditionWire[15];
 
@@ -104,6 +107,9 @@ public class WireModScript : MonoBehaviour
 
     void Start()
     {
+
+        AS = GetComponent<AudioSource>();
+
         colorOrder = new Color[wireCount];//set it to the amount of wires
         foreach (GameObject wire in wireSlots)
         {
@@ -111,7 +117,7 @@ public class WireModScript : MonoBehaviour
             {
                 colorOrder[colorCounter] = wire.GetComponent<WireBehavior>().wireColor;
                 activeWires.Add(wire);
-                Debug.Log(wire.GetComponent<WireBehavior>().wireColor);
+                //Debug.Log(wire.GetComponent<WireBehavior>().wireColor);
                 colorCounter++;
             }
         }
@@ -232,24 +238,29 @@ public class WireModScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))// if moused over
         {
-            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0) && !COMPLETED && !FAILED)
+            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0) && hit.collider.transform.parent == GenerateBomb.SelectedModule)
             {
+                AS.PlayOneShot(clip);
                 hit.collider.gameObject.GetComponent<WireBehavior>().cut = true;
                 hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                transform.Rotate(-5,0,5);
+                //transform.Rotate(-5,0,5);
                 FailedOrCompleted();
+                if (FAILED)
+                {
+                    StartCoroutine("FailFlash");
+                }
             }
         }
         if (COMPLETED)
         {
             LED.material = lightMaterials[0];
         }
-        if (FAILED)
-        {
-            LED.material = lightMaterials[1];
-        }
+        //if (FAILED && !COMPLETED)
+        //{
+        //    LED.material = lightMaterials[1];
+        //}
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(originalRot), Time.deltaTime * 20);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(originalRot), Time.deltaTime * 20);
 
     }
 
@@ -283,5 +294,12 @@ public class WireModScript : MonoBehaviour
             condition = _condition;
             wireToCut = _wireToCut;
         }
+    }
+
+    IEnumerator FailFlash()
+    {
+        LED.material = lightMaterials[1];
+        yield return new WaitForSeconds(.5f);
+        LED.material = lightMaterials[2];
     }
 }

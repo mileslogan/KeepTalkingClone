@@ -108,8 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1cff02551067034ab6b32e17e3727ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjToRespawn: {fileID: 2086106591165706696}
-  ObjNameToRespawn: Battery
+  ObjectToSpawn: 0
+  HasTriggered: 0
+  Parent: {fileID: 0}
 --- !u!54 &5715942528774309622
 Rigidbody:
   m_ObjectHideFlags: 0

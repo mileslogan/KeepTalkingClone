@@ -706,6 +706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectToSpawn: 2
   HasTriggered: 0
+  Parent: {fileID: 0}
 --- !u!114 &6977560172757551121
 MonoBehaviour:
   m_ObjectHideFlags: 0

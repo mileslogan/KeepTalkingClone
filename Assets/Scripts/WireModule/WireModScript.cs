@@ -238,7 +238,7 @@ public class WireModScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))// if moused over
         {
-            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0) && !COMPLETED)
+            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0) && hit.collider.transform.parent == GenerateBomb.SelectedModule)
             {
                 AS.PlayOneShot(clip);
                 hit.collider.gameObject.GetComponent<WireBehavior>().cut = true;

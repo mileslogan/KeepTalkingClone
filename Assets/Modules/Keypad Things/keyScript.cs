@@ -6,6 +6,15 @@ public class keyScript : MonoBehaviour
 {
     public ArrayList symbols = new ArrayList();
 
+    public GameObject key1;
+    public GameObject key2;
+    public GameObject key3;
+    public GameObject key4;
+
+    public Animator anim1;
+    public Animator anim2;
+    public Animator anim3;
+    public Animator anim4;
 
     public Sprite symbol1;
     public Sprite symbol2;
@@ -51,11 +60,19 @@ public class keyScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if(Physics.Raycast(ray, out hit))
+            RaycastHit keyHit;
+            if (Physics.Raycast(ray, out keyHit))
             {
+                if (keyHit.transform == key1)
+                {
+                    Debug.Log("click");
+                    anim1.SetTrigger("Push");
+
+                }
+
+            }
 
             }
         }
     }
-}
+

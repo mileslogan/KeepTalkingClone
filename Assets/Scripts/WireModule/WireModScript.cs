@@ -240,10 +240,6 @@ public class WireModScript : MonoBehaviour
                 FailedOrCompleted();
             }
         }
-<<<<<<< HEAD
-
-
-=======
         if (COMPLETED)
         {
             LED.material = lightMaterials[0];
@@ -287,6 +283,5 @@ public class WireModScript : MonoBehaviour
             condition = _condition;
             wireToCut = _wireToCut;
         }
->>>>>>> d3c50a7fe122c3edbe238ab63791bce6076e3e73
     }
 }

@@ -39,7 +39,7 @@ public class WhosOnFirst : MonoBehaviour
             if (hit.collider.tag == "WhoButtons" && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 hit.collider.transform.localPosition += transform.forward*.07f;
-                hit.collider.gameObject.GetComponent<ButtonScript>().pressed = true;
+                hit.collider.gameObject.GetComponent<WhoButtonScript>().pressed = true;
             }
         }
     }

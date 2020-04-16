@@ -13,18 +13,18 @@ public class WhosOnFirst : MonoBehaviour
     public TextMeshPro Text;
 
     public string[] availableStrings = new string[6];
-    public string correctLable;
+    public string correctLabel;
     
     // Start is called before the first frame update
     void Start()
     {
         screenText = keyWords[Random.Range(0, 28)];
         Text.text = screenText;
+        DetermineCorrectButton();
     }
 
-    void FailedButton()
+    void DetermineCorrectButton()
     {
-
 
     }
 

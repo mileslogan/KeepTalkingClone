@@ -3318,7 +3318,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  correctLable: 
+  correctLabel: 
 --- !u!114 &2149663812114160510
 MonoBehaviour:
   m_ObjectHideFlags: 0

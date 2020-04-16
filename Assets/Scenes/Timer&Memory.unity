@@ -432,6 +432,7 @@ MonoBehaviour:
   text3: {fileID: 2098002534}
   text4: {fileID: 463340485}
   bigtext: {fileID: 2085948307}
+  memoryAnimator: {fileID: 1157492292}
 --- !u!4 &540462318
 Transform:
   m_ObjectHideFlags: 0
@@ -1015,6 +1016,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 540462318}
     m_Modifications:
+    - target: {fileID: -7591824806308581011, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6323860208696663955, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1073,7 +1084,7 @@ PrefabInstance:
     - target: {fileID: -2384340851840854809, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_Name
-      value: button
+      value: button3
       objectReference: {fileID: 0}
     - target: {fileID: -2384340851840854809, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
@@ -1083,12 +1094,27 @@ PrefabInstance:
     - target: {fileID: -2284258107600505885, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_Name
-      value: button
+      value: button0
       objectReference: {fileID: 0}
     - target: {fileID: -2284258107600505885, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_TagString
       value: MemoryModuleButton
+      objectReference: {fileID: 0}
+    - target: {fileID: -1241969194644116781, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7106649
+      objectReference: {fileID: 0}
+    - target: {fileID: -1241969194644116781, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5210877
+      objectReference: {fileID: 0}
+    - target: {fileID: -1241969194644116781, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6586061
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
@@ -1098,25 +1124,60 @@ PrefabInstance:
     - target: {fileID: 3179774389773594836, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_Name
-      value: button
+      value: button2
       objectReference: {fileID: 0}
     - target: {fileID: 3179774389773594836, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_TagString
       value: MemoryModuleButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5535924959933533814, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6369359792790714776, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_Name
-      value: button
+      value: button1
       objectReference: {fileID: 0}
     - target: {fileID: 6369359792790714776, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
         type: 3}
       propertyPath: m_TagString
       value: MemoryModuleButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8894126137048760670, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9f30b9ce99d64810ac55ba22f3e0a3b, type: 3}
+--- !u!1 &1157492291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: c9f30b9ce99d64810ac55ba22f3e0a3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1157492290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1157492292
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157492291}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6624520c3c0b64f0e9cede937649ca1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1304753030
 GameObject:
   m_ObjectHideFlags: 0

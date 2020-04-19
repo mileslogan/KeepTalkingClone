@@ -10,7 +10,7 @@ public class GenerateBomb : MonoBehaviour
     //done loading
     private bool IsDone = false;
 
-    private bool HasRotated = false;
+    public bool HasRotated = false;
 
     public float DoneTimer = .3f;
     //prefabs
@@ -87,7 +87,8 @@ public class GenerateBomb : MonoBehaviour
     
     //module selected
     public static GameObject SelectedModule = null; //currently selected module: which enables interaction[clicking]
-    
+
+    public GameObject SelectMod = null;
     // Start is called before the first frame update
     void Awake()
     {
@@ -103,11 +104,6 @@ public class GenerateBomb : MonoBehaviour
         SpawnModules();
         //spawn extras: batteries, indicators, and serial #: potentially do: weird ports
         SpawnAllExtras();
-        
-    }
-
-    void Start()
-    {
         
     }
     // Update is called once per frame
@@ -174,6 +170,10 @@ public class GenerateBomb : MonoBehaviour
                 spawned.transform.parent = transform.parent;
                 spawned.transform.Rotate(Vector3.right, 270f);
                 SpawnedModules.Add(spawned);
+                
+                
+                //indicate which location the module on the script attached
+                
             }
             //if no module, spawn empty module
             else

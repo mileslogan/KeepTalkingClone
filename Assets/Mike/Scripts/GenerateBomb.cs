@@ -86,9 +86,9 @@ public class GenerateBomb : MonoBehaviour
     public List<Indicator> AddedIndicators = new List<Indicator>(); //indicators on bomb: to get see if isOn: AddedIndicators[0].IsOn
     
     //module selected
-    public static GameObject SelectedModule = null; //currently selected module: which enables interaction[clicking]
+    public static Transform SelectedModule = null; //currently selected module: which enables interaction[clicking]
 
-    public GameObject SelectMod = null;
+    public Transform SelectMod = null;
     // Start is called before the first frame update
     void Awake()
     {

@@ -91,7 +91,7 @@ public class Lerp : MonoBehaviour
             MouseScript.CurrentState = MouseScript.CurrentState = MouseControl.BombStates.OnModule;
             BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .35f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
             //declare which object is currently on
-            GenerateBomb.SelectedModule = obj;
+            GenerateBomb.SelectedModule = obj.transform;
             BombScript.SelectMod = GenerateBomb.SelectedModule;
         }
         

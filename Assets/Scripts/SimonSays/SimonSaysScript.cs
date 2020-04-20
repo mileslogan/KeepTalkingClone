@@ -6,10 +6,8 @@ public class SimonSaysScript : MonoBehaviour
 {
     int strikeCount;
 
-    //TEMPORARY
-    int globalStrikeCount;
+    
 
-    bool serialHasVowel;
 
     public bool completed;
 
@@ -18,8 +16,8 @@ public class SimonSaysScript : MonoBehaviour
     public GameObject buttonGreen;
     public GameObject buttonYellow;
 
-    int currentStage;
-    int buttonsPressed;
+    public int currentStage;
+    public int buttonsPressed;
 
     //These are the buttons that will flash
     public GameObject firstButton;
@@ -36,8 +34,11 @@ public class SimonSaysScript : MonoBehaviour
 
     int maxStage;
 
+    public GenerateBomb bombScript;
+
     void Start()
     {
+        bombScript = FindObjectOfType<GenerateBomb>();
         completed = false;
         maxStage = Random.Range(3, 6);
         SequenceGen();
@@ -48,89 +49,84 @@ public class SimonSaysScript : MonoBehaviour
     //WORK IN PROGRESS! WILL HAVE FINISHED BY 4/16!
     void Update()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //if (Physics.Raycast(ray, out hit))
-        //{
-        //    if (hit.collider.tag == "BUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
-        //    {
-
-        //    }
-        //}
-
-        if (strikeCount != globalStrikeCount)
+        if (strikeCount != bombScript.CurrentStrikes)
         {
-            strikeCount = globalStrikeCount;
+            strikeCount = bombScript.CurrentStrikes;
             AssignPushButton();
         }
 
-        if(currentStage <= maxStage)
+        if (GenerateBomb.SelectedModule == gameObject)
         {
-            if (Physics.Raycast(ray, out hit))
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (currentStage <= maxStage)
             {
-                switch (buttonsPressed)
+                if (Physics.Raycast(ray, out hit))
                 {
-                    case 0:
-                        if (hit.collider.gameObject == firstPushButton && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            buttonsPressed++;
-                        }
-                        else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            globalStrikeCount++;
-                        }
-                        break;
-                    case 1:
-                        if (hit.collider.gameObject == secondPushButton && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            buttonsPressed++;
-                        }
-                        else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            globalStrikeCount++;
-                            buttonsPressed = 0;
-                        }
-                        break;
-                    case 2:
-                        if (hit.collider.gameObject == thirdPushButton && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            buttonsPressed++;
-                        }
-                        else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            globalStrikeCount++;
-                            buttonsPressed = 0;
-                        }
-                        break;
-                    case 3:
-                        if (hit.collider.gameObject == fourthPushButton && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            buttonsPressed++;
-                        }
-                        else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            globalStrikeCount++;
-                            buttonsPressed = 0;
-                        }
-                        break;
-                    case 4:
-                        if (hit.collider.gameObject == fifthPushButton && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            buttonsPressed++;
-                        }
-                        else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            globalStrikeCount++;
-                            buttonsPressed = 0;
-                        }
-                        break;
+                    switch (buttonsPressed)
+                    {
+                        case 0:
+                            if (hit.collider.gameObject == firstPushButton && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                buttonsPressed++;
+                            }
+                            else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                bombScript.CurrentStrikes++;
+                            }
+                            break;
+                        case 1:
+                            if (hit.collider.gameObject == secondPushButton && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                buttonsPressed++;
+                            }
+                            else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                bombScript.CurrentStrikes++;
+                                buttonsPressed = 0;
+                            }
+                            break;
+                        case 2:
+                            if (hit.collider.gameObject == thirdPushButton && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                buttonsPressed++;
+                            }
+                            else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                bombScript.CurrentStrikes++;
+                                buttonsPressed = 0;
+                            }
+                            break;
+                        case 3:
+                            if (hit.collider.gameObject == fourthPushButton && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                buttonsPressed++;
+                            }
+                            else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                bombScript.CurrentStrikes++;
+                                buttonsPressed = 0;
+                            }
+                            break;
+                        case 4:
+                            if (hit.collider.gameObject == fifthPushButton && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                buttonsPressed++;
+                            }
+                            else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                bombScript.CurrentStrikes++;
+                                buttonsPressed = 0;
+                            }
+                            break;
+                    }
                 }
             }
-        }
-        else
-        {
-            completed = true;
+            else
+            {
+                completed = true;
+            }
         }
 
         if(buttonsPressed == currentStage)
@@ -251,7 +247,7 @@ public class SimonSaysScript : MonoBehaviour
 
     void AssignPushButton()
     {
-        if (serialHasVowel)
+        if (!bombScript.HasVowel)
         {
             switch (strikeCount)
             {

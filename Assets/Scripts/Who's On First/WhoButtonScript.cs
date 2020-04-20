@@ -13,7 +13,7 @@ public class WhoButtonScript : MonoBehaviour
     Vector3 startPos;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Text = GetComponentInChildren<TextMeshPro>();
         buttonNum = int.Parse(this.gameObject.name[0].ToString());
@@ -21,6 +21,14 @@ public class WhoButtonScript : MonoBehaviour
         Text.text = buttonString;
         startPos = transform.localPosition;
 
+        GetComponentInParent<WhosOnFirst>().availableStrings[buttonNum - 1] = buttonString;
+    }
+
+    public void ResetMe()
+    {
+        buttonNum = int.Parse(this.gameObject.name[0].ToString());
+        buttonString = GetComponentInParent<WhosOnFirst>().buttonWords[Random.Range(0, 28)];
+        Text.text = buttonString;
         GetComponentInParent<WhosOnFirst>().availableStrings[buttonNum - 1] = buttonString;
     }
 

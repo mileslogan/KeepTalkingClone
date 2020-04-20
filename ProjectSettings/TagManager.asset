@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - WIRE
-  - WhoButtons
   - EXTRA
+  - WIRE
+  - SIMONBUTTON
+  - WhoButton
   layers:
   - Default
   - TransparentFX

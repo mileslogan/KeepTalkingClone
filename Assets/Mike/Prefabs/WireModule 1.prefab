@@ -391,7 +391,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269613643161947782}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -407,7 +407,7 @@ Transform:
   - {fileID: 971898694372209788}
   m_Father: {fileID: 3093036882321248091}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1312855581234381671
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +607,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3093036882321248091}
   - component: {fileID: 2069392418547334473}
+  - component: {fileID: 4364769450025033136}
+  - component: {fileID: -1655322776631570684}
   m_Layer: 0
   m_Name: WireModule 1
   m_TagString: Untagged
@@ -680,6 +682,32 @@ MonoBehaviour:
   six_two: 0
   six_three: 0
   six_four: 0
+  clip: {fileID: 0}
+--- !u!65 &4364769450025033136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069392418547334472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.732084, y: 0.971805, z: 2.5852592}
+  m_Center: {x: 0.012926125, y: 0.54212564, z: -0.009649815}
+--- !u!114 &-1655322776631570684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069392418547334472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317278b9a67690c45b528fad2e7a6590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2317784117950946946
 GameObject:
   m_ObjectHideFlags: 0

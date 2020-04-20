@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MemoryModule : MonoBehaviour
 {
+
+    public bool Complete = false;
+    public bool Failed = false;
+    public GenerateBomb BombScript;
 
     public List<int[]> stages = new List<int[]>();
     public int[] stage01 = { 1, 2, 3, 4 }; // The numbers that appear on the buttons for stage 1 in order
@@ -25,6 +30,17 @@ public class MemoryModule : MonoBehaviour
     public GameObject text3; //text on button 2
     public GameObject text4; //text on button 3
     public GameObject bigtext; //big number on the top
+    public GameObject light1; // the light that turns on after complete stage 1
+    public GameObject light2; // the light that turns on after complete stage 2
+    public GameObject light3; // the light that turns on after complete stage 3
+    public GameObject light4; // the light that turns on after complete stage 4
+    public GameObject light5; // the light that turns on after complete stage 5
+    public GameObject completeLight; // the top LED light
+
+    public Material greenlight; // material of the green light
+    public Material redlight;// material of the red light
+    public Material lightoff;// material of the light-off
+
     public Animator memoryAnimator;
 
 
@@ -36,6 +52,7 @@ public class MemoryModule : MonoBehaviour
         stages.Add(stage03);
         stages.Add(stage04);
         stages.Add(stage05);
+        BombScript = FindObjectOfType<GenerateBomb>();
 
         // start from stage one
         StartStage();
@@ -148,7 +165,7 @@ public class MemoryModule : MonoBehaviour
             NextStage();
             return;
         }
-
+        Strike();
         StartStage(); // go back the startStage if failed
     }
 
@@ -178,7 +195,7 @@ public class MemoryModule : MonoBehaviour
             NextStage();
             return;
         }
-
+        Strike();
         StartStage(); // go back the startStage if failed
     }
 
@@ -208,7 +225,7 @@ public class MemoryModule : MonoBehaviour
             NextStage();
             return;
         }
-
+        Strike();
         StartStage();// go back the startStage if failed
     }
 
@@ -238,7 +255,7 @@ public class MemoryModule : MonoBehaviour
             NextStage();
             return;
         }
-
+        Strike();
         StartStage();// go back the startStage if failed
     }
 
@@ -268,7 +285,7 @@ public class MemoryModule : MonoBehaviour
             NextStage();
             return;
         }
-
+        Strike();
         StartStage();// go back the startStage if failed
     }
 
@@ -277,17 +294,67 @@ public class MemoryModule : MonoBehaviour
     {
         if (curstage == 6)
         {
-            bigtext.GetComponent<TextMesh>().text = "complete";
+            Complete = true;
+            ChangeLight();
             return;
         }
-        bigtext.GetComponent<TextMesh>().text = "" + bigNumber;
-        text1.GetComponent<TextMesh>().text = "" + stages[curstage - 1][0];
-        text2.GetComponent<TextMesh>().text = "" + stages[curstage - 1][1];
-        text3.GetComponent<TextMesh>().text = "" + stages[curstage - 1][2];
-        text4.GetComponent<TextMesh>().text = "" + stages[curstage - 1][3];
-
-        Debug.Log("Test");
+        bigtext.GetComponent<TextMeshPro>().text = "" + bigNumber;
+        text1.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][0];
+        text2.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][1];
+        text3.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][2];
+        text4.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][3];
+        ChangeLight();
         memoryAnimator.SetTrigger("MemoryRefreshButton");
     }
 
+    //change the green light that shows the curstage. Change the top LED light after complete
+    void ChangeLight()
+    {
+        //change the light base on the stages
+        switch (curstage)
+        {
+            case 1:
+                light1.GetComponent<MeshRenderer>().material = lightoff;
+                light2.GetComponent<MeshRenderer>().material = lightoff;
+                light3.GetComponent<MeshRenderer>().material = lightoff;
+                light4.GetComponent<MeshRenderer>().material = lightoff;
+                light5.GetComponent<MeshRenderer>().material = lightoff;
+                break;
+            case 2:
+                light1.GetComponent<MeshRenderer>().material = greenlight;
+                break;
+            case 3:
+                light2.GetComponent<MeshRenderer>().material = greenlight;
+                break;
+            case 4:
+                light3.GetComponent<MeshRenderer>().material = greenlight;
+                break;
+            case 5:
+                light4.GetComponent<MeshRenderer>().material = greenlight;
+                break;
+            case 6:
+                light5.GetComponent<MeshRenderer>().material = greenlight;
+                completeLight.GetComponent<MeshRenderer>().material = greenlight;
+                break;
+
+        }
+
+
+    }
+
+
+    void Strike()
+    {
+        BombScript.CurrentStrikes += 1; // increase the strikes number 
+        StartCoroutine(FlashRedLight()); // call the function that flash the red light
+    }
+
+    //flash red light
+    IEnumerator FlashRedLight()
+    {
+        completeLight.GetComponent<MeshRenderer>().material = redlight;
+        yield return new WaitForSeconds(0.3f);
+        completeLight.GetComponent<MeshRenderer>().material = lightoff;
+    }
+    
 }

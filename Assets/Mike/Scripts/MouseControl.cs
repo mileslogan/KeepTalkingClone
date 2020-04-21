@@ -114,8 +114,8 @@ public class MouseControl : MonoBehaviour
                     if (HoldingDownTimer <= .15f && HoldingDownTimer > 0f) //needs to be less than this to be considered a quick click
                     {
                         //lerp to picking up bomb state
-                        BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .3f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
-                        LerpScript.LerpCamera(LerpScript.HoldBombSpot, .2f);
+                        BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
+                        LerpScript.LerpCamera(LerpScript.HoldBombSpot, .5f);
                         
                         
                         

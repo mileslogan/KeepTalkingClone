@@ -86,9 +86,9 @@ public class GenerateBomb : MonoBehaviour
     public List<Indicator> AddedIndicators = new List<Indicator>(); //indicators on bomb: to get see if isOn: AddedIndicators[0].IsOn
     
     //module selected
-    public static Transform SelectedModule = null; //currently selected module: which enables interaction[clicking]
+    public static GameObject SelectedModule = null; //currently selected module: which enables interaction[clicking]
 
-    public Transform SelectMod = null;
+    public GameObject SelectMod = null;
     // Start is called before the first frame update
     void Awake()
     {
@@ -403,6 +403,14 @@ public class GenerateBomb : MonoBehaviour
             ExtrasToSpawn.Add(BatteryPrefab);
         }
         
+    }
+
+    public void TurnOnAllCols()
+    {
+        foreach (GameObject obj in SpawnedModules)
+        {
+            obj.GetComponent<Collider>().enabled = true;
+        }
     }
 }
 

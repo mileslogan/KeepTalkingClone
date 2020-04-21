@@ -49,6 +49,7 @@ public class MouseControl : MonoBehaviour
         switch (CurrentState)
         {
             case BombStates.PickedUp:
+                
                 if (Input.GetMouseButton(1)) //Right click
                 {
                    
@@ -61,10 +62,7 @@ public class MouseControl : MonoBehaviour
                     
                     //Clamp upward/downward rotation
                     Vector3 newRot = ParentBomb.localRotation.eulerAngles + new Vector3(mouseY, -mouseX, 0f);
-                    if (Input.GetKeyDown(KeyCode.A))
-                    {
-                        Debug.Log(ParentBomb.eulerAngles);
-                    }
+                    
                     if (ParentBomb.eulerAngles.y >= 90f && ParentBomb.eulerAngles.y <= 270)
                     {
                         newRot = ParentBomb.localRotation.eulerAngles + new Vector3(mouseY, -mouseX, 0f);
@@ -92,6 +90,24 @@ public class MouseControl : MonoBehaviour
                 if (Input.GetMouseButton(1))
                 {
                     HoldingDownTimer += Time.deltaTime; //time holding down
+                    
+                    //can rotate bomb now->get input
+                    float mouseX = Input.GetAxis("Mouse X") * RotSpeed * Time.deltaTime;
+                    float mouseY = Input.GetAxis("Mouse Y") * RotSpeed * Time.deltaTime;
+
+                    
+                    //Clamp upward/downward rotation
+                    Vector3 newRot = ParentBomb.localRotation.eulerAngles + new Vector3(mouseY, -mouseX, 0f);
+                   
+                    if (ParentBomb.eulerAngles.y >= 90f && ParentBomb.eulerAngles.y <= 270)
+                    {
+                        newRot = ParentBomb.localRotation.eulerAngles + new Vector3(mouseY, -mouseX, 0f);
+                    }
+                    
+                    newRot.x = ClampAngle(newRot.x, MinXRot, MaxXRot);
+                    
+                    //newRot.x = Mathf.Clamp(newRot.x, MinXRot, MaxXRot);
+                    ParentBomb.eulerAngles = newRot;
                 }
                 else
                 {
@@ -105,6 +121,7 @@ public class MouseControl : MonoBehaviour
                         
                         //Quaternion.Lerp()
                         CurrentState = BombStates.PickedUp; //switch state
+                        BombScript.TurnOnAllCols();
                         GenerateBomb.SelectedModule = null;
                         BombScript.SelectMod = GenerateBomb.SelectedModule;
                     }
@@ -124,7 +141,7 @@ public class MouseControl : MonoBehaviour
                 if (Input.GetMouseButtonDown(0)) //Left click
                 {
                     //transform.parent.Rotate(Vector3.right, -71f);
-                    
+                    BombScript.TurnOnAllCols();
                     //lerp to picking up bomb state
                     BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f);
                     LerpScript.LerpCamera(LerpScript.HoldBombSpot, .4f);

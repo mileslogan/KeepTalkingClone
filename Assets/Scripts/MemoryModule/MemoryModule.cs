@@ -294,8 +294,9 @@ public class MemoryModule : MonoBehaviour
     {
         if (curstage == 6)
         {
-            Complete = true;
-            ChangeLight();
+            Complete = true; 
+            BombScript.Completed();// call the Bomb script when complete
+            ChangeLight(); // Change the LED light to green
             return;
         }
         bigtext.GetComponent<TextMeshPro>().text = "" + bigNumber;
@@ -345,7 +346,7 @@ public class MemoryModule : MonoBehaviour
 
     void Strike()
     {
-        BombScript.CurrentStrikes += 1; // increase the strikes number 
+        BombScript.BombStrikes(); // call the Bomb script when Strikes
         StartCoroutine(FlashRedLight()); // call the function that flash the red light
     }
 

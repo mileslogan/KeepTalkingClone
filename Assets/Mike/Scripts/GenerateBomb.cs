@@ -431,6 +431,8 @@ public class GenerateBomb : MonoBehaviour
             obj.GetComponent<Collider>().enabled = true;
         }
     }
+
+   
 }
 
 //to be used for indicator spawning

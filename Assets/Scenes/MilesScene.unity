@@ -213,6 +213,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!23 &234003680 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2634134447523528318, guid: f7476a707bd174d6a88dae9c105f2cce,
+    type: 3}
+  m_PrefabInstance: {fileID: 5605051786554427084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &616973253
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +462,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimonSays
       objectReference: {fileID: 0}
+    - target: {fileID: 5605051787276350604, guid: f7476a707bd174d6a88dae9c105f2cce,
+        type: 3}
+      propertyPath: lightMaterials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605051787276350604, guid: f7476a707bd174d6a88dae9c105f2cce,
+        type: 3}
+      propertyPath: LED
+      value: 
+      objectReference: {fileID: 234003680}
+    - target: {fileID: 5605051787276350604, guid: f7476a707bd174d6a88dae9c105f2cce,
+        type: 3}
+      propertyPath: lightMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20abd6c5eb7b14e43be8c9af93ab863b, type: 2}
+    - target: {fileID: 5605051787276350604, guid: f7476a707bd174d6a88dae9c105f2cce,
+        type: 3}
+      propertyPath: lightMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0fe01b24b0db3a44b84de2d49b94035c, type: 2}
+    - target: {fileID: 5605051787276350604, guid: f7476a707bd174d6a88dae9c105f2cce,
+        type: 3}
+      propertyPath: lightMaterials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb854efee7736784494e0e13ec1f74b3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7476a707bd174d6a88dae9c105f2cce, type: 3}
 --- !u!1001 &7599989226630161169

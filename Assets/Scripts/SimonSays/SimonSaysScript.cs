@@ -6,7 +6,7 @@ public class SimonSaysScript : MonoBehaviour
 {
     int strikeCount;
 
-    public bool completed;
+    bool completed;
 
     public GameObject buttonRed;
     public GameObject buttonBlue;
@@ -33,6 +33,9 @@ public class SimonSaysScript : MonoBehaviour
 
     public GenerateBomb bombScript;
 
+    public Material[] lightMaterials;
+    public MeshRenderer LED;
+
     void Start()
     {
         bombScript = FindObjectOfType<GenerateBomb>();
@@ -46,11 +49,15 @@ public class SimonSaysScript : MonoBehaviour
     //WORK IN PROGRESS! WILL HAVE FINISHED BY 4/16!
     void Update()
     {
-        if (strikeCount != bombScript.CurrentStrikes)
+        if (bombScript != null)
         {
-            strikeCount = bombScript.CurrentStrikes;
-            AssignPushButton();
+            if (strikeCount != bombScript.CurrentStrikes)
+            {
+                strikeCount = bombScript.CurrentStrikes;
+                AssignPushButton();
+            }
         }
+        
 
         if (GenerateBomb.SelectedModule == gameObject)
         {
@@ -70,7 +77,11 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.BombStrikes();
+                                if (bombScript != null)
+                                {
+                                    bombScript.BombStrikes();
+                                }
+                                StartCoroutine("FailFlash");
                             }
                             break;
                         case 1:
@@ -80,7 +91,11 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.BombStrikes();
+                                if (bombScript != null)
+                                {
+                                    bombScript.BombStrikes();
+                                }
+                                StartCoroutine("FailFlash");
                                 buttonsPressed = 0;
                             }
                             break;
@@ -91,7 +106,11 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.BombStrikes();
+                                if (bombScript != null)
+                                {
+                                    bombScript.BombStrikes();
+                                }
+                                StartCoroutine("FailFlash");
                                 buttonsPressed = 0;
                             }
                             break;
@@ -102,7 +121,11 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.BombStrikes();
+                                if (bombScript != null)
+                                {
+                                    bombScript.BombStrikes();
+                                }
+                                StartCoroutine("FailFlash");
                                 buttonsPressed = 0;
                             }
                             break;
@@ -113,12 +136,26 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.BombStrikes();
+                                if(bombScript != null)
+                                {
+                                    bombScript.BombStrikes();
+                                }
+                                StartCoroutine("FailFlash");
                                 buttonsPressed = 0;
                             }
                             break;
                     }
                 }
+            }
+            else if (currentStage == maxStage + 1)
+            {
+                if (bombScript != null)
+                {
+                    bombScript.Completed();
+                }
+
+                LED.material = lightMaterials[0];
+                currentStage++;
             }
             else
             {
@@ -131,8 +168,15 @@ public class SimonSaysScript : MonoBehaviour
             currentStage++;
             buttonsPressed = 0;
         }
+
     }
 
+    IEnumerator FailFlash()
+    {
+        LED.material = lightMaterials[1];
+        yield return new WaitForSeconds(.5f);
+        LED.material = lightMaterials[2];
+    }
 
     //generate or regenerate the buttons that will flash
     void SequenceGen()

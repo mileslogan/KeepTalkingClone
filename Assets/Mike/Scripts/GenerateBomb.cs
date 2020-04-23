@@ -89,6 +89,10 @@ public class GenerateBomb : MonoBehaviour
     public static GameObject SelectedModule = null; //currently selected module: which enables interaction[clicking]
 
     public GameObject SelectMod = null;
+    
+    //completed
+    public int ModulesLeftToComplete;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -104,7 +108,7 @@ public class GenerateBomb : MonoBehaviour
         SpawnModules();
         //spawn extras: batteries, indicators, and serial #: potentially do: weird ports
         SpawnAllExtras();
-        
+        ModulesLeftToComplete = ModuleAmount;
     }
     // Update is called once per frame
     void Update()
@@ -286,8 +290,23 @@ public class GenerateBomb : MonoBehaviour
         }
     }
 
+    public void Completed()
+    {
+        ModulesLeftToComplete--;
+        if (ModulesLeftToComplete <= 0)
+        {
+            Win();
+        }
+    }
+    
     //create an explosion sfx, and black out screen, game over
     public void GameOver()
+    {
+        
+    }
+
+    //win screen
+    public void Win()
     {
         
     }

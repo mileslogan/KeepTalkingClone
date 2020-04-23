@@ -6,9 +6,6 @@ public class SimonSaysScript : MonoBehaviour
 {
     int strikeCount;
 
-    
-
-
     public bool completed;
 
     public GameObject buttonRed;
@@ -73,7 +70,7 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.CurrentStrikes++;
+                                bombScript.BombStrikes();
                             }
                             break;
                         case 1:
@@ -83,7 +80,7 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.CurrentStrikes++;
+                                bombScript.BombStrikes();
                                 buttonsPressed = 0;
                             }
                             break;
@@ -94,7 +91,7 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.CurrentStrikes++;
+                                bombScript.BombStrikes();
                                 buttonsPressed = 0;
                             }
                             break;
@@ -105,7 +102,7 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.CurrentStrikes++;
+                                bombScript.BombStrikes();
                                 buttonsPressed = 0;
                             }
                             break;
@@ -116,7 +113,7 @@ public class SimonSaysScript : MonoBehaviour
                             }
                             else if (hit.collider.tag == "SIMONBUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
                             {
-                                bombScript.CurrentStrikes++;
+                                bombScript.BombStrikes();
                                 buttonsPressed = 0;
                             }
                             break;

@@ -197,10 +197,15 @@ public class keyScript : MonoBehaviour
                 Debug.Log("CORRECT!");
                 correctOrder.RemoveAt(0);
                if (counter == 4)
+
             {
                 Debug.Log("YOU WIN!!");
                 //Global Counter++ (?)
                 keyLED.material = keylightMaterials[0];
+                if (BombScript != null)
+                {
+                    BombScript.Completed(); //if you are completing the module
+                }
 
             }
             return;
@@ -211,10 +216,9 @@ public class keyScript : MonoBehaviour
                 Debug.Log("incorrect!");
 
             //Global Strike
-            FailFlash();
+            StartCoroutine("FailFlash");
             if (BombScript != null)
             {
-                BombScript.Completed(); //if you are completing the module
                 BombScript.BombStrikes(); //if you made a mistake i.e. pressed wrong button
             }
 

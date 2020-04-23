@@ -76,10 +76,10 @@ public class MouseControl : MonoBehaviour
                 }
                 else
                 {
-                    if (HoldingDownTimer <= .15f && HoldingDownTimer > 0f) //needs to be less than this to be considered a quick click
+                    if (HoldingDownTimer <= .20f && HoldingDownTimer > 0f) //needs to be less than this to be considered a quick click
                     {
                         BombLerpScript.LerpCamera(BombLerpScript.DefaultSpot, .5f);
-                        LerpScript.LerpCamera(LerpScript.DefaultSpot, .4f);
+                        LerpScript.LerpCamera(LerpScript.DefaultSpot, .5f);
                         //Quaternion.Lerp()
                         CurrentState = BombStates.OnTable; //switch state
                     }
@@ -111,7 +111,7 @@ public class MouseControl : MonoBehaviour
                 }
                 else
                 {
-                    if (HoldingDownTimer <= .15f && HoldingDownTimer > 0f) //needs to be less than this to be considered a quick click
+                    if (HoldingDownTimer <= .20f && HoldingDownTimer > 0f) //needs to be less than this to be considered a quick click
                     {
                         //lerp to picking up bomb state
                         BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE

@@ -6,6 +6,8 @@ public class keyScript : MonoBehaviour
 {
     public ArrayList symbols = new ArrayList();
 
+    public GenerateBomb BombScript;
+
     public GameObject key1;
     public GameObject key2;
     public GameObject key3;
@@ -15,6 +17,8 @@ public class keyScript : MonoBehaviour
     public Animator anim2;
     public Animator anim3;
     public Animator anim4;
+
+    public Material[] keylightMaterials;     public MeshRenderer keyLED;
 
     public List<SpriteRenderer> keySymbols;
 
@@ -65,6 +69,8 @@ public class keyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BombScript = FindObjectOfType<GenerateBomb>();
+
         int chosenList = Random.Range(0, 6);
          
 
@@ -192,8 +198,10 @@ public class keyScript : MonoBehaviour
                 correctOrder.RemoveAt(0);
                if (counter == 4)
             {
-                Debug.Log("You Win...One of 'em!");
+                Debug.Log("YOU WIN!!");
                 //Global Counter++ (?)
+                keyLED.material = keylightMaterials[0];
+
             }
             return;
             }
@@ -202,9 +210,19 @@ public class keyScript : MonoBehaviour
             {
                 Debug.Log("incorrect!");
 
-                //Global Strike
+            //Global Strike
+            FailFlash();
+            if (BombScript != null)
+            {
+                BombScript.Completed(); //if you are completing the module
+                BombScript.BombStrikes(); //if you made a mistake i.e. pressed wrong button
             }
+
+
+        }
         
     }
+
+    IEnumerator FailFlash()     {         keyLED.material = keylightMaterials[1];         yield return new WaitForSeconds(.5f);         keyLED.material = keylightMaterials[2];     } 
 }
 

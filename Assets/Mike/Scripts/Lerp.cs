@@ -14,7 +14,7 @@ public class Lerp : MonoBehaviour
     
     //initial pick up bomb spot
     public CameraSpot HoldBombSpot = new CameraSpot(new Vector3(0f, 3.76f, -10f), 
-        23.55f);
+        23.55f, Vector3.zero);
     
 
     public CameraSpot DefaultSpot; //original spot of camera
@@ -41,7 +41,7 @@ public class Lerp : MonoBehaviour
         Cam = GetComponent<Camera>();
         StartingFov = Cam.fieldOfView;
         StartingPos = transform.position;
-        DefaultSpot = new CameraSpot(transform.position, Cam.fieldOfView);
+        DefaultSpot = new CameraSpot(transform.position, Cam.fieldOfView, transform.rotation.eulerAngles);
     }
 
     // Update is called once per frame
@@ -61,7 +61,7 @@ public class Lerp : MonoBehaviour
             
             transform.position = Vector3.Lerp(StartingPos, NewSpot.Loc, t);
             Cam.fieldOfView = Mathf.Lerp(StartingFov, NewSpot.FieldOfView, t);
-            
+            transform.rotation = Quaternion.Euler(Vector3.Lerp(transform.rotation.eulerAngles, NewSpot.RotationAngles, t));
             //turn of lerping once done
             if (t >= 1)
             {
@@ -92,7 +92,7 @@ public class Lerp : MonoBehaviour
             BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
             //declare which object is currently on
             StartCoroutine(DelayObj(.05f, obj));
-
+            
             //GenerateBomb.SelectedModule = obj;
             //BombScript.SelectMod = GenerateBomb.SelectedModule;
 
@@ -135,9 +135,12 @@ public struct CameraSpot
 {
     public Vector3 Loc; //move camera
     public float FieldOfView; //camera zoom
+
+    public Vector3 RotationAngles;
     //Constructor
-    public CameraSpot(Vector3 loc, float fieldOfView) {
+    public CameraSpot(Vector3 loc, float fieldOfView, Vector3 rot) {
         this.Loc = loc;
         this.FieldOfView = fieldOfView;
+        this.RotationAngles = rot;
     }
 }

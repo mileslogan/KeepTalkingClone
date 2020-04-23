@@ -91,8 +91,12 @@ public class Lerp : MonoBehaviour
             MouseScript.CurrentState = MouseScript.CurrentState = MouseControl.BombStates.OnModule;
             BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
             //declare which object is currently on
-            GenerateBomb.SelectedModule = obj;
-            BombScript.SelectMod = GenerateBomb.SelectedModule;
+            StartCoroutine(DelayObj(.05f, obj));
+
+            //GenerateBomb.SelectedModule = obj;
+            //BombScript.SelectMod = GenerateBomb.SelectedModule;
+
+
         }
         
     }
@@ -116,6 +120,13 @@ public class Lerp : MonoBehaviour
         }
         Debug.Log("Error: object clicked was not the same");
         
+    }
+    
+    IEnumerator DelayObj(float delay, GameObject obj)
+    {
+        yield return new WaitForSeconds(delay);
+        GenerateBomb.SelectedModule = obj;
+        BombScript.SelectMod = GenerateBomb.SelectedModule;
     }
 }
 

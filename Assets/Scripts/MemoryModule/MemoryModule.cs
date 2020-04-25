@@ -294,8 +294,11 @@ public class MemoryModule : MonoBehaviour
     {
         if (curstage == 6)
         {
-            Complete = true; 
-            BombScript.Completed();// call the Bomb script when complete
+            Complete = true;
+            if (BombScript != null)
+            {
+                BombScript.Completed();// call the Bomb script when complete
+            }
             ChangeLight(); // Change the LED light to green
             return;
         }
@@ -346,7 +349,11 @@ public class MemoryModule : MonoBehaviour
 
     void Strike()
     {
-        BombScript.BombStrikes(); // call the Bomb script when Strikes
+        if (BombScript != null)
+        {
+            BombScript.BombStrikes(); // call the Bomb script when Strikes
+        }
+        
         StartCoroutine(FlashRedLight()); // call the function that flash the red light
     }
 

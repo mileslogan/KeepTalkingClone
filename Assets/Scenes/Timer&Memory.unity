@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -151,9 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdowntime: 200
+  waittime: 1
   BombScript: {fileID: 0}
   timeText: {fileID: 0}
-  strikesText: {fileID: 0}
+  strikeScreen: {fileID: 0}
+  timerStrike0: {fileID: 0}
+  timerStrike1: {fileID: 0}
+  timerStrike2: {fileID: 0}
 --- !u!4 &264148596
 Transform:
   m_ObjectHideFlags: 0
@@ -1752,6 +1756,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimerModule
       objectReference: {fileID: 0}
+    - target: {fileID: 1306558425596808821, guid: 5f1aa638ae2a44c61bde65da15f0d433,
+        type: 3}
+      propertyPath: timerStrike0
+      value: 
+      objectReference: {fileID: -321610462239964284, guid: c71bb95b5aa3b4b9796e59503636823b,
+        type: 3}
+    - target: {fileID: 1306558425596808821, guid: 5f1aa638ae2a44c61bde65da15f0d433,
+        type: 3}
+      propertyPath: timerStrike1
+      value: 
+      objectReference: {fileID: -1143407610822249764, guid: c71bb95b5aa3b4b9796e59503636823b,
+        type: 3}
+    - target: {fileID: 1306558425596808821, guid: 5f1aa638ae2a44c61bde65da15f0d433,
+        type: 3}
+      propertyPath: timerStrike2
+      value: 
+      objectReference: {fileID: 6875377450873775592, guid: c71bb95b5aa3b4b9796e59503636823b,
+        type: 3}
+    - target: {fileID: 1306558425596808821, guid: 5f1aa638ae2a44c61bde65da15f0d433,
+        type: 3}
+      propertyPath: strikeScreen
+      value: 
+      objectReference: {fileID: 1435085927}
+    - target: {fileID: 5519523642772283759, guid: 5f1aa638ae2a44c61bde65da15f0d433,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -321610462239964284, guid: c71bb95b5aa3b4b9796e59503636823b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f1aa638ae2a44c61bde65da15f0d433, type: 3}
 --- !u!1 &1304753030
@@ -1972,6 +2005,12 @@ Transform:
   m_Father: {fileID: 540462318}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1435085927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8469339365204515354, guid: 5f1aa638ae2a44c61bde65da15f0d433,
+    type: 3}
+  m_PrefabInstance: {fileID: 1242786946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1478087227
 GameObject:
   m_ObjectHideFlags: 0

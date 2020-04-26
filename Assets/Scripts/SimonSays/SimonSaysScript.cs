@@ -36,6 +36,8 @@ public class SimonSaysScript : MonoBehaviour
     public Material[] lightMaterials;
     public MeshRenderer LED;
 
+    public Animator simonAnimator;
+
     void Start()
     {
         bombScript = FindObjectOfType<GenerateBomb>();
@@ -57,9 +59,14 @@ public class SimonSaysScript : MonoBehaviour
                 AssignPushButton();
             }
         }
-        
 
-        if (GenerateBomb.SelectedModule == gameObject)
+        //if button is pushed up, set all animation conditions to false
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            simonAnimator.SetBool("PressingBlue", false);
+        }
+
+        //if (GenerateBomb.SelectedModule == gameObject)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -68,6 +75,12 @@ public class SimonSaysScript : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hit))
                 {
+                  if(hit.collider.gameObject == buttonBlue && Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        simonAnimator.SetBool("PressingBlue", true);
+                    }
+
+                    //logic for adavncing game or getting strikes
                     switch (buttonsPressed)
                     {
                         case 0:
@@ -288,7 +301,7 @@ public class SimonSaysScript : MonoBehaviour
 
     void AssignPushButton()
     {
-        if (!bombScript.HasVowel)
+        if (bombScript != null && !bombScript.HasVowel)
         {
             switch (strikeCount)
             {

@@ -921,6 +921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 627003282060071787}
   - component: {fileID: 5605051787276350604}
+  - component: {fileID: 205638994596549650}
   m_Layer: 0
   m_Name: SimonSays
   m_TagString: Untagged
@@ -961,7 +962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c61a7dc9191442787313fd4421bc0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completed: 0
   buttonRed: {fileID: 2802217435008674410}
   buttonBlue: {fileID: 4889557447434201342}
   buttonGreen: {fileID: 3730193098869961810}
@@ -974,6 +974,28 @@ MonoBehaviour:
   fourthButton: {fileID: 0}
   fifthButton: {fileID: 0}
   bombScript: {fileID: 0}
+  lightMaterials: []
+  LED: {fileID: 0}
+  simonAnimator: {fileID: 0}
+--- !u!95 &205638994596549650
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4533095063276167544}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 84e8328f41bbe4316a0f0ff0d57e247b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4578592407481359945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,7 +1102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4889557447434201342}
   m_LocalRotation: {x: -0.6532815, y: -0.27059802, z: -0.27059808, w: 0.65328145}
-  m_LocalPosition: {x: -0, y: 0.8967232, z: -0.4}
+  m_LocalPosition: {x: 0, y: 0.8967232, z: -0.4}
   m_LocalScale: {x: 0.24999999, y: 0.24999999, z: 0.03}
   m_Children: []
   m_Father: {fileID: 627003282060071787}

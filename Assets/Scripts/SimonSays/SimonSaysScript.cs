@@ -36,6 +36,13 @@ public class SimonSaysScript : MonoBehaviour
     public Material[] lightMaterials;
     public MeshRenderer LED;
 
+    public Material[] unpressedMaterials;
+    public Material[] pressedMaterials;
+
+    public Material testMaterial;
+
+    public MeshRenderer[] meshArray;
+
     public Animator simonAnimator;
 
     void Start()
@@ -47,7 +54,7 @@ public class SimonSaysScript : MonoBehaviour
         currentStage = 1;
         buttonsPressed = 0;
 
-
+        StartSimonFlashSequence();
     }
 
     //WORK IN PROGRESS! WILL HAVE FINISHED BY 4/16!
@@ -80,6 +87,8 @@ public class SimonSaysScript : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hit))
                 {
+
+                    //FOR LATER Enable button pushing when puzzle is completed
                   if(hit.collider.gameObject == buttonBlue && Input.GetKeyDown(KeyCode.Mouse0))
                     {
                         simonAnimator.SetBool("PressingBlue", true);
@@ -206,6 +215,47 @@ public class SimonSaysScript : MonoBehaviour
         LED.material = lightMaterials[1];
         yield return new WaitForSeconds(.5f);
         LED.material = lightMaterials[2];
+    }
+
+    public void StartSimonFlashSequence()
+    {
+        StartCoroutine(SimonSaysSequence());
+    }
+
+    IEnumerator SimonSaysSequence()
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log("started once");
+        FlashButton(firstButton);
+    }
+
+    void FlashButton(GameObject currentButton)
+    {
+        Debug.Log("Starting Flashing ");
+        if(currentButton == buttonBlue)
+        {
+            meshArray[1].material = testMaterial;
+            Debug.Log("Flashing " + currentButton);
+            Debug.Log(buttonBlue.GetComponent<MeshRenderer>().material.name);
+        }
+        if (currentButton == buttonRed)
+        {
+            meshArray[0].material = testMaterial;
+            Debug.Log("Flashing " + currentButton);
+            Debug.Log(buttonRed.GetComponent<MeshRenderer>().material.name);
+        }
+        if (currentButton == buttonGreen)
+        {
+            meshArray[2].material = testMaterial;
+            Debug.Log("Flashing " + currentButton);
+            Debug.Log(buttonGreen.GetComponent<MeshRenderer>().material.name);
+        }
+        if (currentButton == buttonYellow)
+        {
+            meshArray[3].material = testMaterial;
+            Debug.Log("Flashing " + currentButton);
+            Debug.Log(buttonYellow.GetComponent<MeshRenderer>().material.name);
+        }
     }
 
     //generate or regenerate the buttons that will flash

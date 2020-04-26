@@ -976,6 +976,16 @@ MonoBehaviour:
   bombScript: {fileID: 0}
   lightMaterials: []
   LED: {fileID: 0}
+  unpressedMaterials:
+  - {fileID: 2100000, guid: 65fd6ae5ac21a4cbeb2ab7d3adc92040, type: 2}
+  - {fileID: 2100000, guid: 44bb1464ea0324da3ba59706db6a2dbc, type: 2}
+  - {fileID: 2100000, guid: 0f1543a96c5c8451d8a896a063bdc984, type: 2}
+  - {fileID: 2100000, guid: 61256fd9a13f3454ca766343f69b1ea3, type: 2}
+  pressedMaterials:
+  - {fileID: 2100000, guid: 5b1fa98b7f72a481c9c024a5af5e0eea, type: 2}
+  - {fileID: 2100000, guid: 0483e966583ec4ef3b87a8f5d17697a8, type: 2}
+  - {fileID: 2100000, guid: 19ff8dac54c2f4fb09ce3dc3e6077f04, type: 2}
+  - {fileID: 2100000, guid: 5d15e3f03d0ae444e84f98b3c65a8b70, type: 2}
   simonAnimator: {fileID: 205638994596549650}
 --- !u!95 &205638994596549650
 Animator:

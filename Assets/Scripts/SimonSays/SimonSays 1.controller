@@ -64,28 +64,28 @@ AnimatorStateMachine:
     m_Position: {x: 360, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7160286964742982171}
-    m_Position: {x: 650, y: 70, z: 0}
+    m_Position: {x: 640, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4957191045143266963}
-    m_Position: {x: 540, y: 180, z: 0}
+    m_Position: {x: 290, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7765684657451334033}
-    m_Position: {x: 580, y: -80, z: 0}
+    m_Position: {x: 540, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8587373556229908457}
-    m_Position: {x: 410, y: -220, z: 0}
+    m_Position: {x: 260, y: -270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7616179783599460341}
-    m_Position: {x: 650, y: 0, z: 0}
+    m_Position: {x: 640, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4259713383779158259}
-    m_Position: {x: 380, y: 230, z: 0}
+    m_Position: {x: 550, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4750125895756756886}
-    m_Position: {x: 520, y: -160, z: 0}
+    m_Position: {x: 590, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3894656052859229100}
-    m_Position: {x: 240, y: -270, z: 0}
+    m_Position: {x: 480, y: -270, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -93,7 +93,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ExitPosition: {x: 860, y: 220, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 8216346021493264860}
 --- !u!1102 &-4259713383779158259
@@ -104,7 +104,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Push Red Reverse
-  m_Speed: -1
+  m_Speed: -5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5019059851057464124}
@@ -131,7 +131,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PushGreen Reverse
-  m_Speed: -1
+  m_Speed: -5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -968884056280455272}
@@ -258,25 +258,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PressingRed
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PressingYellow
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PressingGreen
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -398,7 +398,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Push Yellow Reverse
-  m_Speed: -1
+  m_Speed: -5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5669885759807499530}
@@ -523,7 +523,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Push Blue Reverse
-  m_Speed: -1
+  m_Speed: -5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -147126503239523322}

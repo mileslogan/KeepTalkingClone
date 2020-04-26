@@ -46,6 +46,8 @@ public class SimonSaysScript : MonoBehaviour
         SequenceGen();
         currentStage = 1;
         buttonsPressed = 0;
+
+
     }
 
     //WORK IN PROGRESS! WILL HAVE FINISHED BY 4/16!
@@ -64,6 +66,9 @@ public class SimonSaysScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             simonAnimator.SetBool("PressingBlue", false);
+            simonAnimator.SetBool("PressingRed", false);
+            simonAnimator.SetBool("PressingGreen", false);
+            simonAnimator.SetBool("PressingYellow", false);
         }
 
         //if (GenerateBomb.SelectedModule == gameObject)
@@ -78,6 +83,18 @@ public class SimonSaysScript : MonoBehaviour
                   if(hit.collider.gameObject == buttonBlue && Input.GetKeyDown(KeyCode.Mouse0))
                     {
                         simonAnimator.SetBool("PressingBlue", true);
+                    }
+                    if (hit.collider.gameObject == buttonRed && Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        simonAnimator.SetBool("PressingRed", true);
+                    }
+                    if (hit.collider.gameObject == buttonGreen && Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        simonAnimator.SetBool("PressingGreen", true);
+                    }
+                    if (hit.collider.gameObject == buttonYellow && Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        simonAnimator.SetBool("PressingYellow", true);
                     }
 
                     //logic for adavncing game or getting strikes

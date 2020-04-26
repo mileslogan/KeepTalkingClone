@@ -976,7 +976,7 @@ MonoBehaviour:
   bombScript: {fileID: 0}
   lightMaterials: []
   LED: {fileID: 0}
-  simonAnimator: {fileID: 0}
+  simonAnimator: {fileID: 205638994596549650}
 --- !u!95 &205638994596549650
 Animator:
   serializedVersion: 3

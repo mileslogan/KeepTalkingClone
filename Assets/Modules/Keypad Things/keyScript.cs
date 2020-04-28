@@ -18,6 +18,9 @@ public class keyScript : MonoBehaviour
     public Animator anim3;
     public Animator anim4;
 
+    public AudioSource clicker;
+    public AudioClip click;
+
     public Material[] keylightMaterials;     public MeshRenderer keyLED;
 
     public List<SpriteRenderer> keySymbols;
@@ -32,6 +35,7 @@ public class keyScript : MonoBehaviour
             RaycastHit keyHit;
             if (Physics.Raycast(ray, out keyHit))
             {
+                clicker.PlayOneShot(click);
 
                 if (keyHit.transform.gameObject == key1)
                 {

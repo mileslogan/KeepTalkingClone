@@ -42,7 +42,7 @@ public class MemoryModule : MonoBehaviour
     public Material lightoff;// material of the light-off
 
     public Animator memoryAnimator;
-
+    public AudioSource audioClick;
 
     void Start()
     {
@@ -69,6 +69,7 @@ public class MemoryModule : MonoBehaviour
         {
             if (hit.collider.tag == "MemoryModuleButton" && Input.GetKeyDown(KeyCode.Mouse0) && hit.collider.transform.parent.gameObject == GenerateBomb.SelectedModule)
             {
+                audioClick.Play(0);
                 int buttonIndex = hit.collider.gameObject.GetComponent<MemoryModuleButton>().buttonIndex;
                 ButtonClick(buttonIndex);
             }
@@ -294,8 +295,11 @@ public class MemoryModule : MonoBehaviour
     {
         if (curstage == 6)
         {
-            Complete = true; 
-            BombScript.Completed();// call the Bomb script when complete
+            Complete = true;
+            if (BombScript != null)
+            {
+                BombScript.Completed();// call the Bomb script when complete
+            }
             ChangeLight(); // Change the LED light to green
             return;
         }
@@ -346,7 +350,11 @@ public class MemoryModule : MonoBehaviour
 
     void Strike()
     {
-        BombScript.BombStrikes(); // call the Bomb script when Strikes
+        if (BombScript != null)
+        {
+            BombScript.BombStrikes(); // call the Bomb script when Strikes
+        }
+        
         StartCoroutine(FlashRedLight()); // call the function that flash the red light
     }
 

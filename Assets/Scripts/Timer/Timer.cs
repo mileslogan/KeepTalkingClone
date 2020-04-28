@@ -12,29 +12,41 @@ public class Timer : MonoBehaviour
     int seconds;//the number representation of seconds
     string str_minutes; //the string representation of minutes
     string str_seconds;//the string representation of seconds
+    public float waittime = 1f;
 
     public GenerateBomb BombScript;
     public GameObject timeText; // Test of the time 
-    public GameObject strikesText; // Test of the strikes
+    public GameObject strikeScreen;
+     
+    public Material timerStrike0; // The material of no strikes 
+    public Material timerStrike1;// The material of 1 strikes 
+    public Material timerStrike2;// The material of 2 strikes 
+
+    public AudioSource audioData; // The audio source of the sounds of timer 
 
     void Start()
     {
         //start timer
         StartCoroutine(CountDown(countdowntime));
         BombScript = FindObjectOfType<GenerateBomb>();
+
     }
 
     
     // Update the strike shows on the top
     void Update()
-    { 
-        if (BombScript.CurrentStrikes == 1)
+    {
+        if (BombScript!= null && BombScript.CurrentStrikes == 1)
         {
-            strikesText.GetComponent<TextMesh>().text = "x";
+            Material[] matArray = strikeScreen.GetComponent<MeshRenderer>().materials;
+            matArray[1] = timerStrike1;
+            strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
+            waittime = 0.75f;
         }
-        if (BombScript.CurrentStrikes == 2)
+        if (BombScript != null && BombScript.CurrentStrikes == 2)
         {
-            strikesText.GetComponent<TextMesh>().text = "x  x";
+            StartCoroutine(Blink());
+            waittime = 0.5f;
         }
 
     }
@@ -47,8 +59,24 @@ public class Timer : MonoBehaviour
         {
             TimeCalculator();
             timeText.GetComponent<TextMesh>().text = str_minutes + " : " + str_seconds;
-            yield return new WaitForSeconds(1.0f);
+            audioData.Play(0);
+            yield return new WaitForSeconds(waittime);
             timeleft--;
+        }
+
+    }
+
+    private IEnumerator Blink()
+    {
+        Material[] matArray = strikeScreen.GetComponent<MeshRenderer>().materials;
+        while (true)
+        {
+            matArray[1] = timerStrike2;
+            strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
+            yield return new WaitForSeconds(0.8f);
+            matArray[1] = timerStrike0;
+            strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
+            yield return new WaitForSeconds(0.8f);
         }
 
     }

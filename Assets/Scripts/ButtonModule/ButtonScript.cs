@@ -22,14 +22,44 @@ public class ButtonScript : MonoBehaviour
     public bool completed;
     public bool pressing;
 
+    bool frkOn;
+    bool carOn;
+
     public bool needHold;
 
     public TextMesh buttonWords;
     public GameObject buttonStrip;
 
+    public GenerateBomb bombScript;
+
+    public MeshRenderer buttonMesh;
+
     // Start is called before the first frame update
     void Start()
     {
+        bombScript = FindObjectOfType<GenerateBomb>();
+
+        foreach (Indicator ind in bombScript.AddedIndicators)
+        {
+            
+            if (ind.Str == "CAR")
+            {
+                
+                if (ind.IsOn)
+                {
+                    carOn = true;
+                }
+            }
+
+            if (ind.Str == "FRK")
+            {
+                if (ind.IsOn)
+                {
+                    frkOn = true;
+                }
+            }
+        }
+
         completed = false;
         pressing = false;
 
@@ -43,7 +73,7 @@ public class ButtonScript : MonoBehaviour
         stripColor2 = StripColorGen();
 
         //Set Button Color and Text
-        GetComponent<MeshRenderer>().material.SetColor("_BaseColor", currentColor);
+        buttonMesh.material.SetColor("_BaseColor", currentColor);
         buttonWords.text = currentString;
 
         //Check if generated button needs to be pressed or held and released
@@ -59,10 +89,15 @@ public class ButtonScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.tag == "BUTTON" && Input.GetKeyDown(KeyCode.Mouse0))
+            if (hit.collider.tag == "ButtonButton" && Input.GetKeyDown(KeyCode.Mouse0))
             {
-                
+                pressing = true;
             }
+        }
+
+        if(pressing == true)
+        {
+
         }
     }
 
@@ -155,16 +190,18 @@ public class ButtonScript : MonoBehaviour
         {
             needHold = true;
         }
-        else if (currentString == detonate) //ALSO if there is more than one battery
+        else if (currentString == detonate && bombScript != null && bombScript.BatteryNum > 1)
         {
             needHold = false;
         }
-        else if (currentColor == Color.white) //ALSO if lit indicator CAR
+        else if (currentColor == Color.white && carOn)
         {
             needHold = true;
         }
-        //else if (lit indicator FRK && more than two batteries)
-        //press and immediately release
+        else if (frkOn && bombScript != null && bombScript.BatteryNum > 2)
+        {
+            needHold = false;
+        }
         else if (currentColor == Color.yellow)
         {
             needHold = true;

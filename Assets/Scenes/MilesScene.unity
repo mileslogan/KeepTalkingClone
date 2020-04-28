@@ -480,6 +480,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimonSays
       objectReference: {fileID: 0}
+    - target: {fileID: 4533095063276167544, guid: f7476a707bd174d6a88dae9c105f2cce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5605051787276350604, guid: f7476a707bd174d6a88dae9c105f2cce,
         type: 3}
       propertyPath: lightMaterials.Array.size

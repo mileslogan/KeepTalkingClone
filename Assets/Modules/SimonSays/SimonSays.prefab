@@ -639,7 +639,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 5dc5a3907c29b4b2c84f046dac6d00f8, type: 3}
+  - {fileID: 2100000, guid: 9e683cf6dc7e44f5cb453a7dbc72e21b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -900,10 +900,10 @@ MonoBehaviour:
   simonAnimator: {fileID: 205638994596549650}
   simonSound: {fileID: 3812116898542183039}
   buttonBeep:
-  - {fileID: 8300000, guid: c1d88feb1765349159a85d240b50cecb, type: 3}
-  - {fileID: 8300000, guid: d500a8b5ef29248348e586dc4994b177, type: 3}
-  - {fileID: 8300000, guid: 6a12089bfceb942d8935bbf2ef76b7e4, type: 3}
-  - {fileID: 8300000, guid: 2824239e964eb48ffba7e22fc517e0d2, type: 3}
+  - {fileID: 8300000, guid: 02cd87999ce4a4b909734b0010d03193, type: 3}
+  - {fileID: 8300000, guid: 394fd67857969440491e276ec787e3c7, type: 3}
+  - {fileID: 8300000, guid: 08b39b32fedf945b9a7cf439cebf31af, type: 3}
+  - {fileID: 8300000, guid: bdfbdaf3541de43a0b73e9c56f5144a7, type: 3}
 --- !u!95 &205638994596549650
 Animator:
   serializedVersion: 3
@@ -1704,7 +1704,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

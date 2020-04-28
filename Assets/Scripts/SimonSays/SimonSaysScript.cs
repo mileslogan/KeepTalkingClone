@@ -86,7 +86,7 @@ public class SimonSaysScript : MonoBehaviour
             }
         }
 
-        if (GenerateBomb.SelectedModule == gameObject)
+        //if (GenerateBomb.SelectedModule == gameObject)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -249,48 +249,78 @@ public class SimonSaysScript : MonoBehaviour
         {
             case 1:
                 FlashButton(firstButton);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1f);
+                simonSound.Stop();
+                yield return new WaitForSeconds(1f);
                 break;
             case 2:
                 FlashButton(firstButton);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1f);
+                simonSound.Stop();
+                yield return new WaitForSeconds(.5f);
                 FlashButton(secondButton);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1f);
+                simonSound.Stop();
+                yield return new WaitForSeconds(1f);
                 break;
             case 3:
                 FlashButton(firstButton);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1f);
+                simonSound.Stop();
+                yield return new WaitForSeconds(.5f);
                 FlashButton(secondButton);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1f);
+                simonSound.Stop();
+                yield return new WaitForSeconds(.5f);
                 FlashButton(thirdButton);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1f);
+                simonSound.Stop();
+                yield return new WaitForSeconds(1f);
                 break;
             case 4:
                 if(maxStage >= 4)
                 {
                     FlashButton(firstButton);
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(.5f);
                     FlashButton(secondButton);
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(.5f);
                     FlashButton(thirdButton);
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(.5f);
                     FlashButton(fourthButton);
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(1f);
                 }
                 break;
             case 5:
                 if (maxStage >= 5)
                 {
                     FlashButton(firstButton);
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(.5f);
                     FlashButton(secondButton);
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(.5f);
                     FlashButton(thirdButton);
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(.5f);
                     FlashButton(fourthButton);
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(.5f);
                     FlashButton(fifthButton);
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1f);
+                    simonSound.Stop();
+                    yield return new WaitForSeconds(1f);
                 }
                 break;
         }
@@ -306,7 +336,8 @@ public class SimonSaysScript : MonoBehaviour
             simonAnimator.SetTrigger("FlashBlue");
             if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
             {
-                simonSound.PlayOneShot(buttonBeep[1]);
+                simonSound.clip = buttonBeep[1];
+                simonSound.Play();
             }
         }
         if (currentButton == buttonRed)
@@ -314,7 +345,8 @@ public class SimonSaysScript : MonoBehaviour
             simonAnimator.SetTrigger("FlashRed");
             if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
             {
-                simonSound.PlayOneShot(buttonBeep[0]);
+                simonSound.clip = buttonBeep[0];
+                simonSound.Play();
             }
         }
         if (currentButton == buttonGreen)
@@ -322,7 +354,8 @@ public class SimonSaysScript : MonoBehaviour
             simonAnimator.SetTrigger("FlashGreen");
             if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
             {
-                simonSound.PlayOneShot(buttonBeep[2]);
+                simonSound.clip = buttonBeep[2];
+                simonSound.Play();
             }
         }
         if (currentButton == buttonYellow)
@@ -330,7 +363,8 @@ public class SimonSaysScript : MonoBehaviour
             simonAnimator.SetTrigger("FlashYellow");
             if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
             {
-                simonSound.PlayOneShot(buttonBeep[3]);
+                simonSound.clip = buttonBeep[3];
+                simonSound.Play();
             }
         }
     }

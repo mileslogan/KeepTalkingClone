@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentState: 0
   RotSpeed: 700
-  MinXRot: -77
+  MinXRot: -90
   MaxXRot: 90
 --- !u!1001 &846327729
 PrefabInstance:
@@ -518,7 +518,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ModulesToSpawnFrom.Array.data[0]
       value: 
-      objectReference: {fileID: 1912719815922324045, guid: 0488f2f4f9504e843b263ae0893ae4cb,
+      objectReference: {fileID: 1641324715581679882, guid: 98ba9069a1373254e8ffc183eadec2a0,
         type: 3}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
@@ -530,7 +530,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ModulesToSpawnFrom.Array.data[2]
       value: 
-      objectReference: {fileID: 6239219234673357535, guid: ecd53d0fad603b0459659f64c34484c7,
+      objectReference: {fileID: 4533095063276167544, guid: 0e5e5cfe482f185479a15d2f4851368d,
         type: 3}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
@@ -1115,22 +1115,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModuleSpots:
   - Loc: {x: -1, y: 2.07, z: -10}
-    FieldOfView: 23.55
+    FieldOfView: 21
     RotationAngles: {x: 0, y: 0, z: 0}
   - Loc: {x: 0, y: 2.07, z: -10}
-    FieldOfView: 23.55
+    FieldOfView: 21
     RotationAngles: {x: 0, y: 0, z: 0}
   - Loc: {x: 1, y: 2.07, z: -10}
-    FieldOfView: 23.55
+    FieldOfView: 21
     RotationAngles: {x: 0, y: 0, z: 0}
   - Loc: {x: -1, y: 1.3, z: -10}
-    FieldOfView: 23.55
+    FieldOfView: 21
     RotationAngles: {x: 0, y: 0, z: 0}
   - Loc: {x: 0, y: 1.3, z: -10}
-    FieldOfView: 23.55
+    FieldOfView: 21
     RotationAngles: {x: 0, y: 0, z: 0}
   - Loc: {x: 1, y: 1.3, z: -10}
-    FieldOfView: 23.55
+    FieldOfView: 21
     RotationAngles: {x: 0, y: 0, z: 0}
   HoldBombSpot:
     Loc: {x: 0, y: 1.5, z: -10}

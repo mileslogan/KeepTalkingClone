@@ -17,10 +17,12 @@ public class Timer : MonoBehaviour
     public GenerateBomb BombScript;
     public GameObject timeText; // Test of the time 
     public GameObject strikeScreen;
+     
+    public Material timerStrike0; // The material of no strikes 
+    public Material timerStrike1;// The material of 1 strikes 
+    public Material timerStrike2;// The material of 2 strikes 
 
-    public Material timerStrike0;
-    public Material timerStrike1;
-    public Material timerStrike2;
+    public AudioSource audioData; // The audio source of the sounds of timer 
 
     void Start()
     {
@@ -34,7 +36,6 @@ public class Timer : MonoBehaviour
     // Update the strike shows on the top
     void Update()
     {
-
         if (BombScript!= null && BombScript.CurrentStrikes == 1)
         {
             Material[] matArray = strikeScreen.GetComponent<MeshRenderer>().materials;
@@ -58,6 +59,7 @@ public class Timer : MonoBehaviour
         {
             TimeCalculator();
             timeText.GetComponent<TextMesh>().text = str_minutes + " : " + str_seconds;
+            audioData.Play(0);
             yield return new WaitForSeconds(waittime);
             timeleft--;
         }
@@ -71,10 +73,10 @@ public class Timer : MonoBehaviour
         {
             matArray[1] = timerStrike2;
             strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.8f);
             matArray[1] = timerStrike0;
             strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.8f);
         }
 
     }

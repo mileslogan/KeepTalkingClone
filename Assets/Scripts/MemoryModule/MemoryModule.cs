@@ -42,7 +42,7 @@ public class MemoryModule : MonoBehaviour
     public Material lightoff;// material of the light-off
 
     public Animator memoryAnimator;
-
+    public AudioSource audioClick;
 
     void Start()
     {
@@ -69,6 +69,7 @@ public class MemoryModule : MonoBehaviour
         {
             if (hit.collider.tag == "MemoryModuleButton" && Input.GetKeyDown(KeyCode.Mouse0) && hit.collider.transform.parent.gameObject == GenerateBomb.SelectedModule)
             {
+                audioClick.Play(0);
                 int buttonIndex = hit.collider.gameObject.GetComponent<MemoryModuleButton>().buttonIndex;
                 ButtonClick(buttonIndex);
             }

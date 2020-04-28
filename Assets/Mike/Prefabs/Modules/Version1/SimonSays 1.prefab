@@ -1131,7 +1131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c61a7dc9191442787313fd4421bc0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completed: 0
   buttonRed: {fileID: 5664851917113883085}
   buttonBlue: {fileID: 3145152670725323609}
   buttonGreen: {fileID: 6609788896565503989}
@@ -1144,6 +1143,8 @@ MonoBehaviour:
   fourthButton: {fileID: 0}
   fifthButton: {fileID: 0}
   bombScript: {fileID: 0}
+  lightMaterials: []
+  LED: {fileID: 0}
 --- !u!114 &2107528685826979058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,6 +1158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 0}
+  IsFlipped: 1
 --- !u!65 &7825245860176379531
 BoxCollider:
   m_ObjectHideFlags: 0

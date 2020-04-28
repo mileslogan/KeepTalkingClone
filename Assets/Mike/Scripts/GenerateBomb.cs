@@ -287,6 +287,7 @@ public class GenerateBomb : MonoBehaviour
         {
             //Game Over
             GameOver();
+            Debug.Log("Game Over");
         }
     }
 
@@ -296,6 +297,7 @@ public class GenerateBomb : MonoBehaviour
         if (ModulesLeftToComplete <= 0)
         {
             Win();
+            Debug.Log("Win");
         }
     }
     

@@ -23,7 +23,6 @@ public class MouseControl : MonoBehaviour
     
     
     // Rotation //
-    public float RotationSpeed;
     [FormerlySerializedAs("MouseSensitivity")] public float RotSpeed = 10f;
 
     public float MinXRot = -77f;
@@ -65,7 +64,7 @@ public class MouseControl : MonoBehaviour
                     
                     if (ParentBomb.eulerAngles.y >= 90f && ParentBomb.eulerAngles.y <= 270)
                     {
-                        newRot = ParentBomb.localRotation.eulerAngles + new Vector3(mouseY, -mouseX, 0f);
+                        newRot = ParentBomb.localRotation.eulerAngles + new Vector3(-mouseY, -mouseX, 0f);
                     }
                     
                     newRot.x = ClampAngle(newRot.x, MinXRot, MaxXRot);

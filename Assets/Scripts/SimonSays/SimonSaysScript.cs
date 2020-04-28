@@ -36,14 +36,13 @@ public class SimonSaysScript : MonoBehaviour
     public Material[] lightMaterials;
     public MeshRenderer LED;
 
-    public Material[] unpressedMaterials;
-    public Material[] pressedMaterials;
-
-    public Material testMaterial;
-
-    public MeshRenderer[] meshArray;
-
     public Animator simonAnimator;
+
+    bool corutineStarted;
+
+    public AudioSource simonSound;
+
+    public AudioClip[] buttonBeep;
 
     void Start()
     {
@@ -53,11 +52,9 @@ public class SimonSaysScript : MonoBehaviour
         SequenceGen();
         currentStage = 1;
         buttonsPressed = 0;
-
-        StartSimonFlashSequence();
     }
 
-    //WORK IN PROGRESS! WILL HAVE FINISHED BY 4/16!
+    
     void Update()
     {
         if (bombScript != null)
@@ -69,13 +66,24 @@ public class SimonSaysScript : MonoBehaviour
             }
         }
 
-        //if button is pushed up, set all animation conditions to false
+        //if mouse is let go, set all animation conditions to false
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             simonAnimator.SetBool("PressingBlue", false);
             simonAnimator.SetBool("PressingRed", false);
             simonAnimator.SetBool("PressingGreen", false);
             simonAnimator.SetBool("PressingYellow", false);
+            corutineStarted = false;
+            simonSound.Stop();
+        }
+
+        if (currentStage <= maxStage)
+        {
+            if (corutineStarted == false)
+            {
+                StopCoroutine("SimonSaysSequence");
+                StartCoroutine("SimonSaysSequence");
+            }
         }
 
         //if (GenerateBomb.SelectedModule == gameObject)
@@ -88,22 +96,37 @@ public class SimonSaysScript : MonoBehaviour
                 if (Physics.Raycast(ray, out hit))
                 {
 
-                    //FOR LATER Enable button pushing when puzzle is completed
                   if(hit.collider.gameObject == buttonBlue && Input.GetKeyDown(KeyCode.Mouse0))
                     {
+                        StopCoroutine("SimonSaysSequence");
                         simonAnimator.SetBool("PressingBlue", true);
+                        simonSound.clip = buttonBeep[1];
+                        simonSound.Play();
+                        
                     }
                     if (hit.collider.gameObject == buttonRed && Input.GetKeyDown(KeyCode.Mouse0))
                     {
+                        StopCoroutine("SimonSaysSequence");
                         simonAnimator.SetBool("PressingRed", true);
+                        simonSound.clip = buttonBeep[0];
+                        simonSound.Play();
+
                     }
                     if (hit.collider.gameObject == buttonGreen && Input.GetKeyDown(KeyCode.Mouse0))
                     {
+                        StopCoroutine("SimonSaysSequence");
                         simonAnimator.SetBool("PressingGreen", true);
+                        simonSound.clip = buttonBeep[2];
+                        simonSound.Play();
+
                     }
                     if (hit.collider.gameObject == buttonYellow && Input.GetKeyDown(KeyCode.Mouse0))
                     {
+                        StopCoroutine("SimonSaysSequence");
                         simonAnimator.SetBool("PressingYellow", true);
+                        simonSound.clip = buttonBeep[3];
+                        simonSound.Play();
+
                     }
 
                     //logic for adavncing game or getting strikes
@@ -217,44 +240,98 @@ public class SimonSaysScript : MonoBehaviour
         LED.material = lightMaterials[2];
     }
 
-    public void StartSimonFlashSequence()
-    {
-        StartCoroutine(SimonSaysSequence());
-    }
-
     IEnumerator SimonSaysSequence()
     {
+        corutineStarted = true;
         yield return new WaitForSeconds(1f);
         Debug.Log("started once");
-        FlashButton(firstButton);
+        switch (currentStage)
+        {
+            case 1:
+                FlashButton(firstButton);
+                yield return new WaitForSeconds(2f);
+                break;
+            case 2:
+                FlashButton(firstButton);
+                yield return new WaitForSeconds(1.5f);
+                FlashButton(secondButton);
+                yield return new WaitForSeconds(2f);
+                break;
+            case 3:
+                FlashButton(firstButton);
+                yield return new WaitForSeconds(1.5f);
+                FlashButton(secondButton);
+                yield return new WaitForSeconds(1.5f);
+                FlashButton(thirdButton);
+                yield return new WaitForSeconds(2f);
+                break;
+            case 4:
+                if(maxStage >= 4)
+                {
+                    FlashButton(firstButton);
+                    yield return new WaitForSeconds(1.5f);
+                    FlashButton(secondButton);
+                    yield return new WaitForSeconds(1.5f);
+                    FlashButton(thirdButton);
+                    yield return new WaitForSeconds(1.5f);
+                    FlashButton(fourthButton);
+                    yield return new WaitForSeconds(2f);
+                }
+                break;
+            case 5:
+                if (maxStage >= 5)
+                {
+                    FlashButton(firstButton);
+                    yield return new WaitForSeconds(1.5f);
+                    FlashButton(secondButton);
+                    yield return new WaitForSeconds(1.5f);
+                    FlashButton(thirdButton);
+                    yield return new WaitForSeconds(1.5f);
+                    FlashButton(fourthButton);
+                    yield return new WaitForSeconds(1.5f);
+                    FlashButton(fifthButton);
+                    yield return new WaitForSeconds(2f);
+                }
+                break;
+        }
+
+        corutineStarted = false;
+      
     }
 
     void FlashButton(GameObject currentButton)
     {
-        Debug.Log("Starting Flashing ");
         if(currentButton == buttonBlue)
         {
-            meshArray[1].material = testMaterial;
-            Debug.Log("Flashing " + currentButton);
-            Debug.Log(buttonBlue.GetComponent<MeshRenderer>().material.name);
+            simonAnimator.SetTrigger("FlashBlue");
+            if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
+            {
+                simonSound.PlayOneShot(buttonBeep[1]);
+            }
         }
         if (currentButton == buttonRed)
         {
-            meshArray[0].material = testMaterial;
-            Debug.Log("Flashing " + currentButton);
-            Debug.Log(buttonRed.GetComponent<MeshRenderer>().material.name);
+            simonAnimator.SetTrigger("FlashRed");
+            if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
+            {
+                simonSound.PlayOneShot(buttonBeep[0]);
+            }
         }
         if (currentButton == buttonGreen)
         {
-            meshArray[2].material = testMaterial;
-            Debug.Log("Flashing " + currentButton);
-            Debug.Log(buttonGreen.GetComponent<MeshRenderer>().material.name);
+            simonAnimator.SetTrigger("FlashGreen");
+            if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
+            {
+                simonSound.PlayOneShot(buttonBeep[2]);
+            }
         }
         if (currentButton == buttonYellow)
         {
-            meshArray[3].material = testMaterial;
-            Debug.Log("Flashing " + currentButton);
-            Debug.Log(buttonYellow.GetComponent<MeshRenderer>().material.name);
+            simonAnimator.SetTrigger("FlashYellow");
+            if (bombScript != null && GenerateBomb.SelectedModule == gameObject)
+            {
+                simonSound.PlayOneShot(buttonBeep[3]);
+            }
         }
     }
 

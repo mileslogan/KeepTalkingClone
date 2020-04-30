@@ -33,7 +33,7 @@ public class keyScript : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit keyHit;
-            if (Physics.Raycast(ray, out keyHit))
+            if (Physics.Raycast(ray, out keyHit) && (BombScript == null || gameObject == GenerateBomb.SelectedModule))
             {
                 clicker.PlayOneShot(click);
 

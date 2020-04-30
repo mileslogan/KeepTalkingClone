@@ -67,7 +67,7 @@ public class MemoryModule : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))// if moused over
         {
-            if (hit.collider.tag == "MemoryModuleButton" && Input.GetKeyDown(KeyCode.Mouse0) && (BombScript == null || hit.collider.transform.parent.gameObject == GenerateBomb.SelectedModule))
+            if (hit.collider.tag == "MemoryModuleButton" && Input.GetKeyDown(KeyCode.Mouse0) && (BombScript == null || gameObject == GenerateBomb.SelectedModule))
             {
                 audioClick.Play(0);
                 int buttonIndex = hit.collider.gameObject.GetComponent<MemoryModuleButton>().buttonIndex;

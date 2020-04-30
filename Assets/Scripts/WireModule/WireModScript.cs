@@ -60,8 +60,12 @@ public class WireModScript : MonoBehaviour
     //conditions (tells you what wire to cut. *note: there are two special cases)
     ConditionWire[] conditions = new ConditionWire[15];
 
+    
+    //bomb script
+    public GenerateBomb BombScript;
     void Awake()
     {
+        BombScript = FindObjectOfType<GenerateBomb>();
         originalRot = transform.rotation.eulerAngles;
         //DEBUGGING ONLY UNTIL IMPLEMETED WITH MIKE
         serialNum = Random.Range(111111,999999).ToString();
@@ -107,7 +111,7 @@ public class WireModScript : MonoBehaviour
 
     void Start()
     {
-
+        
         AS = GetComponent<AudioSource>();
 
         colorOrder = new Color[wireCount];//set it to the amount of wires
@@ -238,7 +242,7 @@ public class WireModScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))// if moused over
         {
-            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0) && hit.collider.transform.parent.gameObject == GenerateBomb.SelectedModule)
+            if (hit.collider.tag == "WIRE" && Input.GetKeyDown(KeyCode.Mouse0) && (BombScript == null || hit.collider.transform.parent.gameObject == GenerateBomb.SelectedModule))
             {
                 AS.PlayOneShot(clip);
                 hit.collider.gameObject.GetComponent<WireBehavior>().cut = true;
@@ -248,6 +252,7 @@ public class WireModScript : MonoBehaviour
                 if (FAILED)
                 {
                     StartCoroutine("FailFlash");
+                    FindObjectOfType<GenerateBomb>().BombStrikes(); //trigger strike
                 }
             }
         }
@@ -266,7 +271,7 @@ public class WireModScript : MonoBehaviour
 
     void FailedOrCompleted()
     {
-
+        COMPLETED = false; //so it's possible to fail if choose to cut a wire even tho complete module
         foreach (ConditionWire condition in conditions)
         {
             if (condition.condition == true)
@@ -274,6 +279,7 @@ public class WireModScript : MonoBehaviour
                 if (activeWires[condition.wireToCut].gameObject.GetComponent<WireBehavior>().cut)
                 {
                     COMPLETED = true;
+                    FAILED = false;
                 }
             }
         }

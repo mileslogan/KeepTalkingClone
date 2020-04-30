@@ -46,7 +46,7 @@ public class GenerateBomb : MonoBehaviour
     
     //ACCESSED BY CERTAIN MODULES-TIMER
     public int CurrentStrikes = 0;
-    
+    public GameObject LostOnThisModule;
     
     //EXTERNAL MODULES // EXTRA->means extra elements that go on the sides of the bomb to be used in the puzzle modules
     public GameObject BatteryPrefab;
@@ -222,7 +222,17 @@ public class GenerateBomb : MonoBehaviour
                 {
                     spawned.transform.Rotate(180f,0f,0f);
                     spawned.transform.Translate(0f, 0f, .07f);
+
+                    if (index >= 9)
+                    {
+                        spawned.transform.Translate(0f, .02f, 0f);
+                    }
                 }
+                else
+                {
+                    spawned.transform.Translate(0f, .025f, 0f);
+                }
+                
             }
             
             
@@ -358,6 +368,9 @@ public class GenerateBomb : MonoBehaviour
         Panel.color = Color.black;
         
         SpawnedTimer.GetComponent<AudioSource>().mute = true; //turn off blinking
+        
+        //Lost on this module
+        LostOnThisModule = SelectedModule;
         //Camera.main.enabled = false;
     }
 

@@ -4,20 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UI;
 
 public class GenerateBomb : MonoBehaviour
 {
     //done loading
     private bool IsDone = false;
-
     public bool HasRotated = false;
-
     public float DoneTimer = .3f;
     //prefabs
     public GameObject TimerModule;
     public GameObject EmptyModule;
     public GameObject SpawnedTimer;
     
+    //Canvas dark:
+    public Image Panel;
     //variables to change
     public int ModuleAmount = 1;
     public int MaxModules = 5;
@@ -32,6 +33,14 @@ public class GenerateBomb : MonoBehaviour
     public List<GameObject> ModulesToSpawn = new List<GameObject>();
     public List<GameObject> SpawnedModules = new List<GameObject>();
     
+    //sounds
+    private BombSounds SoundScript;
+
+    public Timer TimerScript;
+    //states
+    public bool IsGameOver;
+
+    public bool IsGameWon;
     //Strikes
     public int MaxStrikes = 2;
     
@@ -43,6 +52,7 @@ public class GenerateBomb : MonoBehaviour
     public GameObject BatteryPrefab;
     public GameObject SerialPrefab;
     public GameObject IndicatorPrefab;
+    
     
     //potential locations to spawn object->could expand to be 20 sections
     public static Area TopSide = new Area(new Vector3(-1f, 1f, -0.2f),new Vector3(1f, 1f, 0.2f), 
@@ -98,9 +108,9 @@ public class GenerateBomb : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        
-        
-        
+
+       
+        SoundScript = GetComponent<BombSounds>();
         PickModules();
         //shuffle order of where each module is spawned
         RandFuncs.Shuffle(ModuleLocToSpawn);
@@ -114,10 +124,22 @@ public class GenerateBomb : MonoBehaviour
         //spawn extras: batteries, indicators, and serial #: potentially do: weird ports
         SpawnAllExtras();
         ModulesLeftToComplete = ModuleAmount;
+        
+        //Set components
+        TimerScript = FindObjectOfType<Timer>();
     }
     // Update is called once per frame
     void Update()
     {
+        //if game is won, stop timer
+        if (IsGameWon)
+        {
+            //StartCoroutine(TimerScript.Blink());
+            //TimerScript.waittime = 0.5f;
+            
+            //TimerScript.StopAllCoroutines(); //stop coroutine
+        }
+        
         //once done creating bomb, rotate it
         if (IsDone && !HasRotated)
         {
@@ -183,13 +205,27 @@ public class GenerateBomb : MonoBehaviour
                 
                 //indicate which location the module on the script attached
                 
+                //back side of bomb
+                if (index >= 6)
+                {
+                    spawned.transform.Rotate(180f,180f,0f);
+                }
             }
             //if no module, spawn empty module
             else
             {
                 spawned = Instantiate(EmptyModule, transform.position + location, Quaternion.identity);
                 spawned.transform.parent = transform.parent;
+                
+                //back side of bomb
+                if (index >= 6)
+                {
+                    spawned.transform.Rotate(180f,0f,0f);
+                    spawned.transform.Translate(0f, 0f, .07f);
+                }
             }
+            
+            
             
         }
         //spawn timer: always spawns at top middle of front: can be adjusted if need be
@@ -284,22 +320,29 @@ public class GenerateBomb : MonoBehaviour
         
     }
 
+    
+    
     //strike occurs, used when a module fails-other prefab modules will use this function
     public void BombStrikes()
     {
+        
         CurrentStrikes++;
-        if (CurrentStrikes > MaxStrikes)
+        if (CurrentStrikes > MaxStrikes && !IsGameOver)
         {
             //Game Over
             GameOver();
             Debug.Log("Game Over");
+        }
+        else
+        {
+            AudioManager.Instance.PlayOneShotSound("Wrong", false);
         }
     }
 
     public void Completed()
     {
         ModulesLeftToComplete--;
-        if (ModulesLeftToComplete <= 0)
+        if (ModulesLeftToComplete <= 0 && IsGameWon)
         {
             Win();
             Debug.Log("Win");
@@ -309,13 +352,21 @@ public class GenerateBomb : MonoBehaviour
     //create an explosion sfx, and black out screen, game over
     public void GameOver()
     {
+        IsGameOver = true;
+        string sfx = SoundScript.Explosions[Random.Range(0, SoundScript.Explosions.Length)];
+        AudioManager.Instance.PlayOneShotSound(sfx, true);
+        Panel.color = Color.black;
         
+        SpawnedTimer.GetComponent<AudioSource>().mute = true; //turn off blinking
+        //Camera.main.enabled = false;
     }
 
     //win screen
     public void Win()
     {
-        
+        IsGameWon = true;
+        StopCoroutine(TimerScript.CountDown(TimerScript.countdowntime)); //pause time
+        AudioManager.Instance.PlayOneShotSound("Correct", false);
     }
     
     

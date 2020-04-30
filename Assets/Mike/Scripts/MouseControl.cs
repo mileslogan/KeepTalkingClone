@@ -15,7 +15,7 @@ public class MouseControl : MonoBehaviour
     private GenerateBomb BombScript;
     private Lerp LerpScript;
     private Transform ParentBomb;
-
+    private Collider BombCollider;
     private BombLerp BombLerpScript;
 
     private float HoldingDownTimer; //holding down right mouse click
@@ -31,6 +31,7 @@ public class MouseControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BombCollider = GetComponent<Collider>();
         BombScript = GetComponent<GenerateBomb>();
         ParentBomb = BombScript.gameObject.transform.parent;
         LerpScript = FindObjectOfType<Lerp>();
@@ -65,6 +66,11 @@ public class MouseControl : MonoBehaviour
                     if (ParentBomb.eulerAngles.y >= 90f && ParentBomb.eulerAngles.y <= 270)
                     {
                         newRot = ParentBomb.localRotation.eulerAngles + new Vector3(-mouseY, -mouseX, 0f);
+                        BombLerpScript.IsFrontSide = false;
+                    }
+                    else
+                    {
+                        BombLerpScript.IsFrontSide = true;
                     }
                     
                     newRot.x = ClampAngle(newRot.x, MinXRot, MaxXRot);
@@ -77,10 +83,12 @@ public class MouseControl : MonoBehaviour
                 {
                     if (HoldingDownTimer <= .20f && HoldingDownTimer > 0f) //needs to be less than this to be considered a quick click
                     {
-                        BombLerpScript.LerpCamera(BombLerpScript.DefaultSpot, .5f);
+                        BombLerpScript.PutDown();
                         LerpScript.LerpCamera(LerpScript.DefaultSpot, .5f);
                         //Quaternion.Lerp()
                         CurrentState = BombStates.OnTable; //switch state
+                        //turn on collider
+                        BombCollider.enabled = true;
                     }
                     HoldingDownTimer = 0f;
                 }
@@ -100,7 +108,12 @@ public class MouseControl : MonoBehaviour
                    
                     if (ParentBomb.eulerAngles.y >= 90f && ParentBomb.eulerAngles.y <= 270)
                     {
-                        newRot = ParentBomb.localRotation.eulerAngles + new Vector3(mouseY, -mouseX, 0f);
+                        newRot = ParentBomb.localRotation.eulerAngles + new Vector3(-mouseY, -mouseX, 0f);
+                        BombLerpScript.IsFrontSide = false;
+                    }
+                    else
+                    {
+                        BombLerpScript.IsFrontSide = true;
                     }
                     
                     newRot.x = ClampAngle(newRot.x, MinXRot, MaxXRot);
@@ -113,7 +126,7 @@ public class MouseControl : MonoBehaviour
                     if (HoldingDownTimer <= .20f && HoldingDownTimer > 0f) //needs to be less than this to be considered a quick click
                     {
                         //lerp to picking up bomb state
-                        BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
+                        BombLerpScript.PickUp(); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
                         LerpScript.LerpCamera(LerpScript.HoldBombSpot, .5f);
                         
                         
@@ -131,6 +144,11 @@ public class MouseControl : MonoBehaviour
         }
     }
 
+    private void OnMouseEnter()
+    {
+        AudioManager.Instance.PlayOneShotSound("Hover", false);
+    }
+
     private void OnMouseOver()
     {
         //check current bomb state to determine potential actions
@@ -142,10 +160,13 @@ public class MouseControl : MonoBehaviour
                     //transform.parent.Rotate(Vector3.right, -71f);
                     BombScript.TurnOnAllCols();
                     //lerp to picking up bomb state
-                    BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f);
+                    
+                    BombLerpScript.PickUp();
                     LerpScript.LerpCamera(LerpScript.HoldBombSpot, .4f);
                     //Quaternion.Lerp()
                     CurrentState = BombStates.PickedUp; //switch state
+                    //turn off collider
+                    BombCollider.enabled = false;
                 }
                 break;
         }

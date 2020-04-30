@@ -9,7 +9,9 @@
       <e p="Assets" t="Include">
         <e p="Mike" t="Include">
           <e p="Scripts" t="Include">
+            <e p="AudioManager.cs" t="Include" />
             <e p="BombLerp.cs" t="Include" />
+            <e p="BombSounds.cs" t="Include" />
             <e p="ClickModule.cs" t="Include" />
             <e p="GenerateBomb.cs" t="Include" />
             <e p="IndicatorBehavior.cs" t="Include" />

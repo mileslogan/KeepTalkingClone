@@ -84,12 +84,24 @@ public class Lerp : MonoBehaviour
     //lerp to the location based on module index
     public void LerpToModule(int index, GameObject obj)
     {
+        
         if (MouseScript.CurrentState == MouseControl.BombStates.PickedUp 
             || MouseScript.CurrentState == MouseControl.BombStates.OnModule)
         {
             LerpCamera(ModuleSpots[index], .3f);
             MouseScript.CurrentState = MouseScript.CurrentState = MouseControl.BombStates.OnModule;
-            BombLerpScript.LerpCamera(BombLerpScript.PickUpSpot, .5f); //MAY NEED TO ADD ANOTHER ONE IF ON BACKSIDE
+     
+            //front side
+            if (index < 6)
+            {
+                BombLerpScript.LerpCamera(BombLerpScript.PickUpFrontSpot, .5f); 
+            }
+            else//back side
+            {
+
+                BombLerpScript.LerpCamera(BombLerpScript.FlipSpot, .5f); 
+            }
+            
             //declare which object is currently on
             StartCoroutine(DelayObj(.05f, obj));
             
@@ -115,6 +127,7 @@ public class Lerp : MonoBehaviour
                 //Turn off collider
                 BombScript.TurnOnAllCols();
                 obj.GetComponent<Collider>().enabled = false;
+                Debug.Log(obj);
                 return;
             }
         }

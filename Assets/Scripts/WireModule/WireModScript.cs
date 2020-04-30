@@ -271,7 +271,7 @@ public class WireModScript : MonoBehaviour
 
     void FailedOrCompleted()
     {
-        COMPLETED = false; //so it's possible to fail if choose to cut a wire even tho complete module
+        
         foreach (ConditionWire condition in conditions)
         {
             if (condition.condition == true)
@@ -279,7 +279,13 @@ public class WireModScript : MonoBehaviour
                 if (activeWires[condition.wireToCut].gameObject.GetComponent<WireBehavior>().cut)
                 {
                     COMPLETED = true;
+                    Debug.Log("Check");
+                    BombScript.Completed();
                     FAILED = false;
+                }
+                else
+                {
+                    FAILED = true;
                 }
             }
         }

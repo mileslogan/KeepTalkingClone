@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,6 +60,7 @@ public class Timer : MonoBehaviour
         {
             TimeCalculator();
             timeText.GetComponent<TextMesh>().text = str_minutes + " : " + str_seconds;
+            //timeText.GetComponent<TextMeshPro>().text = str_minutes + " : " + str_seconds;
             audioData.Play(0);
             yield return new WaitForSeconds(waittime);
             timeleft--;

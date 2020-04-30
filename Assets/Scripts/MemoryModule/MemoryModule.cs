@@ -67,7 +67,7 @@ public class MemoryModule : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))// if moused over
         {
-            if (hit.collider.tag == "MemoryModuleButton" && Input.GetKeyDown(KeyCode.Mouse0) && hit.collider.transform.parent.gameObject == GenerateBomb.SelectedModule)
+            if (hit.collider.tag == "MemoryModuleButton" && Input.GetKeyDown(KeyCode.Mouse0) && (BombScript == null || hit.collider.transform.parent.gameObject == GenerateBomb.SelectedModule))
             {
                 audioClick.Play(0);
                 int buttonIndex = hit.collider.gameObject.GetComponent<MemoryModuleButton>().buttonIndex;
@@ -303,13 +303,14 @@ public class MemoryModule : MonoBehaviour
             ChangeLight(); // Change the LED light to green
             return;
         }
+        memoryAnimator.SetTrigger("MemoryRefreshButton");
         bigtext.GetComponent<TextMeshPro>().text = "" + bigNumber;
         text1.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][0];
         text2.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][1];
         text3.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][2];
         text4.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][3];
         ChangeLight();
-        memoryAnimator.SetTrigger("MemoryRefreshButton");
+        
     }
 
     //change the green light that shows the curstage. Change the top LED light after complete

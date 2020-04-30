@@ -86,7 +86,7 @@ public class SimonSaysScript : MonoBehaviour
             }
         }
 
-        if (GenerateBomb.SelectedModule == gameObject)
+        if (bombScript == null || GenerateBomb.SelectedModule == gameObject)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

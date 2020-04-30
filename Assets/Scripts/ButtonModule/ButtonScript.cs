@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ButtonScript : MonoBehaviour
 {
     public Color currentColor;
 
-    public Color stripColor0;
-    public Color stripColor1;
-    public Color stripColor2;
+    public Material stripColor0;
+    public Material stripColor1;
+    public Material stripColor2;
+
+    public Material[] stripMats;
 
     string detonate = "DETONATE";
     string abort = "ABORT";
@@ -22,43 +25,61 @@ public class ButtonScript : MonoBehaviour
     public bool completed;
     public bool pressing;
 
+    public float miniTimer;
+
     bool frkOn;
     bool carOn;
 
     public bool needHold;
 
-    public TextMesh buttonWords;
-    public GameObject buttonStrip;
+    public TextMeshPro buttonWords;
+    public MeshRenderer buttonStrip;
 
     public GenerateBomb bombScript;
 
     public MeshRenderer buttonMesh;
 
+    public Animator buttonAnim;
+
+    public Material[] lightMaterials;
+    public MeshRenderer LED;
+
+    public Timer timeScript;
+
+    public AudioSource buttonAudioSource;
+    public AudioClip[] buttonClicks;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         bombScript = FindObjectOfType<GenerateBomb>();
+        timeScript = FindObjectOfType<Timer>();
 
-        foreach (Indicator ind in bombScript.AddedIndicators)
+        if (bombScript != null)
         {
-            
-            if (ind.Str == "CAR")
+            foreach (Indicator ind in bombScript.AddedIndicators)
             {
-                
-                if (ind.IsOn)
-                {
-                    carOn = true;
-                }
-            }
 
-            if (ind.Str == "FRK")
-            {
-                if (ind.IsOn)
+                if (ind.Str == "CAR")
                 {
-                    frkOn = true;
+
+                    if (ind.IsOn)
+                    {
+                        carOn = true;
+                    }
+                }
+
+                if (ind.Str == "FRK")
+                {
+                    if (ind.IsOn)
+                    {
+                        frkOn = true;
+                    }
                 }
             }
         }
+        
 
         completed = false;
         pressing = false;
@@ -81,23 +102,109 @@ public class ButtonScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    // CURRENTLY A WORK IN PROGRESS
     void Update()
     {
-        RaycastHit hit; 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
+        if (bombScript == null || GenerateBomb.SelectedModule == gameObject)
         {
-            if (hit.collider.tag == "ButtonButton" && Input.GetKeyDown(KeyCode.Mouse0))
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
             {
-                pressing = true;
+                if (hit.collider.tag == "ButtonButton" && Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    buttonAudioSource.PlayOneShot(buttonClicks[0]);
+                    pressing = true;
+                    buttonAnim.SetBool("isPressing", true);
+                }
             }
         }
+        
 
-        if(pressing == true)
+        if(pressing)
         {
+                if (bombScript != null && bombScript.CurrentStrikes == 0)
+                {
+                    buttonStrip.material = stripColor0;
+                }
+                else if (bombScript != null && bombScript.CurrentStrikes == 1)
+                {
+                    buttonStrip.material = stripColor1;
+                }
+                else
+                {
+                    buttonStrip.material = stripColor2;
+                }
 
+                if (!needHold)
+                {
+                    miniTimer += Time.deltaTime;
+                    if (Input.GetKeyUp(KeyCode.Mouse0))
+                    {
+                        buttonAnim.SetBool("isPressing", false);
+                        buttonStrip.material = stripMats[4];
+                        if (miniTimer <= 0.8f)
+                        {
+                            miniTimer = 0f;
+                            Completed();
+                        }
+                        else
+                        {
+                            miniTimer = 0f;
+                            Failure();
+                        }
+                        buttonAudioSource.PlayOneShot(buttonClicks[1]);
+                        pressing = false;
+                    }
+                }
+
+                if (needHold)
+                {
+                    if (Input.GetKeyUp(KeyCode.Mouse0))
+                    {
+                    //if (buttonStrip.material == stripMats[1])
+                    //{
+                    //    if (timeScript.str_minutes.ToLower().IndexOf('4') != -1 || timeScript.str_seconds.ToLower().IndexOf('4') != -1)
+                    //    {
+                    //        Completed();
+                    //    }
+                    //    else
+                    //    {
+                    //        Failure();
+                    //    }
+                    //}
+                    //if (buttonStrip.material == stripMats[3])
+                    //{
+                    //    if (timeScript.str_minutes.ToLower().IndexOf('5') != -1 || timeScript.str_seconds.ToLower().IndexOf('5') != -1)
+                    //    {
+                    //        Completed();
+                    //    }
+                    //    else
+                    //    {
+                    //        Failure();
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (buttonStrip.material == stripMats[1])
+                    //    {
+                    //        if (timeScript.str_minutes.ToLower().IndexOf('0') != -1 || timeScript.str_seconds.ToLower().IndexOf('0') != -1)
+                    //        {
+                    //            Completed();
+                    //        }
+                    //        else
+                    //        {
+                    //            Failure();
+                    //        }
+                    //    }
+                    //}
+
+                        buttonAudioSource.PlayOneShot(buttonClicks[1]);
+                        buttonAnim.SetBool("isPressing", false);
+                        buttonStrip.material = stripMats[4];
+                        pressing = false;
+                    }
+                }
         }
     }
 
@@ -135,25 +242,25 @@ public class ButtonScript : MonoBehaviour
     }
 
     //Pick a color: Red, White, Yellow, or Blue
-    Color StripColorGen()
+    Material StripColorGen()
     {
-        Color genColor;
+        Material genColor;
         randomRoller = Random.Range(1, 5);
         if (randomRoller == 1)
         {
-            genColor = Color.red;
+            genColor = stripMats[0];
         }
         else if (randomRoller == 2)
         {
-            genColor = Color.white;
+            genColor = stripMats[2];
         }
         else if (randomRoller == 3)
         {
-            genColor = Color.yellow;
+            genColor = stripMats[3];
         }
         else
         {
-            genColor = Color.blue;
+            genColor = stripMats[1];
         }
         return genColor;
     }
@@ -214,5 +321,37 @@ public class ButtonScript : MonoBehaviour
         {
             needHold = true;
         }
+    }
+
+    void Failure()
+    {
+        if (bombScript != null)
+        {
+            bombScript.BombStrikes();
+        }
+        if (!completed)
+        {
+            StartCoroutine("FailFlash");
+        }
+    }
+
+    void Completed()
+    {
+        if (!completed)
+        {
+            if (bombScript != null)
+            {
+                bombScript.Completed();
+            }
+            LED.material = lightMaterials[0];
+            completed = true;
+        }
+    }
+
+    IEnumerator FailFlash()
+    {
+        LED.material = lightMaterials[1];
+        yield return new WaitForSeconds(.5f);
+        LED.material = lightMaterials[2];
     }
 }

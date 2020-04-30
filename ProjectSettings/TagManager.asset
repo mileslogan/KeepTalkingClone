@@ -8,6 +8,9 @@ TagManager:
   - WIRE
   - SIMONBUTTON
   - WhoButton
+  - MemoryModuleButton
+  - WhoButtons
+  - ButtonButton
   layers:
   - Default
   - TransparentFX

@@ -28,9 +28,11 @@ public class WhosOnFirst : MonoBehaviour
 
     public bool CORRECT;
 
+    private GenerateBomb BombScript;
     // Start is called before the first frame update
     void Start()
     {
+        BombScript = FindObjectOfType<GenerateBomb>();
         arrayStorage = GetComponent<WhosOnFirstArrays>();
         screenText = keyWords[Random.Range(0, 28)];
         Text.text = screenText;
@@ -130,7 +132,7 @@ public class WhosOnFirst : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))// if moused over
         {
-            if (hit.collider.tag == "WhoButtons" && Input.GetKeyDown(KeyCode.Mouse0))
+            if (hit.collider.tag == "WhoButtons" && Input.GetKeyDown(KeyCode.Mouse0) && (BombScript == null || gameObject == GenerateBomb.SelectedModule))
             {
                 hit.collider.transform.localPosition += transform.forward*.07f;
                 hit.collider.gameObject.GetComponent<WhoButtonScript>().pressed = true;
@@ -142,6 +144,7 @@ public class WhosOnFirst : MonoBehaviour
                 else
                 {
                     Debug.Log("WRONG!");
+                    BombScript.BombStrikes(); //trigger strike
                     StartCoroutine("FailFlash");
                     foreach (WhoButtonScript button in buttons)
                     {

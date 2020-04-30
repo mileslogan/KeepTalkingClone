@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8011101a8c2764e44a6e57e2ee2d2302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdowntime: 200
+  countdowntime: 300
+  str_minutes: 
+  str_seconds: 
   waittime: 1
   BombScript: {fileID: 0}
   timeText: {fileID: 1306558426108546096}

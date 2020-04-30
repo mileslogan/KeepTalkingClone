@@ -304,13 +304,19 @@ public class MemoryModule : MonoBehaviour
             return;
         }
         memoryAnimator.SetTrigger("MemoryRefreshButton");
+        StartCoroutine(ChangeNumber());
+        ChangeLight();
+        
+    }
+
+    private IEnumerator ChangeNumber()
+    {
+        yield return new WaitForSeconds(0.5f);
         bigtext.GetComponent<TextMeshPro>().text = "" + bigNumber;
         text1.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][0];
         text2.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][1];
         text3.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][2];
         text4.GetComponent<TextMeshPro>().text = "" + stages[curstage - 1][3];
-        ChangeLight();
-        
     }
 
     //change the green light that shows the curstage. Change the top LED light after complete

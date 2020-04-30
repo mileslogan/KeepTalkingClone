@@ -10,8 +10,8 @@ public class Timer : MonoBehaviour
     float timeleft;// how many time left
     int minutes; // the number representation of minutes
     int seconds;//the number representation of seconds
-    string str_minutes; //the string representation of minutes
-    string str_seconds;//the string representation of seconds
+    public string str_minutes; //the string representation of minutes
+    public string str_seconds;//the string representation of seconds
     public float waittime = 1f;
 
     public GenerateBomb BombScript;
@@ -52,7 +52,7 @@ public class Timer : MonoBehaviour
     }
     
     //timer count donw
-    private IEnumerator CountDown(float timer)
+    public IEnumerator CountDown(float timer)
     {
         timeleft = timer;
         while (timeleft > 0)
@@ -66,7 +66,7 @@ public class Timer : MonoBehaviour
 
     }
 
-    private IEnumerator Blink()
+    public IEnumerator Blink()
     {
         Material[] matArray = strikeScreen.GetComponent<MeshRenderer>().materials;
         while (true)

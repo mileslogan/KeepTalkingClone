@@ -107,7 +107,7 @@ public class BombLerp : MonoBehaviour
         {
             LerpCamera(DefaultBackSpot, .5f);
         }
-        AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlaySoundDelay("Bump",true,.46f));
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.PlaySoundDelay("Bump",false,.3f));
     }
 
     public void PickUp()

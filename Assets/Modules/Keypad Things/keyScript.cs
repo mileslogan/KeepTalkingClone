@@ -231,6 +231,11 @@ public class keyScript : MonoBehaviour
         
     }
 
-    IEnumerator FailFlash()     {         keyLED.material = keylightMaterials[1];         yield return new WaitForSeconds(.5f);         keyLED.material = keylightMaterials[2];     } 
+    IEnumerator FailFlash()     { 
+        keyLED.material = keylightMaterials[1];         
+        yield return new WaitForSeconds(.5f);         
+        keyLED.material = keylightMaterials[2];
+        
+    } 
 }
 

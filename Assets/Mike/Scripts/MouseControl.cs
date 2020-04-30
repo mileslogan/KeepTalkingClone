@@ -146,7 +146,7 @@ public class MouseControl : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        AudioManager.Instance.PlayOneShotSound("Hover", false);
+        //AudioManager.Instance.PlayOneShotSound("Hover", false);
     }
 
     private void OnMouseOver()

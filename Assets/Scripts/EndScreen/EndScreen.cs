@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 public class EndScreen : MonoBehaviour
 {
     public bool Defused; // true if the bomb is defused, false if it explorded
-    public int time;
+    public string time;
     public int modulesNum;
     public int strikeNum;
-    public int timeRemain;
+    public string timeRemain;
     public string cause;
 
     public GameObject defusedPage;
@@ -25,6 +25,7 @@ public class EndScreen : MonoBehaviour
 
     void Start()
     {
+        
         if (Defused)
         {
             explodedPage.GetComponent<SpriteRenderer>().enabled = false;
@@ -34,16 +35,19 @@ public class EndScreen : MonoBehaviour
             defusedPage.GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        timeText.GetComponent<TextMeshPro>().text = "";
+        TimeCalculator();//convey timeleft(float) to string representation
+
+        timeText.GetComponent<TextMeshPro>().text = "" + time;
         modulesNumText.GetComponent<TextMeshPro>().text = ""+ modulesNum + " Modules";
-        strikeNumText.GetComponent<TextMeshPro>().text = "" + strikeNum + " Strikes";
-        timeRemainText.GetComponent<TextMeshPro>().text = "" + timeRemain;
+        strikeNumText.GetComponent<TextMeshPro>().text =  "3 Strikes"; //
+        timeRemainText.GetComponent<TextMeshPro>().text = "" + timeRemain; //
         causeText.GetComponent<TextMeshPro>().text = "" + cause;
     }
 
     
     void Update()
     {
+        // RayCast
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -57,7 +61,30 @@ public class EndScreen : MonoBehaviour
         }
     }
 
-    void LoadScene(int num)
+    void TimeCalculator() //convey timeleft(float) to string representation
+    {
+        int minutes;
+        int seconds;
+        string str_minutes;
+        string str_seconds;
+        minutes = (int)Timer.timeleft / 60;
+        seconds = (int)Timer.timeleft % 60;
+        str_minutes = "" + minutes;
+        str_seconds = "" + seconds;
+        if (minutes < 10)
+        {
+            str_minutes = "0" + minutes;
+        }
+        if (seconds < 10)
+        {
+            str_seconds = "0" + seconds;
+        }
+
+        timeRemain = str_minutes + " : " + str_seconds;
+
+    }
+
+    void LoadScene(int num) //load to start screen or retry 
     {
 
         if (num == 0)

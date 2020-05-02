@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 {
 
     public float countdowntime;//enter the time of the bomb in the inspector
-    float timeleft;// how many time left
+    public static float timeleft;// how many time left
     int minutes; // the number representation of minutes
     int seconds;//the number representation of seconds
     public string str_minutes; //the string representation of minutes

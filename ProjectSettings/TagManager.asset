@@ -12,6 +12,12 @@ TagManager:
   - WhoButtons
   - ButtonButton
   - EndScreenButton
+  - StartModPlus
+  - StartModMinus
+  - StartTimePlus
+  - StartTimeMinus
+  - StartStart
+  - Binder
   layers:
   - Default
   - TransparentFX

@@ -19,7 +19,7 @@ public class EndScreen : MonoBehaviour
     public GameObject modulesNumText;
     public GameObject strikeNumText;
     public GameObject timeRemainText;
-    public GameObject causeText; 
+    public GameObject causeText;
 
 
 
@@ -39,12 +39,22 @@ public class EndScreen : MonoBehaviour
 
         timeText.GetComponent<TextMeshPro>().text = "" + time;
         modulesNumText.GetComponent<TextMeshPro>().text = ""+ modulesNum + " Modules";
-        strikeNumText.GetComponent<TextMeshPro>().text =  "3 Strikes"; //
-        timeRemainText.GetComponent<TextMeshPro>().text = "" + timeRemain; //
-        causeText.GetComponent<TextMeshPro>().text = "" + cause;
+        strikeNumText.GetComponent<TextMeshPro>().text =  "3 Strikes"; 
+        timeRemainText.GetComponent<TextMeshPro>().text = "" + timeRemain; 
+        if (Defused)
+        {
+            causeText.GetComponent<TextMeshPro>().text = "";
+        }
+        else
+        {
+            //uncomment this when LostOnThis Module is static 
+            //causeText.GetComponent<TextMeshPro>().text = "" + GenerateBomb.LostOnThisModule;
+        }
+            
+
     }
 
-    
+
     void Update()
     {
         // RayCast

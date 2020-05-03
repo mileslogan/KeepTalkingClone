@@ -26,13 +26,15 @@ public class StartScreen : MonoBehaviour
     public AudioSource clickSource;
     public AudioClip clickClip;
 
-    void Awake()
-    {
-        //DontDestroyOnLoad(this);
-    }
+    public SceneManage managerScript;
+
 
     void Start()
     {
+        managerScript = FindObjectOfType<SceneManage>();
+
+        managerScript.fadeAnim.SetInteger("FadeState", 1);
+
         numOfModules = 3;
         timeForDefusal = 300;
 
@@ -79,7 +81,6 @@ public class StartScreen : MonoBehaviour
                 else if(hit.collider.tag == "StartStart" && Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     clickSource.PlayOneShot(clickClip);
-                    //REPLACE THIS WITH SCENE MANAGER SCENE SWITCHING FUNCTION
                     StartGame();
                 }
             }
@@ -143,6 +144,8 @@ public class StartScreen : MonoBehaviour
 
     void StartGame()
     {
-        //PLACEHOLDER FOR SCENE MANAGER SWTICHING
+        managerScript.numModules = numOfModules;
+        managerScript.defuseTime = timeForDefusal;
+        managerScript.ToBombFunction();
     }
 }

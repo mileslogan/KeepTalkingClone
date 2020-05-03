@@ -5,7 +5,10 @@ using TMPro;
 
 public class StartScreen : MonoBehaviour
 {
+    //Number of Modules to put on bomb
     public static int numOfModules;
+
+    //Amount of time to defuse bomb IN SECONDS
     public static int timeForDefusal;
 
     public Animator binderAnim;
@@ -76,6 +79,7 @@ public class StartScreen : MonoBehaviour
                 else if(hit.collider.tag == "StartStart" && Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     clickSource.PlayOneShot(clickClip);
+                    //REPLACE THIS WITH SCENE MANAGER SCENE SWITCHING FUNCTION
                     StartGame();
                 }
             }
@@ -139,6 +143,6 @@ public class StartScreen : MonoBehaviour
 
     void StartGame()
     {
-
+        //PLACEHOLDER FOR SCENE MANAGER SWTICHING
     }
 }

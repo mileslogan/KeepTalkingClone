@@ -42,6 +42,7 @@
             <e p="MemoryModule.cs" t="Include" />
             <e p="MemoryModuleButton.cs" t="Include" />
           </e>
+          <e p="SceneManage.cs" t="Include" />
           <e p="SerialNumber.cs" t="Include" />
           <e p="SimonSays" t="Include">
             <e p="SimonSaysScript.cs" t="Include" />

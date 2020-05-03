@@ -37,7 +37,7 @@ public class GenerateBomb : MonoBehaviour
     //scripts to get
     private BombSounds SoundScript;
     private MouseControl MouseScript;
-    
+    private SceneManage ManagerScript;
     public Timer TimerScript;
     //states
     public bool IsGameOver;
@@ -119,10 +119,18 @@ public class GenerateBomb : MonoBehaviour
     //completed
     public int ModulesLeftToComplete;
     
+    
+    
     // Start is called before the first frame update
     void Awake()
     {
-
+        //Manager script
+        ManagerScript = FindObjectOfType<SceneManage>();
+        ManagerScript.fadeAnim.SetInteger("FadeState", 1);
+        
+        
+        
+        
         MouseScript = GetComponent<MouseControl>();
         SoundScript = GetComponent<BombSounds>();
         PickModules();
@@ -145,6 +153,12 @@ public class GenerateBomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //time ran out
+        if (Timer.timeleft <= 0)
+        {
+            GameOver();
+        }
+        
         //if game is won, stop timer
         if (IsGameWon)
         {
@@ -386,9 +400,42 @@ public class GenerateBomb : MonoBehaviour
         Panel.color = Color.black;
         
         SpawnedTimer.GetComponent<AudioSource>().mute = true; //turn off blinking
+
+        //determine cause of death
+        if (Timer.timeleft <= 0f)
+        {
+            ManagerScript.causeOfDeath = "Time Ran out";
+        }
+        else
+        {
+            //Lost on this module
+            LostOnThisModule = SelectedModule.GetComponentInChildren<ClickModule>().ModuleType;
+            switch (LostOnThisModule)
+            {
+                case ModuleTypes.Button:
+                    ManagerScript.causeOfDeath = "The Button";
+                    break;
+                case ModuleTypes.Keypad:
+                    ManagerScript.causeOfDeath = "Keypad";
+                    break;
+                case ModuleTypes.Memory:
+                    ManagerScript.causeOfDeath = "Memory";
+                    break;
+                case ModuleTypes.Wire:
+                    ManagerScript.causeOfDeath = "Wires";
+                    break;
+                case ModuleTypes.SimonSays:
+                    ManagerScript.causeOfDeath = "Simon Says";
+                    break;
+                case ModuleTypes.WhosOnFirst:
+                    ManagerScript.causeOfDeath = "Who's on First";
+                    break;
+            }
+        }
         
-        //Lost on this module
-        LostOnThisModule = SelectedModule.GetComponentInChildren<ClickModule>().ModuleType;
+        ManagerScript.defused = false;
+        ManagerScript.timeLeft = (int)Timer.timeleft;
+        StartCoroutine(EndScene(5f));
         //Camera.main.enabled = false;
     }
 
@@ -398,6 +445,10 @@ public class GenerateBomb : MonoBehaviour
         IsGameWon = true;
         StopCoroutine(TimerScript.CountDown(TimerScript.countdowntime)); //pause time
         AudioManager.Instance.PlayOneShotSound("Correct", false);
+        //AudioManager.Instance.PlayOneShotSound("Correct", false);
+        AudioManager.Instance.PlaySoundDelay("Correct", false, 1.7f);
+        StartCoroutine(EndScene(5f));
+        ManagerScript.ToEndFunction();
     }
     
     
@@ -525,7 +576,13 @@ public class GenerateBomb : MonoBehaviour
     {
         MouseScript.ShakeBomb();
     }
-   
+
+
+    IEnumerator EndScene(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ManagerScript.ToEndFunction();
+    }
 }
 
 //to be used for indicator spawning

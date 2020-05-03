@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdowntime: 200
+  str_minutes: 
+  str_seconds: 
   waittime: 1
   BombScript: {fileID: 0}
   timeText: {fileID: 1306558426108546096}

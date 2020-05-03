@@ -11,6 +11,7 @@ TagManager:
   - MemoryModuleButton
   - WhoButtons
   - ButtonButton
+  - EndScreenButton
   layers:
   - Default
   - TransparentFX

@@ -33,6 +33,7 @@ public class GenerateBomb : MonoBehaviour
     public List<GameObject> ModulesToSpawn = new List<GameObject>();
     public List<GameObject> SpawnedModules = new List<GameObject>();
     
+    
     //sounds
     private BombSounds SoundScript;
 
@@ -46,7 +47,19 @@ public class GenerateBomb : MonoBehaviour
     
     //ACCESSED BY CERTAIN MODULES-TIMER
     public int CurrentStrikes = 0;
-    public GameObject LostOnThisModule;
+    public static ModuleTypes LostOnThisModule = ModuleTypes.Null;
+
+    public enum ModuleTypes
+    {
+        Wire,
+        SimonSays,
+        WhosOnFirst,
+        Memory,
+        Keypad,
+        Button,
+        Null,
+    }
+    
     
     //EXTERNAL MODULES // EXTRA->means extra elements that go on the sides of the bomb to be used in the puzzle modules
     public GameObject BatteryPrefab;
@@ -370,7 +383,7 @@ public class GenerateBomb : MonoBehaviour
         SpawnedTimer.GetComponent<AudioSource>().mute = true; //turn off blinking
         
         //Lost on this module
-        LostOnThisModule = SelectedModule;
+        LostOnThisModule = SelectedModule.GetComponent<ClickModule>().ModuleType;
         //Camera.main.enabled = false;
     }
 

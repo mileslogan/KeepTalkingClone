@@ -7,7 +7,7 @@ public class ClickModule : MonoBehaviour
 {
     private Lerp CameraLerp;
     public GameObject Self;
-
+    public GenerateBomb.ModuleTypes ModuleType = GenerateBomb.ModuleTypes.Null;
     public bool IsFlipped;
     private void Start()
     {
@@ -17,6 +17,8 @@ public class ClickModule : MonoBehaviour
         {
             transform.Rotate(0f, 180f, 0f);
         }
+        
+        
     }
 
     private void OnMouseEnter()
@@ -30,7 +32,26 @@ public class ClickModule : MonoBehaviour
         {
 
             CameraLerp.LerpGivenObject(gameObject);
-
+            
+            
         }
     }
+
+    public void TurnOffCols()
+    {
+        foreach (Collider col in gameObject.GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
+    }
+    
+    public void TurnOnCols()
+    {
+        foreach (Collider col in gameObject.GetComponentsInChildren<Collider>())
+        {
+            col.enabled = true;
+        }
+    }
+    
+    
 }

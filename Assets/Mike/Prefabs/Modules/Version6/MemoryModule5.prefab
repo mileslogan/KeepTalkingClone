@@ -632,6 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 0}
+  ModuleType: 3
   IsFlipped: 0
 --- !u!65 &4639639018574236211
 BoxCollider:

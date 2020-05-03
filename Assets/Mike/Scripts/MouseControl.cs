@@ -12,7 +12,7 @@ public class MouseControl : MonoBehaviour
     public enum BombStates {OnTable, PickedUp, OnModule}
 
     public BombStates CurrentState = BombStates.OnTable;
-    
+    public BombStates OutlineState = BombStates.OnTable;
     private GenerateBomb BombScript;
     private Lerp LerpScript;
     private Transform ParentBomb;
@@ -21,6 +21,8 @@ public class MouseControl : MonoBehaviour
 
     private float HoldingDownTimer; //holding down right mouse click
 
+
+    private OutlinerScript OutlineScript;
     
     
     // Rotation //
@@ -32,6 +34,7 @@ public class MouseControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OutlineScript = FindObjectOfType<OutlinerScript>();
         BombCollider = GetComponent<Collider>();
         BombScript = GetComponent<GenerateBomb>();
         ParentBomb = BombScript.gameObject.transform.parent;
@@ -42,7 +45,7 @@ public class MouseControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ChangeOutlineState();
         
         //check current bomb state to determine potential actions
         //may need adjusting if there is a menu
@@ -95,11 +98,7 @@ public class MouseControl : MonoBehaviour
                 }
                 break;
             case BombStates.OnModule:
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    ShakeBomb();
-                    Debug.Log("Shaked");
-                }
+                
                 if (Input.GetMouseButton(1))
                 {
                     HoldingDownTimer += Time.deltaTime; //time holding down
@@ -179,6 +178,10 @@ public class MouseControl : MonoBehaviour
                     //turn off collider
                     BombCollider.enabled = false;
                 }
+                else
+                {
+                    
+                }
                 break;
         }
         
@@ -224,6 +227,32 @@ public class MouseControl : MonoBehaviour
             
             ParentBomb.rotation =  Quaternion.Euler(Vector3.LerpUnclamped(startRot, endRot, TweenCurve.Evaluate(timer/duration)));
             yield return null;
+        }
+    }
+
+    void ChangeOutlineState()
+    {
+        if (OutlineState != CurrentState)
+        {
+            OutlineState = CurrentState;
+
+            if (OutlineState == BombStates.OnTable)
+            {
+                OutlineScript.validTags = new string[1];
+                OutlineScript.validTags[0] = "BombItself";
+                
+            }
+            else if (OutlineState == BombStates.PickedUp)
+            {
+                OutlineScript.validTags = new string[1];
+                OutlineScript.validTags[0] = "ModuleOutline";
+                
+            }
+            else if (OutlineState == BombStates.PickedUp)
+            {
+                OutlineScript.validTags = new string[1];
+                OutlineScript.validTags[0] = "ModuleParts";
+            }
         }
     }
     

@@ -34,9 +34,10 @@ public class GenerateBomb : MonoBehaviour
     public List<GameObject> SpawnedModules = new List<GameObject>();
     
     
-    //sounds
+    //scripts to get
     private BombSounds SoundScript;
-
+    private MouseControl MouseScript;
+    
     public Timer TimerScript;
     //states
     public bool IsGameOver;
@@ -122,7 +123,7 @@ public class GenerateBomb : MonoBehaviour
     void Awake()
     {
 
-       
+        MouseScript = GetComponent<MouseControl>();
         SoundScript = GetComponent<BombSounds>();
         PickModules();
         //shuffle order of where each module is spawned
@@ -370,6 +371,10 @@ public class GenerateBomb : MonoBehaviour
             Win();
             Debug.Log("Win");
         }
+        else
+        {
+            AudioManager.Instance.PlayOneShotSound("Correct", false);
+        }
     }
     
     //create an explosion sfx, and black out screen, game over
@@ -383,7 +388,7 @@ public class GenerateBomb : MonoBehaviour
         SpawnedTimer.GetComponent<AudioSource>().mute = true; //turn off blinking
         
         //Lost on this module
-        LostOnThisModule = SelectedModule.GetComponent<ClickModule>().ModuleType;
+        LostOnThisModule = SelectedModule.GetComponentInChildren<ClickModule>().ModuleType;
         //Camera.main.enabled = false;
     }
 
@@ -512,10 +517,14 @@ public class GenerateBomb : MonoBehaviour
     {
         foreach (GameObject obj in SpawnedModules)
         {
-            obj.GetComponent<Collider>().enabled = true;
+            obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
         }
     }
 
+    public void BombShake()
+    {
+        MouseScript.ShakeBomb();
+    }
    
 }
 

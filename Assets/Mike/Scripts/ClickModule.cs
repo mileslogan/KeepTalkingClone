@@ -9,16 +9,39 @@ public class ClickModule : MonoBehaviour
     public GameObject Self;
     public GenerateBomb.ModuleTypes ModuleType = GenerateBomb.ModuleTypes.Null;
     public bool IsFlipped;
+
+    private MeshFilter MeshF;
+    private MeshRenderer MeshRend;
+    private MeshFilter SelectedMeshFilter;
     private void Start()
     {
+        MeshF = GetComponent<MeshFilter>();
+        MeshRend = GetComponent<MeshRenderer>();
+        MeshRend.enabled = false;
+
+        SelectedMeshFilter = FindObjectOfType<OutlinerScript>().thisMeshFilter;
+        //TurnOnCols();
+        //TurnOffCols();
         Self = gameObject;
         CameraLerp = FindObjectOfType<Lerp>();
         if (IsFlipped)
         {
-            transform.Rotate(0f, 180f, 0f);
+            transform.parent.Rotate(0f, 180f, 0f);
         }
         
         
+    }
+
+    public void Update()
+    {
+        if (MeshF.mesh == SelectedMeshFilter.mesh && !MeshRend.enabled)
+        {
+            MeshRend.enabled = true;
+        }
+        else
+        {
+            MeshRend.enabled = false;
+        }
     }
 
     private void OnMouseEnter()
@@ -31,7 +54,7 @@ public class ClickModule : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) //Left click
         {
 
-            CameraLerp.LerpGivenObject(gameObject);
+            CameraLerp.LerpGivenObject(transform.parent.gameObject);
             
             
         }
@@ -39,15 +62,19 @@ public class ClickModule : MonoBehaviour
 
     public void TurnOffCols()
     {
-        foreach (Collider col in gameObject.GetComponentsInChildren<Collider>())
+        foreach (Collider col in transform.parent.gameObject.GetComponentsInChildren<Collider>())
         {
-            col.enabled = false;
+            if (!col.CompareTag("ModuleOutline"))
+            {
+                col.enabled = false;
+            }
+            
         }
     }
     
     public void TurnOnCols()
     {
-        foreach (Collider col in gameObject.GetComponentsInChildren<Collider>())
+        foreach (Collider col in transform.parent.gameObject.GetComponentsInChildren<Collider>())
         {
             col.enabled = true;
         }

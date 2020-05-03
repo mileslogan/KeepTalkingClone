@@ -102,7 +102,7 @@ public class SimonSaysScript : MonoBehaviour
                         simonAnimator.SetBool("PressingBlue", true);
                         simonSound.clip = buttonBeep[1];
                         simonSound.Play();
-                        
+                        bombScript.BombShake();
                     }
                     if (hit.collider.gameObject == buttonRed && Input.GetKeyDown(KeyCode.Mouse0))
                     {
@@ -110,7 +110,7 @@ public class SimonSaysScript : MonoBehaviour
                         simonAnimator.SetBool("PressingRed", true);
                         simonSound.clip = buttonBeep[0];
                         simonSound.Play();
-
+                        bombScript.BombShake();
                     }
                     if (hit.collider.gameObject == buttonGreen && Input.GetKeyDown(KeyCode.Mouse0))
                     {
@@ -118,7 +118,7 @@ public class SimonSaysScript : MonoBehaviour
                         simonAnimator.SetBool("PressingGreen", true);
                         simonSound.clip = buttonBeep[2];
                         simonSound.Play();
-
+                        bombScript.BombShake();
                     }
                     if (hit.collider.gameObject == buttonYellow && Input.GetKeyDown(KeyCode.Mouse0))
                     {
@@ -126,7 +126,7 @@ public class SimonSaysScript : MonoBehaviour
                         simonAnimator.SetBool("PressingYellow", true);
                         simonSound.clip = buttonBeep[3];
                         simonSound.Play();
-
+                        bombScript.BombShake();
                     }
 
                     //logic for adavncing game or getting strikes

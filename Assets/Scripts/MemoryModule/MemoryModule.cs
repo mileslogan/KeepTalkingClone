@@ -69,6 +69,7 @@ public class MemoryModule : MonoBehaviour
         {
             if (hit.collider.tag == "MemoryModuleButton" && Input.GetKeyDown(KeyCode.Mouse0) && (BombScript == null || gameObject == GenerateBomb.SelectedModule))
             {
+                BombScript.BombShake();
                 audioClick.Play(0);
                 int buttonIndex = hit.collider.gameObject.GetComponent<MemoryModuleButton>().buttonIndex;
                 ButtonClick(buttonIndex);

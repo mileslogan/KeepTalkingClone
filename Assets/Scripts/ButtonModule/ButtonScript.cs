@@ -116,6 +116,7 @@ public class ButtonScript : MonoBehaviour
                     buttonAudioSource.PlayOneShot(buttonClicks[0]);
                     pressing = true;
                     buttonAnim.SetBool("isPressing", true);
+                    bombScript.BombShake();
                 }
             }
         }
@@ -142,6 +143,7 @@ public class ButtonScript : MonoBehaviour
                     if (Input.GetKeyUp(KeyCode.Mouse0))
                     {
                         buttonAnim.SetBool("isPressing", false);
+                        
                         buttonStrip.material = stripMats[4];
                         if (miniTimer <= 0.8f)
                         {
@@ -155,6 +157,7 @@ public class ButtonScript : MonoBehaviour
                         }
                         buttonAudioSource.PlayOneShot(buttonClicks[1]);
                         pressing = false;
+                        bombScript.BombShake();
                     }
                 }
 
@@ -198,7 +201,7 @@ public class ButtonScript : MonoBehaviour
                     //        }
                     //    }
                     //}
-
+                        bombScript.BombShake();
                         buttonAudioSource.PlayOneShot(buttonClicks[1]);
                         buttonAnim.SetBool("isPressing", false);
                         buttonStrip.material = stripMats[4];

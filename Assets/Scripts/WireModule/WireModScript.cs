@@ -247,6 +247,7 @@ public class WireModScript : MonoBehaviour
                 AS.PlayOneShot(clip);
                 hit.collider.gameObject.GetComponent<WireBehavior>().cut = true;
                 hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                BombScript.BombShake();
                 //transform.Rotate(-5,0,5);
                 FailedOrCompleted();
                 if (FAILED)

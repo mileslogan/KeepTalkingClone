@@ -7,6 +7,7 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="BinderScript.cs" t="Include" />
         <e p="Mike" t="Include">
           <e p="Scripts" t="Include">
             <e p="AudioManager.cs" t="Include" />
@@ -26,9 +27,16 @@
             <e p="keyScript.cs" t="Include" />
           </e>
         </e>
+        <e p="OUTLINE SCRIP" t="Include">
+          <e p="OutlinerScript.cs" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
           <e p="ButtonModule" t="Include">
             <e p="ButtonScript.cs" t="Include" />
+          </e>
+          <e p="EndScreen" t="Include">
+            <e p="EndScreen.cs" t="Include" />
+            <e p="EndScreenButton.cs" t="Include" />
           </e>
           <e p="MemoryModule" t="Include">
             <e p="MemoryModule.cs" t="Include" />

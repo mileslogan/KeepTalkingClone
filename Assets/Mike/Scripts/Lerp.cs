@@ -126,7 +126,8 @@ public class Lerp : MonoBehaviour
                 
                 //Turn off collider
                 BombScript.TurnOnAllCols();
-                obj.GetComponent<Collider>().enabled = false;
+                //obj.GetComponent<Collider>().enabled = false;
+                obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = false;
                 Debug.Log(obj);
                 return;
             }

@@ -156,6 +156,7 @@ public class WhosOnFirst : MonoBehaviour
                     Text.text = screenText;
                     DetermineCorrectButton();
                 }
+                BombScript.BombShake(); //Shake bomb
             }
         }
 

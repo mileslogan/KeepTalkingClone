@@ -9,15 +9,15 @@ public class OutlinerScript : MonoBehaviour
     // I set it so that there is a public array of tag variable so that not everything with a collider gets outlines when hovered over, on the otherhand, if you want everything with a collider to be selected, 
     // then set the array to zero.
 
-    MeshFilter thisMeshFilter;
+    public MeshFilter thisMeshFilter;
 
-    MeshFilter selectedMeshFilter;//object the cursor is over
+    public MeshFilter selectedMeshFilter;//object the cursor is over
 
     RaycastHit hit;
 
     public string[] validTags; //set in the ditor, if you dont want to filter any tags out, then just leave this set to zero
 
-    void Start()
+    void Awake()
     {
         thisMeshFilter = GetComponent<MeshFilter>();
     }
@@ -36,8 +36,9 @@ public class OutlinerScript : MonoBehaviour
             {
                 for (int i = 0; i < validTags.Length; i++)
                 {
-                    if (hit.collider.tag == validTags[i])
+                    if (hit.collider.gameObject.CompareTag(validTags[i]))
                     {
+                        Debug.Log(hit.collider.gameObject);
                         selectedMeshFilter = hit.collider.gameObject.GetComponent<MeshFilter>();
                         thisMeshFilter.mesh = selectedMeshFilter.mesh;
                     }
@@ -48,6 +49,7 @@ public class OutlinerScript : MonoBehaviour
                 selectedMeshFilter = hit.collider.gameObject.GetComponent<MeshFilter>();
                 thisMeshFilter.mesh = selectedMeshFilter.mesh;
             }
+            Debug.Log(hit.collider.gameObject);
         }
         else
         {

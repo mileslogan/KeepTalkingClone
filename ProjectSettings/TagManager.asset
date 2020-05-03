@@ -18,6 +18,9 @@ TagManager:
   - StartTimeMinus
   - StartStart
   - Binder
+  - BombItself
+  - ModuleOutline
+  - ModuleParts
   layers:
   - Default
   - TransparentFX

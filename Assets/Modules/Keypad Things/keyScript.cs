@@ -36,10 +36,10 @@ public class keyScript : MonoBehaviour
             if (Physics.Raycast(ray, out keyHit) && (BombScript == null || gameObject == GenerateBomb.SelectedModule))
             {
                 clicker.PlayOneShot(click);
-
+            
                 if (keyHit.transform.gameObject == key1)
                 {
-                   
+                    BombScript.BombShake();
                     anim1.SetTrigger("Push");
 
                     SymbolTestFunction(keySymbols[0].sprite);
@@ -47,19 +47,19 @@ public class keyScript : MonoBehaviour
                 }
                 if (keyHit.transform.gameObject == key2)
                 {
-
+                    BombScript.BombShake();
                     anim2.SetTrigger("Push");
                     SymbolTestFunction(keySymbols[1].sprite);
                 }
                 if (keyHit.transform.gameObject == key3)
                 {
-
+                    BombScript.BombShake();
                     anim3.SetTrigger("Push");
                     SymbolTestFunction(keySymbols[2].sprite);
                 }
                 if (keyHit.transform.gameObject == key4)
                 {
-
+                    BombScript.BombShake();
                     anim4.SetTrigger("Push");
                     SymbolTestFunction(keySymbols[3].sprite);
 

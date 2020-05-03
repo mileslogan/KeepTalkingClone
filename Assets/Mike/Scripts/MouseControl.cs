@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 
 public class MouseControl : MonoBehaviour
@@ -94,6 +95,11 @@ public class MouseControl : MonoBehaviour
                 }
                 break;
             case BombStates.OnModule:
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    ShakeBomb();
+                    Debug.Log("Shaked");
+                }
                 if (Input.GetMouseButton(1))
                 {
                     HoldingDownTimer += Time.deltaTime; //time holding down
@@ -120,6 +126,11 @@ public class MouseControl : MonoBehaviour
                     
                     //newRot.x = Mathf.Clamp(newRot.x, MinXRot, MaxXRot);
                     ParentBomb.eulerAngles = newRot;
+
+
+                    
+                    
+                    //void Shake()
                 }
                 else
                 {
@@ -187,7 +198,34 @@ public class MouseControl : MonoBehaviour
 
         return Mathf.Min(angle, max);
     }
-    
+
+    public void ShakeBomb()
+    {
+        StartCoroutine(ShakeBomb(.4f));
+    }
+
+    public AnimationCurve TweenCurve;
+    public IEnumerator ShakeBomb(float duration)
+    {
+        
+        float timer = 0f;
+        
+        //positions of bomb
+        Vector3 startRot = ParentBomb.rotation.eulerAngles;
+        Vector3 endRot = startRot;
+        //endRot.y += 10f;
+
+        endRot.y += 2f;
+        
+        while (timer < duration)
+        {
+
+            timer += Time.deltaTime;
+            
+            ParentBomb.rotation =  Quaternion.Euler(Vector3.LerpUnclamped(startRot, endRot, TweenCurve.Evaluate(timer/duration)));
+            yield return null;
+        }
+    }
     
     
 }

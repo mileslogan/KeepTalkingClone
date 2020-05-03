@@ -11,11 +11,13 @@ public class EndScreen : MonoBehaviour
     public int modulesNum;
     public int strikeNum;
     public string timeRemain;
-    public string cause;
+    public string cause; // Cause of explosions
 
-    public GameObject defusedPage;
-    public GameObject explodedPage;
-    public GameObject timeText;
+    public GameObject defusedPage; // png of the defused page
+    public GameObject explodedPage; // png of the exploded page
+
+    // Text
+    public GameObject timeText; 
     public GameObject modulesNumText;
     public GameObject strikeNumText;
     public GameObject timeRemainText;
@@ -37,10 +39,14 @@ public class EndScreen : MonoBehaviour
 
         TimeCalculator();//convey timeleft(float) to string representation
 
-        timeText.GetComponent<TextMeshPro>().text = "" + time;
-        modulesNumText.GetComponent<TextMeshPro>().text = ""+ modulesNum + " Modules";
+        //time = StartScreen.time;
+        //modulesNum StartScreen.moduleAmount;
+        timeText.GetComponent<TextMeshPro>().text = "" + time + ":00"; // Need access to the start screen script 
+        modulesNumText.GetComponent<TextMeshPro>().text = ""+ modulesNum + " Modules"; // Need access to the start screen script 
         strikeNumText.GetComponent<TextMeshPro>().text =  "3 Strikes"; 
-        timeRemainText.GetComponent<TextMeshPro>().text = "" + timeRemain; 
+        timeRemainText.GetComponent<TextMeshPro>().text = "" + timeRemain;
+
+        //cause of explosions is empty if defused
         if (Defused)
         {
             causeText.GetComponent<TextMeshPro>().text = "";

@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     public float waittime = 1f;
 
     public GenerateBomb BombScript;
-    public GameObject timeText; // Test of the time 
+    public TextMeshPro timeText; // Test of the time 
     public GameObject strikeScreen;
      
     public Material timerStrike0; // The material of no strikes 
@@ -61,7 +61,7 @@ public class Timer : MonoBehaviour
         while (timeleft > 0)
         {
             TimeCalculator();
-            timeText.GetComponent<TextMesh>().text = str_minutes + " : " + str_seconds;
+            timeText.text = str_minutes + " : " + str_seconds;
             //timeText.GetComponent<TextMeshPro>().text = str_minutes + " : " + str_seconds;
             audioData.Play(0);
             yield return new WaitForSeconds(waittime);

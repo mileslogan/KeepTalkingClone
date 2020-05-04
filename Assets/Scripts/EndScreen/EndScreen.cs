@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class EndScreen : MonoBehaviour
 {
-    public static bool Defused; // true if the bomb is defused, false if it explorded
+    public bool Defused; // true if the bomb is defused, false if it explorded
     public int time;
     public int modulesNum;
     public int strikeNum;
+    public int timeleft;
     public string timeRemain;
     public string cause; // Cause of explosions
 
+    //Sprite Obejct
     public GameObject defusedPage; // png of the defused page
     public GameObject explodedPage;// png of the exploded page
 	public GameObject defusedStamp;
@@ -24,12 +26,25 @@ public class EndScreen : MonoBehaviour
     public GameObject strikeNumText;
     public GameObject timeRemainText;
     public GameObject causeText;
+    //Scene Manager
+    public SceneManage managerScript;
 
 
 
     void Start()
     {
-        
+        managerScript = FindObjectOfType<SceneManage>();
+        managerScript.fadeAnim.SetInteger("FadeState", 1);
+
+        // Get value from the Scene Manager script
+        Defused = managerScript.defused;
+        time = managerScript.defuseTime;
+        modulesNum = managerScript.numModules;
+        timeleft = managerScript.timeLeft;
+        cause = managerScript.causeOfDeath;
+        RemainTimeCalculator();//convey timeleft(float) to string representation
+
+        // Set the sprite and stamps
         if (Defused)
         {
             explodedPage.GetComponent<SpriteRenderer>().enabled = false;
@@ -42,16 +57,14 @@ public class EndScreen : MonoBehaviour
             explodedStamp.GetComponent<Animator>().SetTrigger("stamp");
         }
 
-        TimeCalculator();//convey timeleft(float) to string representation
-
+        
         //Set Time text
-		time = StartScreen.timeForDefusal;
 		int minutes;
 		int seconds;
 		string str_minutes;
 		string str_seconds;
-		minutes = (int)Timer.timeleft / 60;
-		seconds = (int)Timer.timeleft % 60;
+		minutes = time / 60;
+		seconds = time % 60;
 		str_minutes = "" + minutes;
 		str_seconds = "" + seconds;
 		if (minutes < 10)
@@ -64,10 +77,11 @@ public class EndScreen : MonoBehaviour
 		}
 		timeText.GetComponent<TextMeshPro>().text = str_minutes + " : " + str_seconds;
 
-        //Set ModulesNum
-		modulesNum = StartScreen.numOfModules;
-        modulesNumText.GetComponent<TextMeshPro>().text = ""+ modulesNum + " Modules"; // Need access to the start screen script 
-        strikeNumText.GetComponent<TextMeshPro>().text =  "3 Strikes"; 
+        //Set ModulesNumText
+        modulesNumText.GetComponent<TextMeshPro>().text = ""+ modulesNum + " Modules";
+        //Set StrikeNumText
+        strikeNumText.GetComponent<TextMeshPro>().text =  "3 Strikes";
+        //Set RemainningTimeText
         timeRemainText.GetComponent<TextMeshPro>().text = "" + timeRemain;
 
         //cause of explosions is empty if defused
@@ -81,8 +95,6 @@ public class EndScreen : MonoBehaviour
         }
 
         StartCoroutine(StampSound());// Play Audio Source for the stamp
-
-
     }
 
 
@@ -102,14 +114,14 @@ public class EndScreen : MonoBehaviour
         }
     }
 
-    void TimeCalculator() //convey timeleft(float) to string representation
+    void RemainTimeCalculator() //convey timeleft(float) to string representation
     {
         int minutes;
         int seconds;
         string str_minutes;
         string str_seconds;
-        minutes = (int)Timer.timeleft / 60;
-        seconds = (int)Timer.timeleft % 60;
+        minutes = timeleft / 60;
+        seconds = timeleft % 60;
         str_minutes = "" + minutes;
         str_seconds = "" + seconds;
         if (minutes < 10)
@@ -129,14 +141,14 @@ public class EndScreen : MonoBehaviour
     {
 
         if (num == 0)
-            SceneManager.LoadScene(""); // retry
+            managerScript.ToBombFunction();
         else
-            SceneManager.LoadScene("StartingScene"); //go back to start Screen
+            managerScript.ToStartFunction();
     }
 
     public IEnumerator StampSound()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(1f);
         GetComponent<AudioSource>().Play(0);
 
     }

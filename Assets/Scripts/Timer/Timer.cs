@@ -25,6 +25,7 @@ public class Timer : MonoBehaviour
 
     public AudioSource audioData; // The audio source of the sounds of timer 
 
+    bool blink = false;
     void Start()
     {
         //start timer
@@ -44,8 +45,9 @@ public class Timer : MonoBehaviour
             strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
             waittime = 0.75f;
         }
-        if (BombScript != null && BombScript.CurrentStrikes == 2)
+        if (BombScript != null && BombScript.CurrentStrikes == 2 && !blink)
         {
+            blink = true;
             StartCoroutine(Blink());
             waittime = 0.5f;
         }
@@ -75,10 +77,10 @@ public class Timer : MonoBehaviour
         {
             matArray[1] = timerStrike2;
             strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.5f);
             matArray[1] = timerStrike0;
             strikeScreen.GetComponent<MeshRenderer>().materials = matArray;
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.5f);
         }
 
     }

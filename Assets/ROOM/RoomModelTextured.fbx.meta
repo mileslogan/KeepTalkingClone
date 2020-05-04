@@ -3,7 +3,67 @@ guid: ef092d020f467de458274c7cd55cdfd1
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BOX
+    second: {fileID: 2100000, guid: f5a09725942d0744caf4b08614f31d78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BigPipe
+    second: {fileID: 2100000, guid: 3f2ca61fb05e1ee418809a6acfd5644c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: aff2084167b9f8e498a00d05b762453a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: 9398a8d8e9af08b4fbd5df34c728bc11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightCasing
+    second: {fileID: 2100000, guid: 54542de7fcf1136429b8ed8c6d454578, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: 0d1a9323b1976ce4ba0f4b7844d6a49f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: dbc1888da7a522945950cab63ee7351b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SmallPipe
+    second: {fileID: 2100000, guid: cf1238a8eb8c0c5458fb40b419e26927, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Speaker
+    second: {fileID: 2100000, guid: 5a48a8a178a334843b62a44a7070e18a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table
+    second: {fileID: 2100000, guid: e21ddb70977d3f94795485848e30ab9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Walls
+    second: {fileID: 2100000, guid: 43a95a1b7f52aa24bb3d64927fff1511, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: switch
+    second: {fileID: 2100000, guid: 245181a47d38f12429376c6ed234d15a, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

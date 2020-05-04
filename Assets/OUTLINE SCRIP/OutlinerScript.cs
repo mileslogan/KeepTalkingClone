@@ -36,11 +36,15 @@ public class OutlinerScript : MonoBehaviour
             {
                 for (int i = 0; i < validTags.Length; i++)
                 {
-                    if (hit.collider.gameObject.CompareTag(validTags[i]))
+                    if (hit.collider.gameObject.tag == validTags[i])
                     {
                         Debug.Log(hit.collider.gameObject);
                         selectedMeshFilter = hit.collider.gameObject.GetComponent<MeshFilter>();
                         thisMeshFilter.mesh = selectedMeshFilter.mesh;
+                    }
+                    if (i==validTags.Length-1 && hit.collider.gameObject.tag != validTags[i])
+                    {
+                        thisMeshFilter.mesh = null;
                     }
                 }
             }

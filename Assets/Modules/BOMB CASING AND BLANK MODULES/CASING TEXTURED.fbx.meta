@@ -3,7 +3,32 @@ guid: af67603d97b4cf94996e77b3c2d03c6a
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bolts
+    second: {fileID: 2100000, guid: 76f579d66e3686042a815307a38f9bba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Casing
+    second: {fileID: 2100000, guid: 4dbcc5c371d31ba40a194c35d54fd9cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Horz
+    second: {fileID: 2100000, guid: 24593f5eec005db458c4cdc8470ede15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Straps
+    second: {fileID: 2100000, guid: 159736fe88d34d847af002293f1b3f0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Verts
+    second: {fileID: 2100000, guid: 73df2a98a8526e346ad11a1cc201dffd, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

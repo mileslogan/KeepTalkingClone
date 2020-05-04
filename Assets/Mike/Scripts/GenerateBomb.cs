@@ -21,10 +21,11 @@ public class GenerateBomb : MonoBehaviour
     public Image Panel;
     //variables to change
     public int ModuleAmount = 1;
-    public int MaxModules = 5;
+    private int MaxModules = 11; //max possible number of modules: 11-don't change
     
     //Set in inspector
     public List<GameObject> ModulesToSpawnFrom = new List<GameObject>();
+    public List<GameObject> SecondaryModulesToSpawnFrom = new List<GameObject>();
     [FormerlySerializedAs("LocationsToSpawn")] public int[] ModuleLocToSpawn; //choose potential index to spawn from
     [FormerlySerializedAs("Locations")] public Vector3[] ModuleLocations; //actual location relative to object
     
@@ -130,6 +131,9 @@ public class GenerateBomb : MonoBehaviour
         
         
         
+        //Set components based on menu: change number of modules
+        ModuleAmount = ManagerScript.numModules;
+        
         
         MouseScript = GetComponent<MouseControl>();
         SoundScript = GetComponent<BombSounds>();
@@ -147,8 +151,9 @@ public class GenerateBomb : MonoBehaviour
         SpawnAllExtras();
         ModulesLeftToComplete = ModuleAmount;
         
-        //Set components
+        //set time
         TimerScript = FindObjectOfType<Timer>();
+        TimerScript.countdowntime = ManagerScript.defuseTime;
     }
     // Update is called once per frame
     void Update()
@@ -164,8 +169,8 @@ public class GenerateBomb : MonoBehaviour
         {
             //StartCoroutine(TimerScript.Blink());
             //TimerScript.waittime = 0.5f;
+            //Win();
             
-            //TimerScript.StopAllCoroutines(); //stop coroutine
         }
         
         //once done creating bomb, rotate it
@@ -199,13 +204,25 @@ public class GenerateBomb : MonoBehaviour
     void PickModules()
     {
         int i = Mathf.Min(ModuleAmount, MaxModules);
-        while (i > 0)
+        int j = i - 6;
+        while (i > 0 && i > j)
         {
             int rand = Random.Range(0, ModulesToSpawnFrom.Count);
             ModulesToSpawn.Add(ModulesToSpawnFrom[rand]);
             ModulesToSpawnFrom.Remove(ModulesToSpawnFrom[rand]);
             i--;
         }
+        
+        
+        //more than 6 modules, than duplicates are possible
+        while (j > 0)
+        {
+            int rand = Random.Range(0, SecondaryModulesToSpawnFrom.Count);
+            ModulesToSpawn.Add(SecondaryModulesToSpawnFrom[rand]);
+            SecondaryModulesToSpawnFrom.Remove(SecondaryModulesToSpawnFrom[rand]);
+            j--;
+        }
+            
     }
     //spawn modules
     void SpawnModules()
@@ -248,8 +265,9 @@ public class GenerateBomb : MonoBehaviour
                 //back side of bomb
                 if (index >= 6)
                 {
-                    spawned.transform.Rotate(180f,0f,0f);
-                    spawned.transform.Translate(0f, 0f, .07f);
+                    
+                    //spawned.transform.Rotate(180f,0f,0f);
+                    spawned.transform.Translate(0f, 0f, -.05f);
 
                     if (index >= 9)
                     {
@@ -258,9 +276,11 @@ public class GenerateBomb : MonoBehaviour
                 }
                 else
                 {
-                    spawned.transform.Translate(0f, .025f, 0f);
+                    spawned.transform.Rotate(180f,0f,0f);
+                    spawned.transform.Translate(0f, 0f, -.1f);
                 }
-                
+
+                spawned.name = "Null " + index.ToString();
             }
             
             
@@ -380,14 +400,15 @@ public class GenerateBomb : MonoBehaviour
     public void Completed()
     {
         ModulesLeftToComplete--;
-        if (ModulesLeftToComplete <= 0 && IsGameWon)
+        if (ModulesLeftToComplete <= 0 && !IsGameWon)
         {
+            //TimerScript.StopAllCoroutines(); //stop coroutine
             Win();
             Debug.Log("Win");
         }
         else
         {
-            AudioManager.Instance.PlayOneShotSound("Correct", false);
+            
         }
     }
     
@@ -435,7 +456,7 @@ public class GenerateBomb : MonoBehaviour
         
         ManagerScript.defused = false;
         ManagerScript.timeLeft = (int)Timer.timeleft;
-        StartCoroutine(EndScene(5f));
+        StartCoroutine(EndScene(2f));
         //Camera.main.enabled = false;
     }
 

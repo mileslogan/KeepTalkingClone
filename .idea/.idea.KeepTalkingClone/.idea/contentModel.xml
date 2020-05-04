@@ -34,6 +34,7 @@
           <e p="ButtonModule" t="Include">
             <e p="ButtonScript.cs" t="Include" />
           </e>
+          <e p="DebugScenes.cs" t="Include" />
           <e p="EndScreen" t="Include">
             <e p="EndScreen.cs" t="Include" />
             <e p="EndScreenButton.cs" t="Include" />

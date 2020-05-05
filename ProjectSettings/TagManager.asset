@@ -21,6 +21,7 @@ TagManager:
   - BombItself
   - ModuleOutline
   - ModuleParts
+  - QuitButton
   layers:
   - Default
   - TransparentFX

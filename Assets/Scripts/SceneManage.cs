@@ -55,6 +55,11 @@ public class SceneManage : MonoBehaviour
         StartCoroutine("ToEndScene");
     }
 
+    public void ToQuitFunction()
+    {
+        StartCoroutine("ToQuitGame");
+    }
+
     IEnumerator ToStartScene()
     {
         fadeAnim.SetInteger("FadeState", 2);
@@ -74,5 +79,13 @@ public class SceneManage : MonoBehaviour
         fadeAnim.SetInteger("FadeState", 2);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(2);
+    }
+
+    IEnumerator ToQuitGame()
+    {
+        fadeAnim.SetInteger("FadeState", 2);
+        yield return new WaitForSeconds(3f);
+        Application.Quit();
+        Debug.Log("QuitGame");
     }
 }

@@ -83,6 +83,11 @@ public class StartScreen : MonoBehaviour
                     clickSource.PlayOneShot(clickClip);
                     StartGame();
                 }
+                else if (hit.collider.tag == "QuitButton" && Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    clickSource.PlayOneShot(clickClip);
+                    managerScript.ToQuitFunction();
+                }
             }
             
         }

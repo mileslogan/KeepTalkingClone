@@ -16,13 +16,22 @@ public class IndicatorBehavior : MonoBehaviour
     public void SetText(string text)
     {
         TopSideText.text = text;
-        FlipSideText.text = text;
+
+        if (FlipSideText != null)
+        {
+            FlipSideText.text = text;
+        }
+        
     }
 
     //set light on or off-to be replaced with model that has a light on it
     public void SetLight(bool isOn)
     {
         FrontLight.enabled = isOn;
-        BackLight.enabled = isOn;
+        if (BackLight != null)
+        {
+            BackLight.enabled = isOn;
+        }
+        
     }
 }

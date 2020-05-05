@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GenerateBomb : MonoBehaviour
 {
@@ -69,7 +71,15 @@ public class GenerateBomb : MonoBehaviour
     public GameObject IndicatorPrefab;
     
     
-    //potential locations to spawn object->could expand to be 20 sections
+    //potential locations to spawn object
+    
+    public SpawnArea[] TopSideSpots;
+    public SpawnArea[] BotSideSpots;
+    public SpawnArea[] LeftSideSpots;
+    public SpawnArea[] RightSideSpots;
+
+    public List<SpawnArea> AllSpots = new List<SpawnArea>();
+    
     public static Area TopSide = new Area(new Vector3(-1f, 1f, -0.2f),new Vector3(1f, 1f, 0.2f), 
         Quaternion.Euler(0f,0f, 90f), Quaternion.Euler(0f,0f, 0f));
     
@@ -154,6 +164,9 @@ public class GenerateBomb : MonoBehaviour
         //set time
         TimerScript = FindObjectOfType<Timer>();
         TimerScript.countdowntime = ManagerScript.defuseTime;
+        
+        //set up all indicator spots: shuffle
+        RandFuncs.Shuffle(AllSpots);
     }
     // Update is called once per frame
     void Update()
@@ -299,16 +312,34 @@ public class GenerateBomb : MonoBehaviour
         int indicatorIndex = 0;
         for (int i = 0; i < ExtrasToSpawn.Count; i++)
         {
+            //Spawn indicators
+            Vector3 loc = AllSpots[i].SpawnLoc;
+            Quaternion rot = Quaternion.Euler(AllSpots[i].Rotation);
+
+            GameObject extra = Instantiate(ExtrasToSpawn[i], loc, rot);
+            
+            if (ExtrasToSpawn[i] == IndicatorPrefab)
+            {
+                IndicatorBehavior indScript = extra.GetComponent<IndicatorBehavior>();
+        
+                //set variables of 3-letter string and whether it is on or off
+                indScript.SetText(AddedIndicators[indicatorIndex].Str);
+                indScript.SetLight(AddedIndicators[indicatorIndex].IsOn);
+                indScript.IndicatorIndex = indicatorIndex;
+                indicatorIndex++;
+            }
+            extra.transform.parent = transform.parent;
+            
             //special spawn for indicators
             if (ExtrasToSpawn[i] == IndicatorPrefab)
             {
-                SpawnIndicator(indicatorIndex);
-                indicatorIndex++;
+                //SpawnIndicator(indicatorIndex);
+                //indicatorIndex++;
             }
             //normal spawn
             else
             {
-                SpawnExtra(ExtrasToSpawn[i]);
+                //SpawnExtra(ExtrasToSpawn[i]);
             }
             
         }
@@ -356,6 +387,12 @@ public class GenerateBomb : MonoBehaviour
         indScript.SetLight(AddedIndicators[index].IsOn);
         indScript.IndicatorIndex = index;
     }
+
+    public void SpawnIndicator()
+    {
+        
+    }
+    
     
 
     //randomly create a location given a range
@@ -421,7 +458,11 @@ public class GenerateBomb : MonoBehaviour
         Panel.color = Color.black;
         
         SpawnedTimer.GetComponent<AudioSource>().mute = true; //turn off blinking
-
+        AudioSource audio = FindObjectOfType<MusicPlayer>().gameObject.GetComponent<AudioSource>(); //turn off music
+        if (audio != null)
+        {
+            audio.mute = true;
+        }
         //determine cause of death
         if (Timer.timeleft <= 0f)
         {
@@ -466,6 +507,11 @@ public class GenerateBomb : MonoBehaviour
         ManagerScript.timeLeft = (int)Timer.timeleft;
         ManagerScript.defused = true;
         ManagerScript.causeOfDeath = "Nothing. You're Alive!";
+        AudioSource audio = FindObjectOfType<MusicPlayer>().gameObject.GetComponent<AudioSource>();//turn off music
+        if (audio != null)
+        {
+            audio.mute = true;
+        }
         IsGameWon = true;
         StopCoroutine(TimerScript.CountDown(TimerScript.countdowntime)); //pause time
         AudioManager.Instance.PlayOneShotSound("Correct", false);
@@ -631,3 +677,14 @@ public struct Area
         this.SerialNumRotation = serialNumRotation;
     }
 }
+
+[Serializable]
+//new spawn areas
+public struct SpawnArea
+{
+    public Vector3 SpawnLoc;
+    public Vector3 Rotation;
+}
+
+
+

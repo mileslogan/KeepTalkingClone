@@ -33,6 +33,7 @@ public class EndScreen : MonoBehaviour
 
     void Start()
     {
+        
         managerScript = FindObjectOfType<SceneManage>();
         managerScript.fadeAnim.SetInteger("FadeState", 1);
 
@@ -91,7 +92,7 @@ public class EndScreen : MonoBehaviour
         }
         else
         {
-            causeText.GetComponent<TextMeshPro>().text = "" + GenerateBomb.LostOnThisModule;
+            causeText.GetComponent<TextMeshPro>().text = "" + cause;
         }
 
         StartCoroutine(StampSound());// Play Audio Source for the stamp

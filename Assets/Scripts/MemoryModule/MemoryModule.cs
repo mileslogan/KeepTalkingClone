@@ -276,13 +276,13 @@ public class MemoryModule : MonoBehaviour
             return;
         }
 
-        if (bigNumber == 3 && stage05[index] == stage03[stage03index])// If the display is 3, press the button with the same label you pressed in stage 4
+        if (bigNumber == 3 && stage05[index] == stage04[stage04index])// If the display is 3, press the button with the same label you pressed in stage 4
         {
             NextStage();
             return;
 
         }
-        if (bigNumber == 4 && stage05[index] == stage04[stage04index])// If the display is 4, press the button with the same label you pressed in stage 3
+        if (bigNumber == 4 && stage05[index] == stage03[stage03index])// If the display is 4, press the button with the same label you pressed in stage 3
         {
             NextStage();
             return;

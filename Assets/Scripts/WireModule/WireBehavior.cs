@@ -11,7 +11,7 @@ public class WireBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //assign possible wire colors to array
+        //assign possible wire colors to arrays
         possibleColors = new Color[5]; 
         possibleColors[0] = Color.red;
         possibleColors[1] = Color.blue;

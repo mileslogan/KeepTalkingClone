@@ -19,7 +19,7 @@ public class WireModScript : MonoBehaviour
     public GameObject[] wireSlots; //all possible activated wires
     public List<GameObject> activeWires = new List<GameObject>();
 
-    Color[] colorOrder; //gets the colors of the wires in order from top to bottom
+    Color[] colorOrder; //gets the colors of the wires in order from top to bottoms
     int colorCounter = 0;
 
     //CASES: read the manual to understand the naming.

@@ -29,7 +29,7 @@ public class WhosOnFirst : MonoBehaviour
     public bool CORRECT;
 
     private GenerateBomb BombScript;
-    // Start is called before the first frame update
+    // Start is called before the first frame updates
     void Start()
     {
         BombScript = FindObjectOfType<GenerateBomb>();

@@ -463,6 +463,8 @@ public class GenerateBomb : MonoBehaviour
     //win screen
     public void Win()
     {
+        ManagerScript.defused = true;
+        ManagerScript.causeOfDeath = "Nothing. You're Alive!";
         IsGameWon = true;
         StopCoroutine(TimerScript.CountDown(TimerScript.countdowntime)); //pause time
         AudioManager.Instance.PlayOneShotSound("Correct", false);

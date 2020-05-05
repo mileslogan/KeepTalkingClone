@@ -86,6 +86,11 @@ public class SimonSaysScript : MonoBehaviour
             }
         }
 
+        if (bombScript != null && bombScript.IsGameOver)
+        {
+            StopCoroutine("SimonSaysSequence");
+        }
+
         if (bombScript == null || GenerateBomb.SelectedModule == gameObject)
         {
             RaycastHit hit;

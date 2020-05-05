@@ -463,6 +463,7 @@ public class GenerateBomb : MonoBehaviour
     //win screen
     public void Win()
     {
+        ManagerScript.timeLeft = (int)Timer.timeleft;
         ManagerScript.defused = true;
         ManagerScript.causeOfDeath = "Nothing. You're Alive!";
         IsGameWon = true;

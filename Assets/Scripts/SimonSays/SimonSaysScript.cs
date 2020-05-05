@@ -479,7 +479,7 @@ public class SimonSaysScript : MonoBehaviour
 
     void AssignPushButton()
     {
-        if (bombScript != null && !bombScript.HasVowel)
+        if (bombScript != null && bombScript.HasVowel)
         {
             switch (strikeCount)
             {

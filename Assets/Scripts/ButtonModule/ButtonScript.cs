@@ -165,43 +165,40 @@ public class ButtonScript : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Mouse0))
                     {
-                    //if (buttonStrip.material == stripMats[1])
-                    //{
-                    //    if (timeScript.str_minutes.ToLower().IndexOf('4') != -1 || timeScript.str_seconds.ToLower().IndexOf('4') != -1)
-                    //    {
-                    //        Completed();
-                    //    }
-                    //    else
-                    //    {
-                    //        Failure();
-                    //    }
-                    //}
-                    //if (buttonStrip.material == stripMats[3])
-                    //{
-                    //    if (timeScript.str_minutes.ToLower().IndexOf('5') != -1 || timeScript.str_seconds.ToLower().IndexOf('5') != -1)
-                    //    {
-                    //        Completed();
-                    //    }
-                    //    else
-                    //    {
-                    //        Failure();
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    if (buttonStrip.material == stripMats[1])
-                    //    {
-                    //        if (timeScript.str_minutes.ToLower().IndexOf('0') != -1 || timeScript.str_seconds.ToLower().IndexOf('0') != -1)
-                    //        {
-                    //            Completed();
-                    //        }
-                    //        else
-                    //        {
-                    //            Failure();
-                    //        }
-                    //    }
-                    //}
-                        bombScript.BombShake();
+                        if (buttonStrip.material == stripMats[1])
+                        {
+                            if (timeScript.str_minutes.ToLower().IndexOf('4') != -1 || timeScript.str_seconds.ToLower().IndexOf('4') != -1)
+                            {
+                                Completed();
+                            }
+                            else
+                            {
+                                Failure();
+                            }
+                        }
+                        else if (buttonStrip.material == stripMats[3])
+                        {
+                            if (timeScript.str_minutes.ToLower().IndexOf('5') != -1 || timeScript.str_seconds.ToLower().IndexOf('5') != -1)
+                            {
+                                Completed();
+                            }
+                            else
+                            {
+                                Failure();
+                            }
+                        }
+                        else
+                        {
+                                if (timeScript.str_minutes.ToLower().IndexOf('1') != -1 || timeScript.str_seconds.ToLower().IndexOf('1') != -1)
+                                {
+                                    Completed();
+                                }
+                                else
+                                {
+                                    Failure();
+                                }
+                        }
+                    bombScript.BombShake();
                         buttonAudioSource.PlayOneShot(buttonClicks[1]);
                         buttonAnim.SetBool("isPressing", false);
                         buttonStrip.material = stripMats[4];

@@ -12,6 +12,8 @@ public class GenerateBomb : MonoBehaviour
 {
     //done loading
     private bool IsDone = false;
+    [FormerlySerializedAs("SpawnedButton")] public bool HasSpawnedButton = false;
+    private int ButtonSpawnIndex;
     public bool HasRotated = false;
     public float DoneTimer = .3f;
     //prefabs
@@ -240,8 +242,9 @@ public class GenerateBomb : MonoBehaviour
     //spawn modules
     void SpawnModules()
     {
+
         //go through all modules and spawn empty or module
-        for(int i = 0; i < ModuleLocToSpawn.Length; i++)
+        for (int i = 0; i < ModuleLocToSpawn.Length; i++)
         {
             int index = ModuleLocToSpawn[i];
             //Debug.Log(index);
@@ -250,7 +253,16 @@ public class GenerateBomb : MonoBehaviour
             if (i < ModulesToSpawn.Count)
             {
                 module = ModulesToSpawn[i];
+
+                //check if spawning button module
+                if (module.GetComponent<ButtonScript>() != null)
+                {
+                    HasSpawnedButton = true;
+                    ButtonSpawnIndex = i;
+                    continue;
+                }
             }
+
             GameObject spawned;
             //check if module exists
             if (module != null)
@@ -259,14 +271,14 @@ public class GenerateBomb : MonoBehaviour
                 spawned.transform.parent = transform.parent;
                 spawned.transform.Rotate(Vector3.right, 270f);
                 SpawnedModules.Add(spawned);
-                
-                
+
+
                 //indicate which location the module on the script attached
-                
+
                 //back side of bomb
                 if (index >= 6)
                 {
-                    spawned.transform.Rotate(180f,180f,0f);
+                    spawned.transform.Rotate(180f, 180f, 0f);
                 }
             }
             //if no module, spawn empty module
@@ -274,11 +286,11 @@ public class GenerateBomb : MonoBehaviour
             {
                 spawned = Instantiate(EmptyModule, transform.position + location, Quaternion.identity);
                 spawned.transform.parent = transform.parent;
-                
+
                 //back side of bomb
                 if (index >= 6)
                 {
-                    
+
                     //spawned.transform.Rotate(180f,0f,0f);
                     spawned.transform.Translate(0f, 0f, -.05f);
 
@@ -289,20 +301,83 @@ public class GenerateBomb : MonoBehaviour
                 }
                 else
                 {
-                    spawned.transform.Rotate(180f,0f,0f);
+                    spawned.transform.Rotate(180f, 0f, 0f);
                     spawned.transform.Translate(0f, 0f, -.1f);
                 }
 
                 spawned.name = "Null " + index.ToString();
+                SpawnedModules.Add(spawned);
             }
-            
-            
-            
+
+
+
         }
+
+        //check if spawned button, if so then make sure it spawns on front
+        //if (HasSpawnedButton)
+        //{
+        //    //pick random location between 0-5 and not 2
+        //    int rand = Random.Range(0, 6);
+        //    while (rand == 1)
+        //    {
+        //        rand = Random.Range(0, 6);
+        //    }
+//
+        //    GameObject objToSwap;
+        //    for (int i = 0; i < ModuleLocToSpawn.Length; i++)
+        //    {
+        //        if (ModuleLocToSpawn[i] == rand)
+        //        {
+        //            objToSwap = SpawnedModules[i];
+        //            foreach (GameObject module in SpawnedModules)
+        //            {
+        //                if (module.GetComponent<ButtonScript>() != null)
+        //                {
+        //                    Vector3 prevPos = module.transform.position;
+        //                    Quaternion prevRot = module.transform.rotation;
+        //                    module.transform.position = objToSwap.transform.position;
+        //                    module.transform.rotation = objToSwap.transform.rotation;
+        //                    objToSwap.transform.position = prevPos;
+        //                    objToSwap.transform.rotation = prevRot;
+        //                    break;
+        //                }
+        //            }
+//
+        //            break;
+        //        }
+        //    }
+//
+//
+        //}
+
+    
+        
+        
         //spawn timer: always spawns at top middle of front: can be adjusted if need be
         GameObject timer = Instantiate(TimerModule, transform.position + ModuleLocations[1], Quaternion.identity);
         timer.transform.parent = transform.parent;
         SpawnedTimer = timer;
+
+        if (HasSpawnedButton)
+        {
+            GameObject buttonObj = Instantiate(ModulesToSpawn[ButtonSpawnIndex], transform.position + ModuleLocations[2], Quaternion.identity);
+            buttonObj.transform.parent = transform.parent;
+            buttonObj.transform.Rotate(Vector3.right, 270f);
+            SpawnedModules.Add(buttonObj);
+        }
+        //spawn an empty module instead
+        else
+        {
+            GameObject spawned = Instantiate(EmptyModule, transform.position + ModuleLocations[2], Quaternion.identity);
+            spawned.transform.parent = transform.parent;
+            
+            spawned.transform.Rotate(180f, 0f, 0f);
+            spawned.transform.Translate(0f, 0f, -.1f);
+
+
+            spawned.name = "Null " + 2;
+            SpawnedModules.Add(spawned);
+        }
     }
 
     
@@ -388,10 +463,7 @@ public class GenerateBomb : MonoBehaviour
         indScript.IndicatorIndex = index;
     }
 
-    public void SpawnIndicator()
-    {
-        
-    }
+    
     
     
 
@@ -498,12 +570,16 @@ public class GenerateBomb : MonoBehaviour
         ManagerScript.defused = false;
         ManagerScript.timeLeft = (int)Timer.timeleft;
         StartCoroutine(EndScene(2f));
-        //Camera.main.enabled = false;
+        
+        
+        //prevent bomb interaction
+        SelectedModule = null;
     }
 
     //win screen
     public void Win()
     {
+        //apply to scene manager
         ManagerScript.timeLeft = (int)Timer.timeleft;
         ManagerScript.defused = true;
         ManagerScript.causeOfDeath = "Nothing. You're Alive!";
@@ -513,6 +589,8 @@ public class GenerateBomb : MonoBehaviour
             audio.mute = true;
         }
         IsGameWon = true;
+        
+        //end functions-sfx/timer
         StopCoroutine(TimerScript.CountDown(TimerScript.countdowntime)); //pause time
         AudioManager.Instance.PlayOneShotSound("Correct", false);
         //AudioManager.Instance.PlayOneShotSound("Correct", false);
@@ -638,7 +716,11 @@ public class GenerateBomb : MonoBehaviour
     {
         foreach (GameObject obj in SpawnedModules)
         {
-            obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
+            if (obj.GetComponent<Collider>() != null)
+            {
+                obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
+            }
+            
         }
     }
 

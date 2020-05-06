@@ -13,8 +13,8 @@ public class SerialNumber : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TopSideText.text = DisplayString + FindObjectOfType<GenerateBomb>().SerialN;
-        FlipSideText.text = DisplayString + FindObjectOfType<GenerateBomb>().SerialN;
+        TopSideText.text = FindObjectOfType<GenerateBomb>().SerialN;
+        //FlipSideText.text = DisplayString + FindObjectOfType<GenerateBomb>().SerialN;
     }
     
 }

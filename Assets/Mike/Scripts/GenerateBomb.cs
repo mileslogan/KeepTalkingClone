@@ -242,7 +242,7 @@ public class GenerateBomb : MonoBehaviour
     //spawn modules
     void SpawnModules()
     {
-
+        int moduleIndex = 0;
         //go through all modules and spawn empty or module
         for (int i = 0; i < ModuleLocToSpawn.Length; i++)
         {
@@ -250,17 +250,27 @@ public class GenerateBomb : MonoBehaviour
             //Debug.Log(index);
             Vector3 location = ModuleLocations[index];
             GameObject module = null;
-            if (i < ModulesToSpawn.Count)
+            if (moduleIndex < ModulesToSpawn.Count)
             {
-                module = ModulesToSpawn[i];
+                module = ModulesToSpawn[moduleIndex];
 
                 //check if spawning button module
                 if (module.GetComponent<ButtonScript>() != null)
                 {
                     HasSpawnedButton = true;
-                    ButtonSpawnIndex = i;
-                    continue;
+                    ButtonSpawnIndex = moduleIndex;
+                    moduleIndex++;
+                    if (moduleIndex < ModulesToSpawn.Count)
+                    {
+                        module = ModulesToSpawn[moduleIndex];
+                    }
+                    else
+                    {
+                        module = null;
+                    }
                 }
+
+                moduleIndex++;
             }
 
             GameObject spawned;
@@ -574,6 +584,8 @@ public class GenerateBomb : MonoBehaviour
         
         
         //prevent bomb interaction
+        //move bomb
+        transform.parent.Translate(100f, 100f, 100f);
         SelectedModule = null;
     }
 
@@ -598,6 +610,8 @@ public class GenerateBomb : MonoBehaviour
         AudioManager.Instance.PlaySoundDelay("Correct", false, 1.7f);
         StartCoroutine(EndScene(5f));
         ManagerScript.ToEndFunction();
+        
+        
     }
     
     

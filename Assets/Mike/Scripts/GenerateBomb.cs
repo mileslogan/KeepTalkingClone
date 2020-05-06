@@ -168,7 +168,7 @@ public class GenerateBomb : MonoBehaviour
         TimerScript.countdowntime = ManagerScript.defuseTime;
         
         //set up all indicator spots: shuffle
-        RandFuncs.Shuffle(AllSpots);
+        RandFuncs.Shuffle(AllSpots); 
     }
     // Update is called once per frame
     void Update()
@@ -306,7 +306,7 @@ public class GenerateBomb : MonoBehaviour
                 }
 
                 spawned.name = "Null " + index.ToString();
-                SpawnedModules.Add(spawned);
+                //SpawnedModules.Add(spawned);
             }
 
 
@@ -376,7 +376,7 @@ public class GenerateBomb : MonoBehaviour
 
 
             spawned.name = "Null " + 2;
-            SpawnedModules.Add(spawned);
+            //SpawnedModules.Add(spawned);
         }
     }
 
@@ -384,6 +384,7 @@ public class GenerateBomb : MonoBehaviour
     //spawn batteries, indicators, and serial #, consider spawning ports
     void SpawnAllExtras()
     {
+        RandFuncs.Shuffle(AllSpots); //shuffle
         int indicatorIndex = 0;
         for (int i = 0; i < ExtrasToSpawn.Count; i++)
         {
@@ -716,10 +717,9 @@ public class GenerateBomb : MonoBehaviour
     {
         foreach (GameObject obj in SpawnedModules)
         {
-            if (obj.GetComponent<Collider>() != null)
-            {
-                obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
-            }
+            
+            obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
+            
             
         }
     }

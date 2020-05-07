@@ -24,5 +24,10 @@ public class WireBehavior : MonoBehaviour
         transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_BaseColor", wireColor);
         GetComponent<MeshCollider>().enabled = GetComponent<MeshRenderer>().enabled;
     }
- 
+
+
+    private void Update()
+    {
+        GetComponent<MeshCollider>().enabled = GetComponent<MeshRenderer>().enabled;
+    }
 }

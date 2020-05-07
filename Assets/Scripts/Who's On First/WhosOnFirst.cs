@@ -29,6 +29,13 @@ public class WhosOnFirst : MonoBehaviour
     public bool CORRECT;
 
     private GenerateBomb BombScript;
+<<<<<<< HEAD
+
+    public int correctCounter;
+    public MeshRenderer[] stageLights;
+    public Material stageOff;
+=======
+>>>>>>> AndrewD_3
     // Start is called before the first frame updates
     void Start()
     {
@@ -139,24 +146,55 @@ public class WhosOnFirst : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<WhoButtonScript>().buttonNum == correctButtonToPress)
                 {
                     Debug.Log("Correct Choice!");
-                    CORRECT = true;
+                    correctCounter++;
+                    if (correctCounter >= 3)
+                    {
+                        CORRECT = true;
+                    }
+                    else
+                    {
+                        foreach (WhoButtonScript button in buttons)
+                        {
+                            button.transform.localPosition += transform.forward * .07f;
+                            button.ResetMe();
+                        }
+                        screenText = keyWords[Random.Range(0, 28)];
+                        Text.text = screenText;
+                        DetermineCorrectButton();
+                    }
                 }
                 else
                 {
-                    Debug.Log("WRONG!");
-                    BombScript.BombStrikes(); //trigger strike
                     StartCoroutine("FailFlash");
-                    foreach (WhoButtonScript button in buttons)
+                    BombScript.BombStrikes(); //trigger strike    
+                    if (!CORRECT)
                     {
-                        button.transform.localPosition += transform.forward * .07f;
-                        button.ResetMe();
-                    }
+                        Debug.Log("WRONG!");
+                        foreach (WhoButtonScript button in buttons)
+                        {
+                            button.transform.localPosition += transform.forward * .07f;
+                            button.ResetMe();
+                            correctCounter = 0;
+                        }
 
-                    screenText = keyWords[Random.Range(0, 28)];
-                    Text.text = screenText;
-                    DetermineCorrectButton();
+                        screenText = keyWords[Random.Range(0, 28)];
+                        Text.text = screenText;
+                        DetermineCorrectButton();
+                    }
                 }
                 BombScript.BombShake(); //Shake bomb
+            }
+        }
+
+        for (int i = 0; i < stageLights.Length; i++)
+        {
+            if (i > correctCounter-1)
+            {
+                stageLights[i].material = stageOff;
+            }
+            else
+            {
+                stageLights[i].material = LEDmats[0];
             }
         }
 

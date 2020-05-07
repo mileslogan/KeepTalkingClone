@@ -142,9 +142,18 @@ public class EndScreen : MonoBehaviour
     {
 
         if (num == 0)
+        {
             managerScript.ToBombFunction();
-        else
+        }
+        else if (num == 1)
+        {
             managerScript.ToStartFunction();
+        }
+        else
+        {
+            managerScript.ToQuitFunction();
+        }
+            
     }
 
     public IEnumerator StampSound()

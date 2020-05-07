@@ -46,6 +46,12 @@ public class MouseControl : MonoBehaviour
     void Update()
     {
         ChangeOutlineState();
+
+        //prevent bomb interaction
+        if (BombScript.IsGameOver || BombScript.IsGameWon)
+        {
+            return;
+        }
         
         //check current bomb state to determine potential actions
         //may need adjusting if there is a menu

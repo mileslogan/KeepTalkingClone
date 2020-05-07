@@ -694,7 +694,7 @@ MonoBehaviour:
   anim3: {fileID: 100905973}
   anim4: {fileID: 1988552267}
   clicker: {fileID: 1961481949306134173}
-  click: {fileID: 0}
+  click: {fileID: 8300000, guid: 7dc25f80df41d4b028bf9ee9cb588866, type: 3}
   keylightMaterials:
   - {fileID: 2100000, guid: 20abd6c5eb7b14e43be8c9af93ab863b, type: 2}
   - {fileID: 2100000, guid: 0fe01b24b0db3a44b84de2d49b94035c, type: 2}

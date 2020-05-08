@@ -29,13 +29,11 @@ public class WhosOnFirst : MonoBehaviour
     public bool CORRECT;
 
     private GenerateBomb BombScript;
-<<<<<<< HEAD
 
     public int correctCounter;
     public MeshRenderer[] stageLights;
     public Material stageOff;
-=======
->>>>>>> AndrewD_3
+
     // Start is called before the first frame updates
     void Start()
     {

@@ -1,4 +1,4 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -29,7 +29,6 @@ public class WhosOnFirst : MonoBehaviour
     public bool CORRECT;
 
     private GenerateBomb BombScript;
-
 
     public int correctCounter;
     public MeshRenderer[] stageLights;

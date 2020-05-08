@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class DebugScenes : MonoBehaviour
 {
     public int NumberOfScenes = 3;
+
+    public bool IsDebugging;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,10 @@ public class DebugScenes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsDebugging)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             int nextIndex = (SceneManager.GetActiveScene().buildIndex + 1) % NumberOfScenes;

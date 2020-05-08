@@ -252,7 +252,7 @@ public class GenerateBomb : MonoBehaviour
         int buttonIndex = 0;
         foreach (GameObject module in ModulesToSpawn)
         {
-            if (module.GetComponent<ButtonScript>() != null)
+            if (module != null && module.GetComponent<ButtonScript>() != null)
             {
                 
                 buttonModuleSpawned = true;
@@ -359,7 +359,7 @@ public class GenerateBomb : MonoBehaviour
                 }
 
                 spawned.name = "Null " + index.ToString();
-                //SpawnedModules.Add(spawned);
+                SpawnedModules.Add(spawned);
             }
 
 
@@ -774,8 +774,11 @@ public class GenerateBomb : MonoBehaviour
     {
         foreach (GameObject obj in SpawnedModules)
         {
+            if (obj.GetComponentInChildren<ClickModule>() != null)
+            {
+                obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
+            }
             
-            obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
             
             
         }
@@ -785,8 +788,11 @@ public class GenerateBomb : MonoBehaviour
     {
         foreach (GameObject obj in SpawnedModules)
         {
+            if (obj.GetComponentInChildren<ClickModule>() != null)
+            {
+                obj.GetComponentInChildren<ClickModule>().TurnOffCols();
+            }
             
-            obj.GetComponentInChildren<ClickModule>().TurnOffCols();
             
             
         }

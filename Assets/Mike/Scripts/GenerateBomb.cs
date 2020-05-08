@@ -151,7 +151,7 @@ public class GenerateBomb : MonoBehaviour
         SoundScript = GetComponent<BombSounds>();
         PickModules();
         //shuffle order of where each module is spawned
-        RandFuncs.Shuffle(ModuleLocToSpawn);
+        //RandFuncs.Shuffle(ModuleLocToSpawn);
         
         //Construct bomb variables
         CreateSerial();
@@ -237,7 +237,49 @@ public class GenerateBomb : MonoBehaviour
             SecondaryModulesToSpawnFrom.Remove(SecondaryModulesToSpawnFrom[rand]);
             j--;
         }
+
+        int remainingModules = MaxModules - ModuleAmount;
+        //spawn remaining null modules
+        while (remainingModules > 0)
+        {
+            ModulesToSpawn.Add(null);
+            remainingModules--;
+        }
+
+        RandFuncs.Shuffle(ModulesToSpawn); //shuffle modules
+        //check if button module spawned
+        bool buttonModuleSpawned = false;
+        int buttonIndex = 0;
+        foreach (GameObject module in ModulesToSpawn)
+        {
+            if (module.GetComponent<ButtonScript>() != null)
+            {
+                
+                buttonModuleSpawned = true;
+                break;
+            }
+
+            buttonIndex++;
+        }
+        //make sure buttonModule Spawned in front, if not then swap locations
+        if (buttonModuleSpawned && buttonIndex >= 5)
+        {
+            //location 0-5 and not 1
+            int rand;
+            do
+            {
+                rand = Random.Range(0, 5);
+            } while (rand == 1);
+
+            GameObject prevPrefab = ModulesToSpawn[rand];
+
+            //swap modules
+            ModulesToSpawn[rand] = ModulesToSpawn[buttonIndex];
+            ModulesToSpawn[buttonIndex] = prevPrefab;
+            //ModulesToSpawn.Reverse(rand, buttonIndex-rand + 1);//reverse order to guarantee buttonModule
             
+
+        }
     }
     //spawn modules
     void SpawnModules()
@@ -254,21 +296,22 @@ public class GenerateBomb : MonoBehaviour
             {
                 module = ModulesToSpawn[moduleIndex];
 
-                //check if spawning button module
-                if (module.GetComponent<ButtonScript>() != null)
-                {
-                    HasSpawnedButton = true;
-                    ButtonSpawnIndex = moduleIndex;
-                    moduleIndex++;
-                    if (moduleIndex < ModulesToSpawn.Count)
-                    {
-                        module = ModulesToSpawn[moduleIndex];
-                    }
-                    else
-                    {
-                        module = null;
-                    }
-                }
+                // COMMENTED OUT-FOUND BETTER SOLUTION
+               ////check if spawning button module
+               //if (module.GetComponent<ButtonScript>() != null)
+               //{
+               //    HasSpawnedButton = true;
+               //    ButtonSpawnIndex = moduleIndex;
+               //    moduleIndex++;
+               //    if (moduleIndex < ModulesToSpawn.Count)
+               //    {
+               //        module = ModulesToSpawn[moduleIndex];
+               //    }
+               //    else
+               //    {
+               //        module = null;
+               //    }
+               //}
 
                 moduleIndex++;
             }
@@ -375,19 +418,19 @@ public class GenerateBomb : MonoBehaviour
             buttonObj.transform.Rotate(Vector3.right, 270f);
             SpawnedModules.Add(buttonObj);
         }
-        //spawn an empty module instead
-        else
-        {
-            GameObject spawned = Instantiate(EmptyModule, transform.position + ModuleLocations[2], Quaternion.identity);
-            spawned.transform.parent = transform.parent;
-            
-            spawned.transform.Rotate(180f, 0f, 0f);
-            spawned.transform.Translate(0f, 0f, -.1f);
-
-
-            spawned.name = "Null " + 2;
-            //SpawnedModules.Add(spawned);
-        }
+        //spawn an empty module instead-COMMENTED OUT AS FOUND BETTER SOLUTION
+        //else
+        //{
+        //    GameObject spawned = Instantiate(EmptyModule, transform.position + ModuleLocations[2], Quaternion.identity);
+        //    spawned.transform.parent = transform.parent;
+        //    
+        //    spawned.transform.Rotate(180f, 0f, 0f);
+        //    spawned.transform.Translate(0f, 0f, -.1f);
+//
+//
+        //    spawned.name = "Null " + 2;
+        //    //SpawnedModules.Add(spawned);
+        //}
     }
 
     
@@ -733,6 +776,17 @@ public class GenerateBomb : MonoBehaviour
         {
             
             obj.GetComponentInChildren<ClickModule>().gameObject.GetComponent<Collider>().enabled = true;
+            
+            
+        }
+    }
+    
+    public void TurnOffAllCols()
+    {
+        foreach (GameObject obj in SpawnedModules)
+        {
+            
+            obj.GetComponentInChildren<ClickModule>().TurnOffCols();
             
             
         }

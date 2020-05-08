@@ -21,7 +21,7 @@ public class ClickModule : MonoBehaviour
 
         SelectedMeshFilter = FindObjectOfType<OutlinerScript>().thisMeshFilter;
         //TurnOnCols();
-        //TurnOffCols();
+        TurnOffCols();
         Self = gameObject;
         CameraLerp = FindObjectOfType<Lerp>();
         if (IsFlipped)
@@ -55,7 +55,7 @@ public class ClickModule : MonoBehaviour
         {
 
             CameraLerp.LerpGivenObject(transform.parent.gameObject);
-            
+            TurnOnCols();
             
         }
     }
@@ -72,11 +72,17 @@ public class ClickModule : MonoBehaviour
         }
     }
     
+    //turn on all colliders except moduleoutline
     public void TurnOnCols()
     {
         foreach (Collider col in transform.parent.gameObject.GetComponentsInChildren<Collider>())
         {
             col.enabled = true;
+            
+            if (col.CompareTag("ModuleOutline"))
+            {
+                col.enabled = false;
+            }
         }
     }
     

@@ -1135,7 +1135,7 @@ PrefabInstance:
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
@@ -1428,27 +1428,27 @@ PrefabInstance:
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[5]
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[6]
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[7]
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[8]
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[9]
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
@@ -1982,22 +1982,22 @@ PrefabInstance:
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[1]
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[2]
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[3]
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143658, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}
       propertyPath: ModuleLocToSpawn.Array.data[4]
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6969597340671143659, guid: 856f92db6c31cd54990f80f7be455f2c,
         type: 3}

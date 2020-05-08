@@ -149,7 +149,7 @@ public class MouseControl : MonoBehaviour
                         
                         //Quaternion.Lerp()
                         CurrentState = BombStates.PickedUp; //switch state
-                        BombScript.TurnOnAllCols();
+                        BombScript.TurnOffAllCols();
                         GenerateBomb.SelectedModule = null;
                         BombScript.SelectMod = GenerateBomb.SelectedModule;
                     }

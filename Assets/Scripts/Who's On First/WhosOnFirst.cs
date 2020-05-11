@@ -148,6 +148,7 @@ public class WhosOnFirst : MonoBehaviour
                     if (correctCounter >= 3)
                     {
                         CORRECT = true;
+                        BombScript.Completed();
                     }
                     else
                     {

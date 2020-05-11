@@ -27,6 +27,7 @@ public class WhosOnFirst : MonoBehaviour
     public Material[] LEDmats;
 
     public bool CORRECT;
+    public bool sentCompleted;
 
     private GenerateBomb BombScript;
 
@@ -199,6 +200,11 @@ public class WhosOnFirst : MonoBehaviour
         if (CORRECT)
         {
             LED.material = LEDmats[0];
+            if (!sentCompleted)
+            {
+                BombScript.Completed();
+                sentCompleted = true;
+            }
         }
     }
 

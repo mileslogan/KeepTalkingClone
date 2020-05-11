@@ -589,6 +589,13 @@ public class GenerateBomb : MonoBehaviour
         {
             audio.mute = true;
         }
+        
+        AudioSource timeAudio = FindObjectOfType<Timer>().gameObject.GetComponent<AudioSource>();//mute timer tick
+        if (timeAudio != null)
+        {
+            timeAudio.mute = true;
+        }
+        
         //determine cause of death
         if (Timer.timeleft <= 0f)
         {
@@ -644,15 +651,21 @@ public class GenerateBomb : MonoBehaviour
         {
             audio.mute = true;
         }
+        
+        AudioSource timeAudio = FindObjectOfType<Timer>().gameObject.GetComponent<AudioSource>();//turn off music
+        if (timeAudio != null)
+        {
+            timeAudio.mute = true;
+        }
         IsGameWon = true;
         
         //end functions-sfx/timer
         StopCoroutine(TimerScript.CountDown(TimerScript.countdowntime)); //pause time
         AudioManager.Instance.PlayOneShotSound("Correct", false);
         //AudioManager.Instance.PlayOneShotSound("Correct", false);
-        AudioManager.Instance.PlaySoundDelay("Correct", false, 1.7f);
-        StartCoroutine(EndScene(5f));
-        ManagerScript.ToEndFunction();
+        StartCoroutine(PlaySoundDelay("Win", false, 1f)); 
+        StartCoroutine(EndScene(3f));
+        
         
         
     }
@@ -808,6 +821,12 @@ public class GenerateBomb : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         ManagerScript.ToEndFunction();
+    }
+    
+    public IEnumerator PlaySoundDelay(string soundName, bool change, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AudioManager.Instance.PlayOneShotSound(soundName, change);
     }
 }
 
